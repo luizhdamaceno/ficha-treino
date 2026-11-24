@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#142b45">
+<meta name="color-scheme" content="light dark">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Ficha de Treino</title>
+<style>
+:root{--navy:#142b45;--blue:#1f4e78;--btn:#1f4e78;--acc:#2f6f9f;--bg:#f3f6fa;--card:#fff;--ink:#1e293b;--muted:#5b6b7f;--line:#dbe3ec;--soft:#eef2f7;--ok:#16835d;--okbg:#e5f5ec;--warm:#5b6b7f;--warmbg:#eef2f7;--work:#1f4e78;--workbg:#e6f0fa}
+@media(prefers-color-scheme:dark){:root{--bg:#0d1520;--card:#162233;--ink:#e8eef6;--muted:#9aabbf;--line:#26374c;--soft:#1d2d42;--btn:#2f6f9f;--acc:#6fb1e4;--ok:#4cc38a;--okbg:#143428;--warm:#a5b6ca;--warmbg:#1d2d42;--work:#8fc4ee;--workbg:#17314a}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;padding-bottom:calc(110px + env(safe-area-inset-bottom))}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer;-webkit-tap-highlight-color:transparent}
+:focus-visible{outline:3px solid #f2b84b;outline-offset:2px}
+header{background:linear-gradient(135deg,var(--navy),var(--blue));color:#fff;padding:calc(18px + env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) 16px max(16px,env(safe-area-inset-left))}
+.w{max-width:760px;margin:0 auto}
+.kick{font-size:13px;font-weight:700;opacity:.8}
+h1{font-size:26px;margin:4px 0 0;letter-spacing:-.02em;line-height:1.15}
+.pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.pill{border:1px solid rgba(255,255,255,.28);background:rgba(255,255,255,.1);border-radius:99px;padding:5px 11px;font-size:13px;font-weight:600}
+.sig{margin-top:8px;font-size:12px;opacity:.85}
+.top{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding:10px 14px 8px;scrollbar-width:none}
+.tab{flex:none;border:1px solid var(--line);background:var(--card);padding:0 14px;min-height:44px;border-radius:12px;font-size:14px;font-weight:700;white-space:nowrap}
+.tab[aria-selected=true]{background:var(--navy);color:#fff;border-color:var(--navy)}
+@media(prefers-color-scheme:dark){.tab[aria-selected=true]{background:var(--acc);color:#0d1520;border-color:var(--acc)}}
+.prog{display:flex;align-items:center;gap:10px;padding:0 14px 10px;max-width:760px;margin:0 auto}
+.ring{--p:0%;width:40px;height:40px;flex:none;border-radius:50%;background:conic-gradient(var(--ok) var(--p),var(--line) 0);display:grid;place-items:center;position:relative;transition:background .4s}
+.ring:before{content:"";position:absolute;inset:4px;border-radius:50%;background:var(--bg)}
+.ring b{position:relative;font-size:11px;font-variant-numeric:tabular-nums}
+.pt{flex:1;min-width:0}
+.pt strong{display:block;font-size:14px}
+.pt span{display:block;font-size:13px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+main{max-width:760px;margin:0 auto;padding:14px 14px 20px}
+.hd{display:flex;justify-content:space-between;align-items:flex-end;gap:10px;margin:2px 2px 12px}
+.eb{font-size:13px;color:var(--acc);font-weight:700}
+h2{font-size:22px;margin:2px 0 0;letter-spacing:-.02em;color:var(--ink)}
+.sm{font-size:13px;color:var(--muted);font-weight:650;white-space:nowrap}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:12px}
+.card.cur{border-color:var(--acc);box-shadow:0 0 0 2px color-mix(in srgb,var(--acc) 25%,transparent)}
+.t2{display:flex;align-items:center;gap:12px}
+.num{width:34px;height:34px;border-radius:10px;background:var(--soft);display:grid;place-items:center;font-weight:800;flex:none}
+.nm{flex:1;min-width:0;font-weight:750;font-size:16px;margin:0;line-height:1.25}
+.tag{font-size:12px;font-weight:700;color:var(--muted);background:var(--soft);padding:4px 9px;border-radius:99px;white-space:nowrap}
+.row{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 14px;margin-bottom:10px;min-height:56px}
+.row.done .num{background:var(--okbg);color:var(--ok)}
+.dots{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0}
+.dot{min-width:32px;height:28px;padding:0 8px;border-radius:8px;display:grid;place-items:center;font-size:12px;font-weight:800;background:var(--warmbg);color:var(--warm)}
+.dot.w{background:var(--workbg);color:var(--work)}
+.dot.ok{background:var(--ok);color:#fff}
+.dot.on{outline:2px solid var(--acc);outline-offset:1px}
+.step{border-radius:14px;padding:14px;background:var(--warmbg)}
+.step.w{background:var(--workbg)}
+.step h4{margin:0;font-size:18px}
+.step p{margin:4px 0 12px;color:var(--muted);font-size:14px}
+.in{display:grid;gap:8px;margin-bottom:12px}
+.in label{display:block;font-size:13px;font-weight:700;color:var(--muted);margin-bottom:3px}
+.in input,.in select{width:100%;height:50px;font-size:20px;font-weight:700;border-radius:10px;border:1px solid var(--line);background:var(--card);text-align:center;padding:0 6px}
+.go{width:100%;min-height:58px;border:0;border-radius:14px;background:var(--btn);color:#fff;font-size:18px;font-weight:800}
+.go:active{transform:scale(.98)}
+.act{display:flex;justify-content:space-between;gap:6px;margin-top:6px}
+.lk{background:none;border:0;color:var(--muted);font-weight:700;font-size:14px;min-height:44px;padding:0 10px}
+.lk:disabled{opacity:.4}
+details{border:1px solid var(--line);border-radius:12px;padding:0 12px;margin-bottom:12px;background:var(--card);font-size:14px}
+summary{min-height:44px;display:flex;align-items:center;font-weight:700;cursor:pointer}
+details p{margin:0 0 12px;color:var(--muted)}
+details.sg{margin:12px 0 0}
+.fin{display:flex;gap:10px;align-items:center;font-weight:750;color:var(--ok);padding:10px 0}
+.met{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
+.met div{background:var(--soft);border-radius:10px;padding:10px}
+.met span{display:block;font-size:12px;color:var(--muted)}
+.met strong{font-size:14px}
+.h{margin-bottom:10px}
+.h p{margin:0 0 10px}
+#rest{position:fixed;left:0;right:0;bottom:0;z-index:9;transform:translateY(110%);transition:transform .25s;background:var(--navy);color:#fff;padding:10px 16px calc(10px + env(safe-area-inset-bottom));display:flex;align-items:center;gap:10px}
+#rest.on{transform:none}
+#rest.end{background:var(--ok)}
+#rest small{display:block;font-size:12px;opacity:.85}
+#rest .t{flex:1;font-size:30px;font-weight:800;font-variant-numeric:tabular-nums;line-height:1.1}
+#rest button{min-height:46px;padding:0 14px;border-radius:10px;border:1px solid rgba(255,255,255,.45);background:transparent;color:#fff;font-weight:700}
+#toast{position:fixed;left:14px;right:14px;bottom:calc(88px + env(safe-area-inset-bottom));z-index:10;max-width:480px;margin:0 auto;background:#0b1626;color:#fff;border-radius:12px;padding:4px 6px 4px 16px;display:none;align-items:center;justify-content:space-between;gap:8px;font-weight:650;font-size:14px}
+#toast.on{display:flex}
+#toast button{background:none;border:0;color:#9fd0f5;font-weight:800;min-height:44px;padding:0 12px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+@media print{.top,#rest,#toast,.go,.in,.lk,.act,.dots{display:none!important}body{background:#fff;padding:0}}
+</style>
+</head>
+<body>
+<header><div class="w">
+  <div class="kick">Treinamento • Hipertrofia</div>
+  <h1 id="who"></h1>
+  <div class="pills" id="pills"></div>
+  <div class="sig" id="sig"></div>
+</div></header>
+<div class="top">
+  <div class="tabs" id="tabs" role="tablist" aria-label="Treinos"></div>
+  <div class="prog" id="prog"></div>
+</div>
+<main id="main"></main>
+<div id="rest" role="timer" aria-label="Descanso"><div class="t"><small id="rl">Descanso</small><span id="rt">0:00</span></div><button data-act="plus">+15 s</button><button data-act="skip">Pular</button></div>
+<div id="toast" role="status"><span id="tm"></span><button data-act="undo" id="tu">Desfazer</button></div>
+<input type="file" id="imp" accept="application/json" hidden>
+
+<script>
+/* ============ DADOS (edite só aqui) ============
+ ex: n=nome, tag, s=sugestões, wu=[[reps,descanso],…] aquecimentos, w=[séries,reps,descanso] trabalho */
+const F={"title":"Ficha de Hipertrofia","person":"Luiz Damaceno","stats":["4 dias fixos","1 dia opcional"],"signature":"Ficha de treino • 25/11/2026","footer":"escolha apenas uma das alternativas sugeridas em cada bloco. Séries de aquecimento não contam como séries de trabalho. RIR alvo da ficha detalhada: normalmente 1–2; no terra opcional, 2–3. Não faça superséries.","week":["0","1","r1","2","3","r2","4"],"panels":[{"id":"0","name":"Treino A – Upper","eyebrow":"TREINO A • PROGRAMA PRINCIPAL","optional":false,"tab":"Treino A · Upper","ex":[{"n":"Peitoral – região média","tag":"Treino fixo","s":"Supino reto com barra/halteres; chest press; máquina convergente; crucifixo na máquina ou polia","wu":[["8–10 leve","45–60 s"],["4–6 moderada","45–60 s"]],"w":[3,"8–12","90 s"]},{"n":"Costas – espessura","tag":"Treino fixo","s":"Remada baixa; remada articulada; remada com peito apoiado; remada unilateral","wu":[["8–10 leve","45–60 s"]],"w":[3,"8–12","90 s"]},{"n":"Peitoral – região superior","tag":"Treino fixo","s":"Supino inclinado com halteres/barra; chest press inclinado; crossover baixo para cima","wu":[],"w":[2,"8–12","90 s"]},{"n":"Costas – largura","tag":"Treino fixo","s":"Puxada frontal; puxada neutra; barra fixa assistida; puxada articulada","wu":[],"w":[2,"8–12","90 s"]},{"n":"Deltoide anterior","tag":"Treino fixo","s":"Desenvolvimento na máquina; desenvolvimento com halteres; máquina convergente","wu":[["8–10 leve","45–60 s"]],"w":[2,"8–12","90 s"]},{"n":"Deltoide lateral","tag":"Treino fixo","s":"Elevação lateral na máquina; polia unilateral; halteres","wu":[],"w":[3,"12–20","60–90 s"]},{"n":"Deltoide posterior","tag":"Treino fixo","s":"Crucifixo inverso; peck deck invertido; elevação posterior na polia","wu":[],"w":[2,"12–15","60–90 s"]},{"n":"Trapézio superior","tag":"Treino fixo","s":"Encolhimento com halteres; máquina; barra se confortável","wu":[],"w":[2,"10–15","60–90 s"]},{"n":"Bíceps","tag":"Treino fixo","s":"2 séries de rosca supinada (polia/máquina/halteres) + 2 séries de rosca martelo; escolher pegada confortável","wu":[["8–10 leve","45–60 s"]],"w":[4,"10–15","60–90 s"]}]},{"id":"1","name":"Treino B – Lower","eyebrow":"TREINO B • PROGRAMA PRINCIPAL","optional":false,"tab":"Treino B · Lower","ex":[{"n":"Quadríceps – composto","tag":"Treino fixo","s":"Agachamento no Smith; leg press; escolher a opção estável e confortável","wu":[["8–10 leve","45–60 s"],["4–6 moderada","45–60 s"]],"w":[3,"8–12","120 s"]},{"n":"Quadríceps – complementar","tag":"Treino fixo","s":"Se o composto foi Smith: leg press; se foi leg press: Smith; ou outra variação estável","wu":[],"w":[1,"10–15","90 s"]},{"n":"Quadríceps – extensão de joelho","tag":"Treino fixo","s":"Cadeira extensora; extensão unilateral na máquina","wu":[],"w":[2,"12–15","60–90 s"]},{"n":"Posteriores – flexão de joelho","tag":"Treino fixo","s":"Mesa flexora; cadeira flexora; flexora unilateral","wu":[["8–10 leve","45–60 s"]],"w":[5,"10–15","90 s"]},{"n":"Adutores","tag":"Treino fixo","s":"Cadeira adutora; adução na polia","wu":[],"w":[2,"12–15","60–90 s"]},{"n":"Panturrilhas – joelho estendido","tag":"Treino fixo","s":"Panturrilha em pé; panturrilha no leg press","wu":[],"w":[2,"10–15","60–90 s"]},{"n":"Panturrilhas – joelho flexionado","tag":"Treino fixo","s":"Panturrilha sentada; máquina de sóleo","wu":[],"w":[1,"12–20","60–90 s"]},{"n":"Abdômen","tag":"Treino fixo","s":"Crunch na polia; máquina abdominal; abdominal no solo","wu":[],"w":[2,"12–15","60 s"]},{"n":"Tríceps","tag":"Treino fixo","s":"2 séries de extensão junto ao corpo (corda/polia/máquina) + 2 séries acima da cabeça se confortável","wu":[["8–10 leve","45–60 s"]],"w":[4,"10–15","60–90 s"]}]},{"id":"2","name":"Treino C – Upper","eyebrow":"TREINO C • PROGRAMA PRINCIPAL","optional":false,"tab":"Treino C · Upper","ex":[{"n":"Peitoral – região superior","tag":"Treino fixo","s":"Supino inclinado com halteres/barra; chest press inclinado; crossover baixo para cima","wu":[["8–10 leve","45–60 s"],["4–6 moderada","45–60 s"]],"w":[3,"8–12","90 s"]},{"n":"Costas – largura","tag":"Treino fixo","s":"Puxada frontal; puxada neutra; barra fixa assistida; puxada articulada","wu":[["8–10 leve","45–60 s"]],"w":[3,"8–12","90 s"]},{"n":"Costas – espessura","tag":"Treino fixo","s":"Remada baixa; remada articulada; remada com peito apoiado","wu":[],"w":[2,"8–12","90 s"]},{"n":"Peitoral – região média","tag":"Treino fixo","s":"Supino reto; chest press; máquina convergente; crucifixo","wu":[],"w":[2,"10–15","90 s"]},{"n":"Deltoide anterior","tag":"Treino fixo","s":"Desenvolvimento na máquina; halteres; máquina convergente","wu":[["8–10 leve","45–60 s"]],"w":[2,"8–12","90 s"]},{"n":"Deltoide lateral","tag":"Treino fixo","s":"Elevação lateral na máquina; polia unilateral; halteres","wu":[],"w":[3,"12–20","60–90 s"]},{"n":"Deltoide posterior","tag":"Treino fixo","s":"Crucifixo inverso; peck deck invertido; elevação posterior na polia","wu":[],"w":[2,"12–15","60–90 s"]},{"n":"Trapézio superior","tag":"Treino fixo","s":"Encolhimento com halteres; máquina; barra se confortável","wu":[],"w":[2,"10–15","60–90 s"]},{"n":"Tríceps","tag":"Treino fixo","s":"2 séries de extensão junto ao corpo + 2 séries acima da cabeça se confortável; corda, unilateral ou máquina","wu":[["8–10 leve","45–60 s"]],"w":[4,"10–15","60–90 s"]}]},{"id":"3","name":"Treino D – Lower","eyebrow":"TREINO D • PROGRAMA PRINCIPAL","optional":false,"tab":"Treino D · Lower","ex":[{"n":"Posteriores – extensão de quadril","tag":"Treino fixo","s":"Stiff com barra ou halteres; amplitude controlada e coluna neutra","wu":[["8–10 leve","45–60 s"],["4–6 moderada","45–60 s"]],"w":[3,"8–12","120 s"]},{"n":"Quadríceps – composto","tag":"Treino fixo","s":"Leg press; agachamento no Smith; variação estável e confortável","wu":[["8–10 leve","45–60 s"]],"w":[2,"8–12","120 s"]},{"n":"Posteriores – flexão de joelho","tag":"Treino fixo","s":"Mesa flexora; cadeira flexora; flexora unilateral","wu":[["8–10 leve","45–60 s"]],"w":[4,"10–15","90 s"]},{"n":"Quadríceps – extensão de joelho","tag":"Treino fixo","s":"Cadeira extensora; extensão unilateral","wu":[],"w":[2,"12–15","60–90 s"]},{"n":"Adutores","tag":"Treino fixo","s":"Cadeira adutora; adução na polia","wu":[],"w":[2,"12–15","60–90 s"]},{"n":"Panturrilhas – joelho estendido","tag":"Treino fixo","s":"Panturrilha em pé; panturrilha no leg press","wu":[],"w":[1,"10–15","60–90 s"]},{"n":"Panturrilhas – joelho flexionado","tag":"Treino fixo","s":"Panturrilha sentada; máquina de sóleo","wu":[],"w":[2,"12–20","60–90 s"]},{"n":"Abdômen","tag":"Treino fixo","s":"Pallof press; rotação controlada na polia; prancha lateral","wu":[],"w":[2,"12–15","60 s"]},{"n":"Bíceps","tag":"Treino fixo","s":"2 séries de rosca supinada + 2 séries de rosca martelo/neutra; pegada confortável","wu":[["8–10 leve","45–60 s"]],"w":[4,"10–15","60–90 s"]}]},{"id":"4","name":"Treino E – Full Body (opcional)","eyebrow":"TREINO E • SESSÃO OPCIONAL","optional":true,"tab":"Treino E · Full Body (opcional)","ex":[{"n":"Cadeia posterior – terra convencional","tag":"Opcional","s":"Levantamento terra convencional. Técnica estável, sem falha e sem teste máximo.","wu":[["8–10 leve","45–60 s"],["4–6 moderada","45–60 s"]],"w":[2,"5–8","2–3 min"]},{"n":"Peitoral","tag":"Opcional","s":"Supino em máquina ou com halteres; crucifixo na máquina ou polia.","wu":[["8–10 leve","45–60 s"]],"w":[2,"10–15","90 s"]},{"n":"Costas","tag":"Opcional","s":"Uma remada ou puxada; escolher o padrão que estiver menos recente.","wu":[],"w":[2,"10–12","90 s"]},{"n":"Quadríceps","tag":"Opcional","s":"Leg press, agachamento no Smith ou cadeira extensora.","wu":[["8–10 leve","45–60 s"]],"w":[2,"10–15","90 s"]},{"n":"Posteriores – flexão de joelho","tag":"Opcional","s":"Mesa flexora ou cadeira flexora; somente se estiver recuperado.","wu":[],"w":[2,"10–15","90 s"]},{"n":"Deltoide lateral","tag":"Opcional","s":"Elevação lateral na máquina, polia unilateral ou halteres.","wu":[],"w":[2,"12–20","60–90 s"]},{"n":"Bíceps","tag":"Opcional","s":"Rosca na polia, máquina, halteres ou rosca martelo.","wu":[["8–10 leve","45–60 s"]],"w":[2,"10–15","60–90 s"]},{"n":"Tríceps","tag":"Opcional","s":"Extensão com corda, unilateral ou máquina; sem dor no cotovelo.","wu":[],"w":[2,"10–15","60–90 s"]},{"n":"Panturrilhas","tag":"Opcional","s":"Panturrilha em pé ou sentada, conforme a região menos estimulada.","wu":[],"w":[2,"12–20","60–90 s"]},{"n":"Abdômen","tag":"Opcional","s":"Crunch, Pallof press ou prancha lateral.","wu":[],"w":[2,"12–15","60 s"]}]}],"rest":{"eyebrow":"RECUPERAÇÃO","name":"Descanso","count":"Atividade opcional","ex":{"n":"Descanso ou corrida leve","tag":"Recuperação","m":[["Intensidade","Leve"],["Duração sugerida","20–30 min"],["Objetivo","Recuperação"]]}}};
+/* ============ MOTOR ============ */
+const K="fichaTreino_v6",$=s=>document.querySelector(s);
+const esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const pl=(n,a,b)=>n+" "+(n===1?a:b);
+const secs=s=>{const m=String(s).match(/\d+/g);return m?+m[m.length-1]:0};
+const num=v=>v===""||v==null||isNaN(v)?null:+v;
+const day=t=>new Date(t).toDateString();
+const P=id=>F.panels.find(p=>p.id===id);
+const steps=e=>[...e.wu.map(([r,d])=>({t:"a",reps:r,rest:d})),...Array.from({length:e.w[0]},()=>({t:"w",reps:e.w[1],rest:e.w[2]}))];
+const sig=p=>p.ex.map(e=>e.n+steps(e).length).join("|");
+
+function load(){let o;try{o=JSON.parse(localStorage.getItem(K))}catch(e){}
+  if(!o||typeof o!=="object"||Array.isArray(o))o={};
+  return{v:1,tab:o.tab||null,cur:o.cur&&typeof o.cur==="object"&&!Array.isArray(o.cur)?o.cur:{},hist:Array.isArray(o.hist)?o.hist:[]}}
+function save(){try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}}
+let S=load();
+
+function sess(p){let s=S.cur[p.id];if(!s||s.sig!==sig(p))s=S.cur[p.id]={sig:sig(p),t0:null,done:{},log:{},open:null};return s}
+function stat(p){const s=sess(p);let d=0,t=0;p.ex.forEach((e,i)=>{t+=e.w[0];d+=Math.max(0,(s.done[i]||0)-e.wu.length)});return{s,d,t}}
+const curEx=(p,s)=>s.open!=null?s.open:p.ex.findIndex((e,i)=>(s.done[i]||0)<steps(e).length);
+function archive(p,s){const sets=[];
+  p.ex.forEach((e,i)=>{let k=0;steps(e).forEach((x,j)=>{if(x.t!=="w")return;k++;const l=s.log[i+":"+j];if(l&&j<(s.done[i]||0))sets.push({n:e.n,k,kg:l.kg,reps:l.reps,rir:l.rir})})});
+  if(sets.length)S.hist.unshift({d:s.t0||Date.now(),p:p.name,sets});
+  S.hist=S.hist.slice(0,300);delete S.cur[p.id]}
+function lastSet(n,k){for(const h of S.hist){const x=(h.sets||[]).find(x=>x.n===n&&x.k===k);if(x)return x}return null}
+
+/* sessões abertas em dias anteriores vão para o histórico */
+Object.keys(S.cur).forEach(id=>{const p=P(id),s=S.cur[id];
+  if(!p||!s)delete S.cur[id];else if(s.t0&&day(s.t0)!==day(Date.now()))archive(p,s)});
+
+/* ---------- render ---------- */
+const isRest=t=>t[0]==="r";
+function render(){
+  if(!F.week.includes(S.tab)&&S.tab!=="h")S.tab=F.week.find(t=>!isRest(t)&&S.cur[t]?.t0)||F.week[0];
+  const tabs=[...F.week.map(t=>({t,l:isRest(t)?"Descanso":P(t).tab})),{t:"h",l:"Histórico"}];
+  $("#tabs").innerHTML=tabs.map(x=>`<button class="tab" role="tab" aria-selected="${x.t===S.tab}" data-act="tab" data-v="${x.t}">${esc(x.l)}</button>`).join("");
+  const p=!isRest(S.tab)&&S.tab!=="h"?P(S.tab):null;
+  if(p){const{s,d,t}=stat(p),pct=t?Math.round(d/t*100):0,c=curEx(p,s);
+    const st=d>=t?"Treino concluído":(s.t0||d)?"Em andamento":"Não iniciado";
+    $("#prog").innerHTML=`<div class="ring" style="--p:${pct}%" role="img" aria-label="${pct}% concluído"><b>${pct}%</b></div><div class="pt"><strong>${d}/${t} séries de trabalho</strong><span aria-live="polite">${st}${c>=0&&d<t?" · próximo: "+esc(p.ex[c].n):""}</span></div>`;
+    $("#prog").hidden=false;
+  }else $("#prog").hidden=true;
+  $("#main").innerHTML=p?panelHTML(p):S.tab==="h"?histHTML():restHTML();
+  $("#tabs [aria-selected=true]")?.scrollIntoView({inline:"center",block:"nearest"});
+}
+function panelHTML(p){const{s,d,t}=stat(p),c=curEx(p,s);
+  let h=`<div class="hd"><div><div class="eb">${esc(p.eyebrow)}</div><h2>${esc(p.name)}</h2></div><span class="sm">${pl(p.ex.length,"exercício","exercícios")}</span></div>`;
+  h+=`<details><summary>Como usar esta ficha</summary><p>${esc(F.footer)}</p></details>`;
+  p.ex.forEach((e,i)=>{const n=steps(e).length,k=s.done[i]||0;
+    h+=i===c?openHTML(e,i,s):`<button class="row ${k>=n?"done":""}" data-act="open" data-ex="${i}"><span class="num">${k>=n?"✓":i+1}</span><span class="nm">${esc(e.n)}</span><span class="sm">${Math.max(0,k-e.wu.length)}/${e.w[0]} séries</span></button>`});
+  if(d>=t)h+=`<div class="card"><div class="fin">✓ Treino concluído. Bom trabalho!</div><button class="go" data-act="finish">Salvar no histórico</button></div>`;
+  else if(s.t0)h+=`<div class="act"><button class="lk" data-act="finish">Encerrar e salvar</button><button class="lk" data-act="reset">Reiniciar treino</button></div>`;
+  return h}
+function openHTML(e,i,s){const st=steps(e),k=s.done[i]||0,fin=k>=st.length,x=st[k],nw=e.wu.length;
+  let h=`<article class="card cur"><div class="t2"><span class="num">${i+1}</span><h3 class="nm">${esc(e.n)}</h3><span class="tag">${esc(e.tag)}</span></div>
+  <div class="sm" style="margin-top:8px;white-space:normal">${nw?pl(nw,"aquecimento","aquecimentos"):"Sem aquecimento"} · ${e.w[0]} × ${esc(e.w[1])} de trabalho</div>
+  <div class="dots" aria-hidden="true">${st.map((y,j)=>`<span class="dot ${y.t==="w"?"w":""} ${j<k?"ok":""} ${j===k?"on":""}">${y.t==="a"?"A"+(j+1):"T"+(j-nw+1)}</span>`).join("")}</div>`;
+  if(!fin){const w=x.t==="w",n=w?k-nw+1:k+1,tot=w?e.w[0]:nw,prev=s.log[i+":"+(k-1)],
+      v=s.log[i+":"+k]||(w?{kg:prev&&k>nw?prev.kg:null,reps:null,rir:null}:{}),ls=w?lastSet(e.n,n):null;
+    if(w&&v.kg==null&&ls)v.kg=ls.kg;
+    h+=`<div class="step ${w?"w":""}"><h4 aria-live="polite">${w?"Série de trabalho":"Aquecimento"} ${n} de ${tot}</h4>
+    <p>Meta: ${esc(x.reps)} reps · descanso depois: ${esc(x.rest)}${ls?` · última vez: ${ls.kg??"—"} kg × ${ls.reps??"—"}`:""}</p>
+    <div class="in" style="grid-template-columns:repeat(${w?3:2},1fr)">
+      <div><label for="kg">Carga (kg)</label><input id="kg" type="number" inputmode="decimal" step="0.5" min="0" value="${v.kg??""}"></div>
+      <div><label for="rp">Reps feitas</label><input id="rp" type="number" inputmode="numeric" min="0" value="${v.reps??""}"></div>
+      ${w?`<div><label for="rir">RIR</label><select id="rir"><option value="">—</option>${[0,1,2,3].map(r=>`<option ${v.rir===r?"selected":""}>${r}</option>`).join("")}</select></div>`:""}
+    </div><button class="go" data-act="next" data-ex="${i}">Concluir série</button></div>`}
+  else h+=`<div class="fin">✓ Exercício concluído</div>`;
+  h+=`<div class="act"><button class="lk" data-act="back" data-ex="${i}" ${k?"":"disabled"}>← Voltar uma série</button></div>`;
+  if(e.s)h+=`<details class="sg"><summary>Opções de exercício</summary><p>${esc(e.s)}</p></details>`;
+  return h+"</article>"}
+function restHTML(){const x=F.rest.ex;
+  return`<div class="hd"><div><div class="eb">${esc(F.rest.eyebrow)}</div><h2>${esc(F.rest.name)}</h2></div><span class="sm">${esc(F.rest.count)}</span></div>
+  <article class="card"><div class="t2"><span class="num">1</span><h3 class="nm">${esc(x.n)}</h3><span class="tag">${esc(x.tag)}</span></div>
+  <div class="met" style="grid-template-columns:repeat(${x.m.length},1fr)">${x.m.map(([a,b])=>`<div><span>${esc(a)}</span><strong>${esc(b)}</strong></div>`).join("")}</div></article>`}
+function histHTML(){
+  let h=`<div class="hd"><div><div class="eb">Seus treinos salvos</div><h2>Histórico</h2></div><span class="sm">${pl(S.hist.length,"treino","treinos")}</span></div>`;
+  if(!S.hist.length)h+=`<div class="card">Nenhum treino salvo ainda. Conclua séries e toque em “Salvar no histórico” para registrar cargas e repetições.</div>`;
+  S.hist.slice(0,60).forEach(x=>{const g={};let vol=0;(x.sets||[]).forEach(y=>{(g[y.n]=g[y.n]||[]).push(y);if(y.kg!=null&&y.reps!=null)vol+=y.kg*y.reps});
+    h+=`<details class="h"><summary>${new Date(x.d).toLocaleDateString("pt-BR",{weekday:"short",day:"2-digit",month:"2-digit"})} · ${esc(x.p)}</summary><p><b>${pl(x.sets.length,"série","séries")}</b> · volume ${Math.round(vol).toLocaleString("pt-BR")} kg</p>${Object.entries(g).map(([n,a])=>`<p><b>${esc(n)}</b><br>${a.map(y=>`${y.kg??"—"} kg × ${y.reps??"—"}${y.rir!=null?` (RIR ${y.rir})`:""}`).join(" · ")}</p>`).join("")}</details>`});
+  return h+`<div class="act"><button class="lk" data-act="export">Exportar backup</button><button class="lk" data-act="import">Importar backup</button><button class="lk" data-act="clear">Apagar histórico</button></div>`}
+
+/* ---------- descanso, aviso, tela ligada ---------- */
+let T=null,iv=null,U=null,tt=null,ac=null,wl=null;
+const reduce=matchMedia("(prefers-reduced-motion:reduce)").matches;
+const vibe=p=>{try{navigator.vibrate&&navigator.vibrate(p)}catch(e){}};
+function audio(){try{ac=ac||new(window.AudioContext||window.webkitAudioContext)();if(ac.state==="suspended")ac.resume()}catch(e){}}
+function beep(){if(!ac)return;[0,.3].forEach(d=>{const o=ac.createOscillator(),g=ac.createGain();o.frequency.value=880;g.gain.value=.15;o.connect(g);g.connect(ac.destination);o.start(ac.currentTime+d);o.stop(ac.currentTime+d+.2)})}
+async function wake(){try{if("wakeLock"in navigator&&!wl){wl=await navigator.wakeLock.request("screen");wl.addEventListener("release",()=>wl=null)}}catch(e){}}
+function startRest(sec,next){stopRest();if(!sec)return;T={end:Date.now()+sec*1000,fin:false};$("#rl").textContent="Descanso"+(next?" · próxima: "+next:"");$("#rest").className="on";iv=setInterval(tick,250);tick()}
+function stopRest(){clearInterval(iv);T=null;$("#rest").className=""}
+function tick(){if(!T)return;const l=Math.max(0,Math.ceil((T.end-Date.now())/1000));
+  $("#rt").textContent=Math.floor(l/60)+":"+String(l%60).padStart(2,"0");
+  if(!l&&!T.fin){T.fin=true;$("#rest").className="on end";$("#rl").textContent="Descanso terminou";vibe([300,150,300]);beep();setTimeout(()=>{if(T&&T.fin)stopRest()},8000)}}
+function toast(msg,undo){$("#tm").textContent=msg;$("#tu").hidden=!undo;$("#toast").className="on";clearTimeout(tt);tt=setTimeout(()=>$("#toast").className="",6000)}
+function focusCur(){requestAnimationFrame(()=>{const c=$(".card.cur");if(c)scrollTo({top:c.getBoundingClientRect().top+scrollY-$(".top").offsetHeight-10,behavior:reduce?"auto":"smooth"})})}
+
+/* ---------- ações ---------- */
+function back(p,i){const s=sess(p),k=s.done[i]||0;if(k>0){s.done[i]=k-1;s.open=i;stopRest();save();render();focusCur()}}
+document.addEventListener("click",ev=>{const b=ev.target.closest("[data-act]");if(!b)return;
+  const a=b.dataset.act,i=+b.dataset.ex,p=P(S.tab),s=p&&sess(p);
+  if(a==="tab"){S.tab=b.dataset.v;save();render();scrollTo(0,0)}
+  else if(a==="open"){s.open=i;render();focusCur()}
+  else if(a==="back")back(p,i);
+  else if(a==="undo"){if(U){const q=P(U.p);if(q)back(q,U.i)}$("#toast").className=""}
+  else if(a==="next"){audio();const e=p.ex[i],st=steps(e),k=s.done[i]||0;if(k>=st.length)return;
+    const w=st[k].t==="w";s.t0=s.t0||Date.now();
+    s.log[i+":"+k]={kg:num($("#kg").value),reps:num($("#rp").value),rir:w?num($("#rir").value):null};
+    s.done[i]=k+1;s.open=k+1<st.length?i:null;
+    const all=p.ex.every((x,j)=>(s.done[j]||0)>=steps(x).length),nx=curEx(p,s);
+    save();wake();vibe(40);
+    if(all){stopRest();toast("Treino concluído!")}
+    else{startRest(secs(st[k].rest),k+1<st.length?"":p.ex[nx]?.n);toast("Série concluída",1)}
+    U={p:p.id,i};render();focusCur()}
+  else if(a==="plus"&&T){T.end+=15000;T.fin=false;$("#rest").className="on";$("#rl").textContent="Descanso";tick()}
+  else if(a==="skip")stopRest();
+  else if(a==="finish"){const{d,t}=stat(p);if(d<t&&!confirm("Salvar o treino como está e encerrar?"))return;
+    archive(p,s);stopRest();save();render();scrollTo(0,0);toast("Treino salvo no histórico")}
+  else if(a==="reset"){if(confirm("Reiniciar este treino? O progresso de hoje será apagado.")){delete S.cur[p.id];stopRest();save();render()}}
+  else if(a==="export"){const u=URL.createObjectURL(new Blob([JSON.stringify({hist:S.hist},null,1)],{type:"application/json"})),l=document.createElement("a");
+    l.href=u;l.download="ficha-treino-backup.json";document.body.appendChild(l);l.click();l.remove();setTimeout(()=>URL.revokeObjectURL(u),2000)}
+  else if(a==="import")$("#imp").click();
+  else if(a==="clear"){if(confirm("Apagar todo o histórico? Esta ação não pode ser desfeita.")){S.hist=[];save();render()}}
+});
+$("#imp").addEventListener("change",async e=>{const f=e.target.files[0];e.target.value="";if(!f)return;
+  try{const o=JSON.parse(await f.text());if(!o||!Array.isArray(o.hist))throw 0;
+    const seen=new Set(S.hist.map(h=>h.d+h.p));o.hist.forEach(h=>{if(h&&Array.isArray(h.sets)&&!seen.has(h.d+h.p))S.hist.push(h)});
+    S.hist.sort((a,b)=>b.d-a.d);save();render();toast("Backup importado")}
+  catch(x){toast("Arquivo inválido. Use um backup exportado por esta ficha.")}});
+document.addEventListener("focusin",e=>{if(e.target.matches("input[type=number]"))e.target.select()});
+document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"){if(Object.values(S.cur).some(s=>s&&s.t0))wake();tick()}});
+
+/* ---------- início ---------- */
+$("#who").textContent=F.person||"";document.title=(F.title||"Ficha de Treino")+" | "+(F.person||"");
+$("#pills").innerHTML=(F.stats||[]).map(x=>`<span class="pill">${esc(x)}</span>`).join("");
+$("#sig").textContent=F.signature||"";
+save();render();
+</script>
+</body>
+</html>
