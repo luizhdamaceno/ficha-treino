@@ -278,7 +278,7 @@ function panelHTML(p){const{s,d,t}=stat(p),c=curEx(p,s);
   else if(s.t0)h+=`<div class="act"><button class="lk" data-act="finish">Encerrar e salvar</button><button class="lk" data-act="reset">Reiniciar treino</button></div>`;
   return h}
 function openHTML(e,i,s){const st=steps(e),k=s.done[i]||0,fin=k>=st.length,x=st[k],nw=e.wu.length;
-  let h=`<article class="card cur"><div class="t2"><span class="num">${i+1}</span><h3 class="nm">${esc(e.n)}</h3><span class="tag">${esc(e.tag)}</span></div>
+  let h=`<article class="card cur"><div class="t2"><span class="num">${i+1}</span><h3 class="nm">${esc(e.n)}</h3>${e.tag==="Treino fixo"?"":`<span class="tag">${esc(e.tag)}</span>`}</div>
   <div class="sm" style="margin-top:8px;white-space:normal">${nw?pl(nw,"aquecimento","aquecimentos"):"Sem aquecimento"} · ${e.w[0]} × ${esc(e.w[1])} de trabalho</div>
   <div class="dots" aria-hidden="true">${st.map((y,j)=>`<span class="dot ${y.t==="w"?"w":""} ${j<k?"ok":""} ${j===k?"on":""}">${y.t==="a"?"A"+(j+1):"T"+(j-nw+1)}</span>`).join("")}</div>`;
   if(!fin){const w=x.t==="w",n=w?k-nw+1:k+1,tot=w?e.w[0]:nw,prev=s.log[i+":"+(k-1)],
