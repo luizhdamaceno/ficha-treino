@@ -128,103 +128,760 @@ details.sg{margin:12px 0 0}
 const F={
   "title": "Ficha de Hipertrofia",
   "person": "Luiz Damaceno",
-  "stats": ["4 dias fixos", "1 dia opcional"],
+  "stats": [
+    "4 dias fixos",
+    "1 dia opcional"
+  ],
   "signature": "Ficha de treino • 25/11/2026",
-  "week": ["0", "1", "r1", "2", "3", "r2", "4"],
-  "guide": {"rir": "1–2", "falha": "Não precisa chegar à falha.", "escolha": "Faça só uma opção da lista, não todas. Se o aparelho estiver ocupado, troque por outra opção e mantenha séries, repetições e esforço.", "esforco": "Termine cada série de trabalho com {r} repetições em reserva (RIR {r}).", "aquecimento": "A = aquecimento, T = trabalho. As séries A preparam o movimento e não contam como séries de trabalho.", "ordem": "Faça um exercício por vez, sem superséries."},
+  "week": [
+    "0",
+    "1",
+    "r1",
+    "2",
+    "3",
+    "4",
+    "r2"
+  ],
+  "guide": {
+    "rir": "1–2",
+    "falha": "Não precisa chegar à falha.",
+    "escolha": "Faça só uma opção da lista, não todas. Se o aparelho estiver ocupado, troque por outra opção e mantenha séries, repetições e esforço.",
+    "esforco": "Termine cada série de trabalho com {r} repetições em reserva (RIR {r}).",
+    "aquecimento": "A = aquecimento, T = trabalho. As séries A preparam o movimento e não contam como séries de trabalho.",
+    "ordem": "Faça um exercício por vez, sem superséries."
+  },
   "panels": [
     {
       "id": "0",
-      "name": "Treino A – Upper",
-      "tab": "Treino A · Upper",
+      "name": "Treino A",
+      "tab": "Treino A",
       "eyebrow": "TREINO A • PROGRAMA PRINCIPAL",
       "optional": false,
       "ex": [
-        {"n": "Peitoral – região média", "tag": "Treino fixo", "s": "Supino reto com barra; Supino reto com halteres; Supino na máquina (chest press); Supino reto no Smith; Crucifixo na máquina (peck deck) ou na polia (crossover)", "op": ["Supino reto com barra", "Supino reto com halteres", "Supino na máquina (chest press)", "Supino reto no Smith", "Crucifixo na máquina (peck deck)", "Crucifixo na polia (crossover)"], "wu": [["8–10 leve", "45–60 s"], ["4–6 moderada", "45–60 s"]], "w": [3, "8–12", "90 s"], "d": "Região média do peitoral (fibras esternais): banco reto e mãos na altura do meio do peito. Halteres e máquinas com pegada neutra poupam punhos e cotovelos."},
-        {"n": "Costas – espessura (remada)", "o": "Costas – espessura", "tag": "Treino fixo", "s": "Remada baixa na polia (triângulo); Remada articulada (máquina); Remada com apoio de peito (máquina ou banco inclinado); Remada unilateral com halter (serrote)", "wu": [["8–10 leve", "45–60 s"]], "w": [3, "8–12", "90 s"], "d": "Espessura das costas (dorsal, romboides e trapézio médio): puxe o cotovelo para trás rente ao tronco, sem balançar o corpo. Pegada neutra e apoio de peito aliviam punhos e lombar."},
-        {"n": "Peitoral – região superior", "tag": "Treino fixo", "s": "Supino inclinado com halteres; Supino inclinado com barra; Supino inclinado na máquina; Supino inclinado no Smith; Crossover na polia baixa (de baixo para cima)", "wu": [], "w": [2, "8–12", "90 s"], "d": "Região superior do peitoral (fibras claviculares): banco inclinado entre 30° e 45°, pois acima disso o ombro tende a assumir o trabalho. No crossover, as mãos sobem em direção ao rosto."},
-        {"n": "Costas – largura (puxada)", "o": "Costas – largura", "tag": "Treino fixo", "s": "Puxada frontal na polia alta; Puxada com pegada neutra (triângulo); Barra fixa assistida (graviton); Puxada articulada (máquina)", "wu": [], "w": [2, "8–12", "90 s"], "d": "Largura das costas (grande dorsal e redondo maior): leve os cotovelos para baixo e para os lados, com o peito aberto e sem jogar o tronco para trás. Pegada neutra poupa punhos e cotovelos."},
-        {"n": "Deltoide anterior", "tag": "Treino fixo", "s": "Desenvolvimento na máquina (shoulder press); Desenvolvimento com halteres sentado; Desenvolvimento no Smith sentado", "wu": [], "w": [2, "8–12", "90 s"], "d": "Deltoide anterior: desenvolvimento sentado, com os cotovelos um pouco à frente do tronco. Pegada neutra ou semineutra nas máquinas e nos halteres poupa punhos e cotovelos."},
-        {"n": "Deltoide lateral", "tag": "Treino fixo", "s": "Elevação lateral na máquina; Elevação lateral com halteres; Elevação lateral na polia (unilateral)", "wu": [], "w": [3, "12–20", "60 s"], "d": "Deltoide lateral: suba até a altura dos ombros com o cotovelo levemente flexionado, sem balançar o tronco nem encolher os ombros. A polia mantém tensão desde o início do movimento."},
-        {"n": "Deltoide posterior", "tag": "Treino fixo", "s": "Crucifixo inverso na máquina (peck deck invertido); Crucifixo inverso com halteres (inclinado ou apoiado no banco); Crucifixo inverso na polia (cabos cruzados)", "wu": [], "w": [2, "12–15", "60 s"], "d": "Deltoide posterior: abra os braços na altura dos ombros, com cotovelos levemente flexionados, sem puxar as escápulas para trás, para o esforço não passar para o trapézio."},
-        {"n": "Trapézio superior", "tag": "Treino fixo", "s": "Encolhimento com halteres; Encolhimento na máquina; Encolhimento no Smith ou com barra (se confortável)", "op": ["Encolhimento com halteres", "Encolhimento na máquina", "Encolhimento no Smith", "Encolhimento com barra"], "wu": [], "w": [2, "10–15", "60 s"], "d": "Trapézio superior: leve os ombros em direção às orelhas, sem girar. Use munhequeiras (straps) se a pegada limitar a série."},
-        {"n": "Bíceps", "tag": "Treino fixo", "s": "2 séries de rosca supinada: rosca direta com barra W, rosca alternada com halteres ou rosca na polia baixa; 2 séries de rosca martelo: com halteres ou na polia com corda", "op": ["Rosca direta com barra W", "Rosca alternada com halteres", "Rosca na polia baixa", "Rosca martelo com halteres", "Rosca martelo na polia com corda"], "wu": [], "w": [4, "10–15", "60 s"], "d": "Bíceps: a rosca supinada trabalha as duas cabeças e o martelo reforça braquial e braquiorradial. Cotovelos fixos ao lado do tronco; barra W ou halteres ajudam se punho ou cotovelo incomodarem.", "c": "Escolha uma opção em cada padrão (2 séries de cada). Se o aparelho estiver ocupado, troque por outra opção do mesmo padrão e mantenha repetições e esforço."}
+        {
+          "n": "Posterior de coxa – stiff",
+          "o": "Posteriores – extensão de quadril",
+          "tag": "Treino fixo",
+          "s": "Stiff com barra; Stiff com halteres",
+          "wu": [
+            [
+              "8–10 leve",
+              "45–60 s"
+            ],
+            [
+              "4–6 moderada",
+              "45–60 s"
+            ]
+          ],
+          "w": [
+            3,
+            "8–12",
+            "120 s"
+          ],
+          "d": "Isquiotibiais (extensão de quadril): leve o quadril para trás com joelhos levemente flexionados e coluna neutra; desça até alongar a parte de trás da coxa, com a barra rente às pernas. Straps ajudam se a pegada limitar."
+        },
+        {
+          "n": "Posterior de coxa – flexora",
+          "o": "Posteriores – flexão de joelho",
+          "tag": "Treino fixo",
+          "s": "Cadeira flexora (sentado), melhor opção; Flexora unilateral sentada; Mesa flexora (deitado), só se não houver cadeira",
+          "wu": [
+            [
+              "8–10 leve",
+              "45–60 s"
+            ]
+          ],
+          "w": [
+            3,
+            "10–15",
+            "90 s"
+          ],
+          "d": "Isquiotibiais: na cadeira flexora o quadril fica flexionado e o músculo trabalha mais alongado, o que mostrou maior ganho de massa em estudo (Maeo e colegas, 2021). Na mesa flexora, mantenha o quadril colado ao banco."
+        },
+        {
+          "n": "Peitoral – região média",
+          "tag": "Treino fixo",
+          "s": "Supino reto com barra; Supino reto com halteres; Supino na máquina (chest press); Supino reto no Smith; Crucifixo na máquina (peck deck) ou na polia (crossover)",
+          "op": [
+            "Supino reto com barra",
+            "Supino reto com halteres",
+            "Supino na máquina (chest press)",
+            "Supino reto no Smith",
+            "Crucifixo na máquina (peck deck)",
+            "Crucifixo na polia (crossover)"
+          ],
+          "wu": [
+            [
+              "8–10 leve",
+              "45–60 s"
+            ]
+          ],
+          "w": [
+            4,
+            "8–12",
+            "90 s"
+          ],
+          "d": "Região média do peitoral (fibras esternais): banco reto e mãos na altura do meio do peito. Halteres e máquinas com pegada neutra poupam punhos e cotovelos."
+        },
+        {
+          "n": "Peitoral – região superior",
+          "tag": "Treino fixo",
+          "s": "Supino inclinado com halteres; Supino inclinado com barra; Supino inclinado na máquina; Supino inclinado no Smith; Crossover na polia baixa (de baixo para cima)",
+          "wu": [],
+          "w": [
+            4,
+            "8–12",
+            "90 s"
+          ],
+          "d": "Região superior do peitoral (fibras claviculares): banco inclinado entre 30° e 45°, pois acima disso o ombro tende a assumir o trabalho. No crossover, as mãos sobem em direção ao rosto."
+        },
+        {
+          "n": "Tríceps",
+          "tag": "Treino fixo",
+          "s": "Tríceps na polia com corda, de costas para a polia (acima da cabeça); Tríceps francês com halter (unilateral ou com as duas mãos); Extensão acima da cabeça na polia alta",
+          "op": [
+            "Tríceps na polia com corda, de costas (acima da cabeça)",
+            "Tríceps francês com halter",
+            "Extensão acima da cabeça na polia alta"
+          ],
+          "wu": [],
+          "w": [
+            4,
+            "10–15",
+            "60 s"
+          ],
+          "d": "Tríceps: acima da cabeça a cabeça longa fica mais alongada, e em estudo (Maeo e colegas, 2023) todas as cabeças cresceram mais nesse formato, mesmo com carga menor. Desça o cotovelo até flexionar bem, com controle. Se o cotovelo incomodar, troque por uma opção junto ao corpo (Outro) e anote. Evite tríceps testa.",
+          "c": "Neste treino, todas as séries são acima da cabeça. Se o aparelho estiver ocupado, troque por outra opção e mantenha repetições e esforço."
+        },
+        {
+          "n": "Deltoide anterior",
+          "tag": "Treino fixo",
+          "s": "Desenvolvimento na máquina (shoulder press); Desenvolvimento com halteres sentado; Desenvolvimento no Smith sentado",
+          "wu": [],
+          "w": [
+            3,
+            "8–12",
+            "60 s"
+          ],
+          "d": "Deltoide anterior: desenvolvimento sentado, com os cotovelos um pouco à frente do tronco. Pegada neutra ou semineutra nas máquinas e nos halteres poupa punhos e cotovelos."
+        },
+        {
+          "n": "Deltoide lateral",
+          "tag": "Treino fixo",
+          "s": "Elevação lateral na máquina; Elevação lateral com halteres; Elevação lateral na polia (unilateral)",
+          "wu": [],
+          "w": [
+            3,
+            "12–20",
+            "60 s"
+          ],
+          "d": "Deltoide lateral: suba até a altura dos ombros com o cotovelo levemente flexionado, sem balançar o tronco nem encolher os ombros. A polia mantém tensão desde o início do movimento."
+        },
+        {
+          "n": "Abdômen – reto abdominal",
+          "o": "Abdômen",
+          "tag": "Treino fixo",
+          "s": "Abdominal na polia (crunch ajoelhado com corda); Abdominal na máquina; Abdominal crunch no solo",
+          "wu": [],
+          "w": [
+            3,
+            "12–15",
+            "60 s"
+          ],
+          "d": "Reto abdominal: arredonde o tronco aproximando costelas e quadril, sem puxar com os braços nem com o quadril."
+        },
+        {
+          "n": "Panturrilha sentado",
+          "o": "Panturrilhas – sóleo",
+          "tag": "Treino fixo",
+          "s": "Panturrilha sentada (máquina); Panturrilha sentada com halteres ou anilha sobre os joelhos",
+          "wu": [],
+          "w": [
+            2,
+            "12–20",
+            "60 s"
+          ],
+          "d": "Sentado (sóleo): com o joelho flexionado a cerca de 90°, o gastrocnêmio sai do movimento. “Máquina de sóleo” e “panturrilha sentada” são o mesmo exercício."
+        }
       ]
     },
     {
       "id": "1",
-      "name": "Treino B – Lower",
-      "tab": "Treino B · Lower",
+      "name": "Treino B",
+      "tab": "Treino B",
       "eyebrow": "TREINO B • PROGRAMA PRINCIPAL",
       "optional": false,
       "ex": [
-        {"n": "Quadríceps – agachamento ou leg press", "o": "Quadríceps – composto", "tag": "Treino fixo", "s": "Agachamento no Smith; Leg press 45°; Agachamento hack (máquina)", "wu": [["8–10 leve", "45–60 s"], ["4–6 moderada", "45–60 s"]], "w": [4, "8–12", "120 s"], "d": "Quadríceps: pés na largura dos ombros, na altura média da plataforma (ou um pouco à frente da barra no Smith) e joelhos avançando sobre os pés. Pés muito altos transferem trabalho para glúteos e posteriores."},
-        {"n": "Quadríceps – cadeira extensora", "o": "Quadríceps – extensão de joelho", "tag": "Treino fixo", "s": "Cadeira extensora; Cadeira extensora unilateral (uma perna por vez)", "wu": [], "w": [2, "12–15", "60 s"], "d": "Quadríceps: encosto bem ajustado e extensão completa do joelho com controle. Se a máquina permitir, reclinar o encosto (cerca de 40° de flexão de quadril) fez o reto femoral crescer mais em estudo (Larsen e colegas, 2025)."},
-        {"n": "Posterior de coxa – flexora", "o": "Posteriores – flexão de joelho", "tag": "Treino fixo", "s": "Cadeira flexora (sentado), melhor opção; Flexora unilateral sentada; Mesa flexora (deitado), só se não houver cadeira", "wu": [["8–10 leve", "45–60 s"]], "w": [5, "10–15", "90 s"], "d": "Isquiotibiais: na cadeira flexora o quadril fica flexionado e o músculo trabalha mais alongado, o que mostrou maior ganho de massa em estudo (Maeo e colegas, 2021). Na mesa flexora, mantenha o quadril colado ao banco."},
-        {"n": "Adutores", "tag": "Treino fixo", "s": "Cadeira adutora (máquina adutora); Adução na polia baixa (com tornozeleira)", "wu": [], "w": [2, "12–15", "60 s"], "d": "Adutores: feche as pernas sem inclinar o tronco e controle a volta, sem deixar a carga bater."},
-        {"n": "Panturrilhas – gastrocnêmio", "o": "Panturrilhas – joelho estendido", "tag": "Treino fixo", "s": "Panturrilha em pé na máquina; Panturrilha no leg press; Panturrilha em pé no Smith (com degrau)", "wu": [], "w": [2, "10–15", "60 s"], "d": "Gastrocnêmio: joelhos estendidos, amplitude completa (calcanhar abaixo do nível do apoio até ficar na ponta dos pés), com pausa curta embaixo e em cima."},
-        {"n": "Panturrilhas – sóleo", "o": "Panturrilhas – joelho flexionado", "tag": "Treino fixo", "s": "Panturrilha sentada (máquina); Panturrilha sentada com halteres ou anilha sobre os joelhos", "wu": [], "w": [1, "12–20", "60 s"], "d": "Sóleo: com o joelho flexionado a cerca de 90°, o gastrocnêmio sai do movimento. “Máquina de sóleo” e “panturrilha sentada” são o mesmo exercício."},
-        {"n": "Abdômen – reto abdominal", "o": "Abdômen", "tag": "Treino fixo", "s": "Abdominal na polia (crunch ajoelhado com corda); Abdominal na máquina; Abdominal crunch no solo", "wu": [], "w": [2, "12–15", "60 s"], "d": "Reto abdominal: arredonde o tronco aproximando costelas e quadril, sem puxar com os braços nem com o quadril."},
-        {"n": "Tríceps", "tag": "Treino fixo", "s": "3 séries acima da cabeça: tríceps na polia com corda, de costas para a polia, tríceps francês com halter (unilateral ou com as duas mãos) ou extensão acima da cabeça na polia alta; 1 série junto ao corpo: tríceps na polia com corda, com barra reta ou V, ou extensão de tríceps na máquina", "op": ["Tríceps na polia com corda, de costas (acima da cabeça)", "Tríceps francês com halter", "Extensão acima da cabeça na polia alta", "Tríceps na polia com corda (junto ao corpo)", "Tríceps na polia com barra reta ou V", "Extensão de tríceps na máquina"], "wu": [["8–10 leve", "45–60 s"]], "w": [4, "10–15", "60 s"], "d": "Tríceps: acima da cabeça a cabeça longa fica mais alongada, e em estudo (Maeo e colegas, 2023) todas as cabeças cresceram mais nesse formato, mesmo com carga menor. Desça o cotovelo até flexionar bem, com controle. Se o cotovelo incomodar, faça as 4 séries junto ao corpo. Evite tríceps testa.", "c": "Escolha uma opção em cada padrão (3 séries acima da cabeça e 1 junto ao corpo). Se o aparelho estiver ocupado, troque por outra opção do mesmo padrão e mantenha repetições e esforço."}
+        {
+          "n": "Quadríceps – agachamento ou leg press",
+          "o": "Quadríceps – composto",
+          "tag": "Treino fixo",
+          "s": "Agachamento no Smith; Leg press 45°; Agachamento hack (máquina)",
+          "wu": [
+            [
+              "8–10 leve",
+              "45–60 s"
+            ],
+            [
+              "4–6 moderada",
+              "45–60 s"
+            ]
+          ],
+          "w": [
+            4,
+            "8–12",
+            "120 s"
+          ],
+          "d": "Quadríceps: pés na largura dos ombros, na altura média da plataforma (ou um pouco à frente da barra no Smith) e joelhos avançando sobre os pés. Pés muito altos transferem trabalho para glúteos e posteriores."
+        },
+        {
+          "n": "Costas – remada",
+          "o": "Costas – espessura (remada)",
+          "tag": "Treino fixo",
+          "s": "Remada baixa na polia (triângulo); Remada articulada (máquina); Remada com apoio de peito (máquina ou banco inclinado); Remada unilateral com halter (serrote)",
+          "wu": [
+            [
+              "8–10 leve",
+              "45–60 s"
+            ]
+          ],
+          "w": [
+            4,
+            "8–12",
+            "90 s"
+          ],
+          "d": "Espessura das costas (dorsal, romboides e trapézio médio): puxe o cotovelo para trás rente ao tronco, sem balançar o corpo. Pegada neutra e apoio de peito aliviam punhos e lombar."
+        },
+        {
+          "n": "Costas – puxada",
+          "o": "Costas – largura (puxada)",
+          "tag": "Treino fixo",
+          "s": "Puxada frontal na polia alta; Puxada com pegada neutra (triângulo); Barra fixa assistida (graviton); Puxada articulada (máquina)",
+          "wu": [],
+          "w": [
+            4,
+            "8–12",
+            "90 s"
+          ],
+          "d": "Largura das costas (grande dorsal e redondo maior): leve os cotovelos para baixo e para os lados, com o peito aberto e sem jogar o tronco para trás. Pegada neutra poupa punhos e cotovelos."
+        },
+        {
+          "n": "Bíceps",
+          "tag": "Treino fixo",
+          "s": "Rosca direta com barra W; Rosca alternada com halteres; Rosca na polia baixa; Rosca inclinada com halteres",
+          "op": [
+            "Rosca direta com barra W",
+            "Rosca alternada com halteres",
+            "Rosca na polia baixa",
+            "Rosca inclinada com halteres"
+          ],
+          "wu": [],
+          "w": [
+            4,
+            "10–15",
+            "60 s"
+          ],
+          "d": "Bíceps: a rosca supinada trabalha as duas cabeças e o martelo reforça braquial e braquiorradial. Na rosca inclinada o braço fica atrás do tronco e a cabeça longa trabalha alongada. Cotovelos fixos ao lado do tronco; barra W ou halteres ajudam se punho ou cotovelo incomodarem.",
+          "c": "Neste treino, só rosca supinada. Se o aparelho estiver ocupado, troque por outra opção e mantenha repetições e esforço."
+        },
+        {
+          "n": "Deltoide posterior",
+          "tag": "Treino fixo",
+          "s": "Crucifixo inverso na máquina (peck deck invertido); Crucifixo inverso com halteres (inclinado ou apoiado no banco); Crucifixo inverso na polia (cabos cruzados)",
+          "wu": [],
+          "w": [
+            3,
+            "12–15",
+            "60 s"
+          ],
+          "d": "Deltoide posterior: abra os braços na altura dos ombros, com cotovelos levemente flexionados, sem puxar as escápulas para trás, para o esforço não passar para o trapézio."
+        },
+        {
+          "n": "Trapézio superior",
+          "tag": "Treino fixo",
+          "s": "Encolhimento com halteres; Encolhimento na máquina; Encolhimento no Smith ou com barra (se confortável)",
+          "op": [
+            "Encolhimento com halteres",
+            "Encolhimento na máquina",
+            "Encolhimento no Smith",
+            "Encolhimento com barra"
+          ],
+          "wu": [],
+          "w": [
+            3,
+            "10–15",
+            "60 s"
+          ],
+          "d": "Trapézio superior: leve os ombros em direção às orelhas, sem girar. Use munhequeiras (straps) se a pegada limitar a série."
+        },
+        {
+          "n": "Deltoide lateral",
+          "tag": "Treino fixo",
+          "s": "Elevação lateral na máquina; Elevação lateral com halteres; Elevação lateral na polia (unilateral)",
+          "wu": [],
+          "w": [
+            3,
+            "12–20",
+            "60 s"
+          ],
+          "d": "Deltoide lateral: suba até a altura dos ombros com o cotovelo levemente flexionado, sem balançar o tronco nem encolher os ombros. A polia mantém tensão desde o início do movimento."
+        },
+        {
+          "n": "Panturrilha sentado",
+          "o": "Panturrilhas – sóleo",
+          "tag": "Treino fixo",
+          "s": "Panturrilha sentada (máquina); Panturrilha sentada com halteres ou anilha sobre os joelhos",
+          "wu": [],
+          "w": [
+            2,
+            "12–20",
+            "60 s"
+          ],
+          "d": "Sentado (sóleo): com o joelho flexionado a cerca de 90°, o gastrocnêmio sai do movimento. “Máquina de sóleo” e “panturrilha sentada” são o mesmo exercício."
+        }
       ]
     },
     {
       "id": "2",
-      "name": "Treino C – Upper",
-      "tab": "Treino C · Upper",
+      "name": "Treino C",
+      "tab": "Treino C",
       "eyebrow": "TREINO C • PROGRAMA PRINCIPAL",
       "optional": false,
       "ex": [
-        {"n": "Peitoral – região superior", "tag": "Treino fixo", "s": "Supino inclinado com halteres; Supino inclinado com barra; Supino inclinado na máquina; Supino inclinado no Smith; Crossover na polia baixa (de baixo para cima)", "wu": [["8–10 leve", "45–60 s"], ["4–6 moderada", "45–60 s"]], "w": [3, "8–12", "90 s"], "d": "Região superior do peitoral (fibras claviculares): banco inclinado entre 30° e 45°, pois acima disso o ombro tende a assumir o trabalho. No crossover, as mãos sobem em direção ao rosto."},
-        {"n": "Costas – largura (puxada)", "o": "Costas – largura", "tag": "Treino fixo", "s": "Puxada frontal na polia alta; Puxada com pegada neutra (triângulo); Barra fixa assistida (graviton); Puxada articulada (máquina)", "wu": [["8–10 leve", "45–60 s"]], "w": [3, "8–12", "90 s"], "d": "Largura das costas (grande dorsal e redondo maior): leve os cotovelos para baixo e para os lados, com o peito aberto e sem jogar o tronco para trás. Pegada neutra poupa punhos e cotovelos."},
-        {"n": "Costas – espessura (remada)", "o": "Costas – espessura", "tag": "Treino fixo", "s": "Remada baixa na polia (triângulo); Remada articulada (máquina); Remada com apoio de peito (máquina ou banco inclinado)", "wu": [], "w": [2, "8–12", "90 s"], "d": "Espessura das costas (dorsal, romboides e trapézio médio): puxe o cotovelo para trás rente ao tronco, sem balançar o corpo. Pegada neutra e apoio de peito aliviam punhos e lombar."},
-        {"n": "Peitoral – região média", "tag": "Treino fixo", "s": "Supino reto com barra; Supino reto com halteres; Supino na máquina (chest press); Supino reto no Smith; Crucifixo na máquina (peck deck) ou na polia (crossover)", "op": ["Supino reto com barra", "Supino reto com halteres", "Supino na máquina (chest press)", "Supino reto no Smith", "Crucifixo na máquina (peck deck)", "Crucifixo na polia (crossover)"], "wu": [], "w": [2, "10–15", "90 s"], "d": "Região média do peitoral (fibras esternais): banco reto e mãos na altura do meio do peito. Halteres e máquinas com pegada neutra poupam punhos e cotovelos."},
-        {"n": "Deltoide anterior", "tag": "Treino fixo", "s": "Desenvolvimento na máquina (shoulder press); Desenvolvimento com halteres sentado; Desenvolvimento no Smith sentado", "wu": [], "w": [2, "8–12", "90 s"], "d": "Deltoide anterior: desenvolvimento sentado, com os cotovelos um pouco à frente do tronco. Pegada neutra ou semineutra nas máquinas e nos halteres poupa punhos e cotovelos."},
-        {"n": "Deltoide lateral", "tag": "Treino fixo", "s": "Elevação lateral na máquina; Elevação lateral com halteres; Elevação lateral na polia (unilateral)", "wu": [], "w": [3, "12–20", "60 s"], "d": "Deltoide lateral: suba até a altura dos ombros com o cotovelo levemente flexionado, sem balançar o tronco nem encolher os ombros. A polia mantém tensão desde o início do movimento."},
-        {"n": "Deltoide posterior", "tag": "Treino fixo", "s": "Crucifixo inverso na máquina (peck deck invertido); Crucifixo inverso com halteres (inclinado ou apoiado no banco); Crucifixo inverso na polia (cabos cruzados)", "wu": [], "w": [2, "12–15", "60 s"], "d": "Deltoide posterior: abra os braços na altura dos ombros, com cotovelos levemente flexionados, sem puxar as escápulas para trás, para o esforço não passar para o trapézio."},
-        {"n": "Trapézio superior", "tag": "Treino fixo", "s": "Encolhimento com halteres; Encolhimento na máquina; Encolhimento no Smith ou com barra (se confortável)", "op": ["Encolhimento com halteres", "Encolhimento na máquina", "Encolhimento no Smith", "Encolhimento com barra"], "wu": [], "w": [2, "10–15", "60 s"], "d": "Trapézio superior: leve os ombros em direção às orelhas, sem girar. Use munhequeiras (straps) se a pegada limitar a série."},
-        {"n": "Tríceps", "tag": "Treino fixo", "s": "3 séries acima da cabeça: tríceps na polia com corda, de costas para a polia, tríceps francês com halter (unilateral ou com as duas mãos) ou extensão acima da cabeça na polia alta; 1 série junto ao corpo: tríceps na polia com corda, com barra reta ou V, ou extensão de tríceps na máquina", "op": ["Tríceps na polia com corda, de costas (acima da cabeça)", "Tríceps francês com halter", "Extensão acima da cabeça na polia alta", "Tríceps na polia com corda (junto ao corpo)", "Tríceps na polia com barra reta ou V", "Extensão de tríceps na máquina"], "wu": [], "w": [4, "10–15", "60 s"], "d": "Tríceps: acima da cabeça a cabeça longa fica mais alongada, e em estudo (Maeo e colegas, 2023) todas as cabeças cresceram mais nesse formato, mesmo com carga menor. Desça o cotovelo até flexionar bem, com controle. Se o cotovelo incomodar, faça as 4 séries junto ao corpo. Evite tríceps testa.", "c": "Escolha uma opção em cada padrão (3 séries acima da cabeça e 1 junto ao corpo). Se o aparelho estiver ocupado, troque por outra opção do mesmo padrão e mantenha repetições e esforço."}
+        {
+          "n": "Quadríceps – cadeira extensora",
+          "o": "Quadríceps – extensão de joelho",
+          "tag": "Treino fixo",
+          "s": "Cadeira extensora; Cadeira extensora unilateral (uma perna por vez)",
+          "wu": [],
+          "w": [
+            4,
+            "12–15",
+            "120 s"
+          ],
+          "d": "Quadríceps: encosto bem ajustado e extensão completa do joelho com controle. Se a máquina permitir, reclinar o encosto (cerca de 40° de flexão de quadril) fez o reto femoral crescer mais em estudo (Larsen e colegas, 2025)."
+        },
+        {
+          "n": "Posterior de coxa – flexora",
+          "o": "Posteriores – flexão de joelho",
+          "tag": "Treino fixo",
+          "s": "Cadeira flexora (sentado), melhor opção; Flexora unilateral sentada; Mesa flexora (deitado), só se não houver cadeira",
+          "wu": [
+            [
+              "8–10 leve",
+              "45–60 s"
+            ]
+          ],
+          "w": [
+            3,
+            "10–15",
+            "90 s"
+          ],
+          "d": "Isquiotibiais: na cadeira flexora o quadril fica flexionado e o músculo trabalha mais alongado, o que mostrou maior ganho de massa em estudo (Maeo e colegas, 2021). Na mesa flexora, mantenha o quadril colado ao banco."
+        },
+        {
+          "n": "Peitoral – região superior",
+          "tag": "Treino fixo",
+          "s": "Supino inclinado com halteres; Supino inclinado com barra; Supino inclinado na máquina; Supino inclinado no Smith; Crossover na polia baixa (de baixo para cima)",
+          "wu": [
+            [
+              "8–10 leve",
+              "45–60 s"
+            ],
+            [
+              "4–6 moderada",
+              "45–60 s"
+            ]
+          ],
+          "w": [
+            4,
+            "8–12",
+            "90 s"
+          ],
+          "d": "Região superior do peitoral (fibras claviculares): banco inclinado entre 30° e 45°, pois acima disso o ombro tende a assumir o trabalho. No crossover, as mãos sobem em direção ao rosto."
+        },
+        {
+          "n": "Peitoral – região média",
+          "tag": "Treino fixo",
+          "s": "Supino reto com barra; Supino reto com halteres; Supino na máquina (chest press); Supino reto no Smith; Crucifixo na máquina (peck deck) ou na polia (crossover)",
+          "op": [
+            "Supino reto com barra",
+            "Supino reto com halteres",
+            "Supino na máquina (chest press)",
+            "Supino reto no Smith",
+            "Crucifixo na máquina (peck deck)",
+            "Crucifixo na polia (crossover)"
+          ],
+          "wu": [],
+          "w": [
+            4,
+            "8–12",
+            "90 s"
+          ],
+          "d": "Região média do peitoral (fibras esternais): banco reto e mãos na altura do meio do peito. Halteres e máquinas com pegada neutra poupam punhos e cotovelos."
+        },
+        {
+          "n": "Tríceps",
+          "tag": "Treino fixo",
+          "s": "Tríceps na polia com corda (junto ao corpo); Tríceps na polia com barra reta ou V; Extensão de tríceps na máquina",
+          "op": [
+            "Tríceps na polia com corda (junto ao corpo)",
+            "Tríceps na polia com barra reta ou V",
+            "Extensão de tríceps na máquina"
+          ],
+          "wu": [],
+          "w": [
+            4,
+            "10–15",
+            "60 s"
+          ],
+          "d": "Tríceps junto ao corpo: reforça sobretudo as cabeças lateral e medial. Cotovelos fixos ao lado do tronco, estenda por completo e volte com controle. Neste treino complementa o tríceps acima da cabeça dos treinos A e E.",
+          "c": "Neste treino, todas as séries são junto ao corpo. Se o aparelho estiver ocupado, troque por outra opção e mantenha repetições e esforço."
+        },
+        {
+          "n": "Deltoide anterior",
+          "tag": "Treino fixo",
+          "s": "Desenvolvimento na máquina (shoulder press); Desenvolvimento com halteres sentado; Desenvolvimento no Smith sentado",
+          "wu": [],
+          "w": [
+            3,
+            "8–12",
+            "60 s"
+          ],
+          "d": "Deltoide anterior: desenvolvimento sentado, com os cotovelos um pouco à frente do tronco. Pegada neutra ou semineutra nas máquinas e nos halteres poupa punhos e cotovelos."
+        },
+        {
+          "n": "Deltoide lateral",
+          "tag": "Treino fixo",
+          "s": "Elevação lateral na máquina; Elevação lateral com halteres; Elevação lateral na polia (unilateral)",
+          "wu": [],
+          "w": [
+            3,
+            "12–20",
+            "60 s"
+          ],
+          "d": "Deltoide lateral: suba até a altura dos ombros com o cotovelo levemente flexionado, sem balançar o tronco nem encolher os ombros. A polia mantém tensão desde o início do movimento."
+        },
+        {
+          "n": "Panturrilha em pé",
+          "o": "Panturrilhas – gastrocnêmio",
+          "tag": "Treino fixo",
+          "s": "Panturrilha em pé na máquina; Panturrilha no leg press; Panturrilha em pé no Smith (com degrau)",
+          "wu": [],
+          "w": [
+            2,
+            "10–15",
+            "60 s"
+          ],
+          "d": "Em pé (gastrocnêmio): joelhos estendidos, amplitude completa (calcanhar abaixo do nível do apoio até ficar na ponta dos pés), com pausa curta embaixo e em cima. A panturrilha no leg press também conta como “em pé”, porque o joelho fica estendido."
+        }
       ]
     },
     {
       "id": "3",
-      "name": "Treino D – Lower",
-      "tab": "Treino D · Lower",
+      "name": "Treino D",
+      "tab": "Treino D",
       "eyebrow": "TREINO D • PROGRAMA PRINCIPAL",
       "optional": false,
       "ex": [
-        {"n": "Posterior de coxa – stiff", "o": "Posteriores – extensão de quadril", "tag": "Treino fixo", "s": "Stiff com barra; Stiff com halteres", "wu": [["8–10 leve", "45–60 s"], ["4–6 moderada", "45–60 s"]], "w": [3, "8–12", "120 s"], "d": "Isquiotibiais (extensão de quadril): leve o quadril para trás com joelhos levemente flexionados e coluna neutra; desça até alongar a parte de trás da coxa, com a barra rente às pernas. Straps ajudam se a pegada limitar."},
-        {"n": "Quadríceps – agachamento ou leg press", "o": "Quadríceps – composto", "tag": "Treino fixo", "s": "Leg press 45°; Agachamento no Smith; Agachamento hack (máquina)", "wu": [["8–10 leve", "45–60 s"]], "w": [2, "8–12", "120 s"], "d": "Quadríceps: pés na largura dos ombros, na altura média da plataforma (ou um pouco à frente da barra no Smith) e joelhos avançando sobre os pés. Pés muito altos transferem trabalho para glúteos e posteriores."},
-        {"n": "Posterior de coxa – flexora", "o": "Posteriores – flexão de joelho", "tag": "Treino fixo", "s": "Cadeira flexora (sentado), melhor opção; Flexora unilateral sentada; Mesa flexora (deitado), só se não houver cadeira", "wu": [["8–10 leve", "45–60 s"]], "w": [4, "10–15", "90 s"], "d": "Isquiotibiais: na cadeira flexora o quadril fica flexionado e o músculo trabalha mais alongado, o que mostrou maior ganho de massa em estudo (Maeo e colegas, 2021). Na mesa flexora, mantenha o quadril colado ao banco."},
-        {"n": "Quadríceps – cadeira extensora", "o": "Quadríceps – extensão de joelho", "tag": "Treino fixo", "s": "Cadeira extensora; Cadeira extensora unilateral (uma perna por vez)", "wu": [], "w": [2, "12–15", "60 s"], "d": "Quadríceps: encosto bem ajustado e extensão completa do joelho com controle. Se a máquina permitir, reclinar o encosto (cerca de 40° de flexão de quadril) fez o reto femoral crescer mais em estudo (Larsen e colegas, 2025)."},
-        {"n": "Adutores", "tag": "Treino fixo", "s": "Cadeira adutora (máquina adutora); Adução na polia baixa (com tornozeleira)", "wu": [], "w": [2, "12–15", "60 s"], "d": "Adutores: feche as pernas sem inclinar o tronco e controle a volta, sem deixar a carga bater."},
-        {"n": "Panturrilhas – gastrocnêmio", "o": "Panturrilhas – joelho estendido", "tag": "Treino fixo", "s": "Panturrilha em pé na máquina; Panturrilha no leg press; Panturrilha em pé no Smith (com degrau)", "wu": [], "w": [1, "10–15", "60 s"], "d": "Gastrocnêmio: joelhos estendidos, amplitude completa (calcanhar abaixo do nível do apoio até ficar na ponta dos pés), com pausa curta embaixo e em cima."},
-        {"n": "Panturrilhas – sóleo", "o": "Panturrilhas – joelho flexionado", "tag": "Treino fixo", "s": "Panturrilha sentada (máquina); Panturrilha sentada com halteres ou anilha sobre os joelhos", "wu": [], "w": [2, "12–20", "60 s"], "d": "Sóleo: com o joelho flexionado a cerca de 90°, o gastrocnêmio sai do movimento. “Máquina de sóleo” e “panturrilha sentada” são o mesmo exercício."},
-        {"n": "Abdômen – oblíquos e estabilização", "o": "Abdômen", "tag": "Treino fixo", "s": "Pallof press na polia; Rotação de tronco na polia (lenhador); Prancha lateral", "wu": [], "w": [2, "12–15", "60 s"], "d": "Oblíquos e estabilização do tronco: tronco firme, sem girar o quadril. Se a prancha lateral incomodar punho ou cotovelo, prefira o Pallof press ou o lenhador."},
-        {"n": "Bíceps", "tag": "Treino fixo", "s": "2 séries de rosca supinada: rosca direta com barra W, rosca alternada com halteres ou rosca na polia baixa; 2 séries de rosca martelo: com halteres ou na polia com corda", "op": ["Rosca direta com barra W", "Rosca alternada com halteres", "Rosca na polia baixa", "Rosca martelo com halteres", "Rosca martelo na polia com corda"], "wu": [["8–10 leve", "45–60 s"]], "w": [4, "10–15", "60 s"], "d": "Bíceps: a rosca supinada trabalha as duas cabeças e o martelo reforça braquial e braquiorradial. Cotovelos fixos ao lado do tronco; barra W ou halteres ajudam se punho ou cotovelo incomodarem.", "c": "Escolha uma opção em cada padrão (2 séries de cada). Se o aparelho estiver ocupado, troque por outra opção do mesmo padrão e mantenha repetições e esforço."}
+        {
+          "n": "Posterior de coxa – flexora",
+          "o": "Posteriores – flexão de joelho",
+          "tag": "Treino fixo",
+          "s": "Cadeira flexora (sentado), melhor opção; Flexora unilateral sentada; Mesa flexora (deitado), só se não houver cadeira",
+          "wu": [
+            [
+              "8–10 leve",
+              "45–60 s"
+            ]
+          ],
+          "w": [
+            3,
+            "10–15",
+            "90 s"
+          ],
+          "d": "Isquiotibiais: na cadeira flexora o quadril fica flexionado e o músculo trabalha mais alongado, o que mostrou maior ganho de massa em estudo (Maeo e colegas, 2021). Na mesa flexora, mantenha o quadril colado ao banco."
+        },
+        {
+          "n": "Costas – puxada",
+          "o": "Costas – largura (puxada)",
+          "tag": "Treino fixo",
+          "s": "Puxada frontal na polia alta; Puxada com pegada neutra (triângulo); Barra fixa assistida (graviton); Puxada articulada (máquina)",
+          "wu": [
+            [
+              "8–10 leve",
+              "45–60 s"
+            ]
+          ],
+          "w": [
+            4,
+            "8–12",
+            "90 s"
+          ],
+          "d": "Largura das costas (grande dorsal e redondo maior): leve os cotovelos para baixo e para os lados, com o peito aberto e sem jogar o tronco para trás. Pegada neutra poupa punhos e cotovelos."
+        },
+        {
+          "n": "Costas – remada",
+          "o": "Costas – espessura (remada)",
+          "tag": "Treino fixo",
+          "s": "Remada baixa na polia (triângulo); Remada articulada (máquina); Remada com apoio de peito (máquina ou banco inclinado)",
+          "wu": [],
+          "w": [
+            4,
+            "8–12",
+            "90 s"
+          ],
+          "d": "Espessura das costas (dorsal, romboides e trapézio médio): puxe o cotovelo para trás rente ao tronco, sem balançar o corpo. Pegada neutra e apoio de peito aliviam punhos e lombar."
+        },
+        {
+          "n": "Bíceps",
+          "tag": "Treino fixo",
+          "s": "Rosca martelo com halteres; Rosca martelo na polia com corda",
+          "op": [
+            "Rosca martelo com halteres",
+            "Rosca martelo na polia com corda"
+          ],
+          "wu": [],
+          "w": [
+            4,
+            "10–15",
+            "60 s"
+          ],
+          "d": "Bíceps: a rosca supinada trabalha as duas cabeças e o martelo reforça braquial e braquiorradial. Na rosca inclinada o braço fica atrás do tronco e a cabeça longa trabalha alongada. Cotovelos fixos ao lado do tronco; barra W ou halteres ajudam se punho ou cotovelo incomodarem.",
+          "c": "Neste treino, só rosca martelo. Se o aparelho estiver ocupado, troque por outra opção e mantenha repetições e esforço."
+        },
+        {
+          "n": "Deltoide posterior",
+          "tag": "Treino fixo",
+          "s": "Crucifixo inverso na máquina (peck deck invertido); Crucifixo inverso com halteres (inclinado ou apoiado no banco); Crucifixo inverso na polia (cabos cruzados)",
+          "wu": [],
+          "w": [
+            3,
+            "12–15",
+            "60 s"
+          ],
+          "d": "Deltoide posterior: abra os braços na altura dos ombros, com cotovelos levemente flexionados, sem puxar as escápulas para trás, para o esforço não passar para o trapézio."
+        },
+        {
+          "n": "Trapézio superior",
+          "tag": "Treino fixo",
+          "s": "Encolhimento com halteres; Encolhimento na máquina; Encolhimento no Smith ou com barra (se confortável)",
+          "op": [
+            "Encolhimento com halteres",
+            "Encolhimento na máquina",
+            "Encolhimento no Smith",
+            "Encolhimento com barra"
+          ],
+          "wu": [],
+          "w": [
+            3,
+            "10–15",
+            "60 s"
+          ],
+          "d": "Trapézio superior: leve os ombros em direção às orelhas, sem girar. Use munhequeiras (straps) se a pegada limitar a série."
+        },
+        {
+          "n": "Deltoide lateral",
+          "tag": "Treino fixo",
+          "s": "Elevação lateral na máquina; Elevação lateral com halteres; Elevação lateral na polia (unilateral)",
+          "wu": [],
+          "w": [
+            3,
+            "12–20",
+            "60 s"
+          ],
+          "d": "Deltoide lateral: suba até a altura dos ombros com o cotovelo levemente flexionado, sem balançar o tronco nem encolher os ombros. A polia mantém tensão desde o início do movimento."
+        },
+        {
+          "n": "Abdômen – reto abdominal",
+          "o": "Abdômen",
+          "tag": "Treino fixo",
+          "s": "Abdominal na polia (crunch ajoelhado com corda); Abdominal na máquina; Abdominal crunch no solo",
+          "wu": [],
+          "w": [
+            3,
+            "12–15",
+            "60 s"
+          ],
+          "d": "Reto abdominal: arredonde o tronco aproximando costelas e quadril, sem puxar com os braços nem com o quadril."
+        },
+        {
+          "n": "Panturrilha em pé",
+          "o": "Panturrilhas – gastrocnêmio",
+          "tag": "Treino fixo",
+          "s": "Panturrilha em pé na máquina; Panturrilha no leg press; Panturrilha em pé no Smith (com degrau)",
+          "wu": [],
+          "w": [
+            2,
+            "10–15",
+            "60 s"
+          ],
+          "d": "Em pé (gastrocnêmio): joelhos estendidos, amplitude completa (calcanhar abaixo do nível do apoio até ficar na ponta dos pés), com pausa curta embaixo e em cima. A panturrilha no leg press também conta como “em pé”, porque o joelho fica estendido."
+        }
       ]
     },
     {
       "id": "4",
-      "name": "Treino E – Full Body (opcional)",
-      "tab": "Treino E · Full Body (opcional)",
+      "name": "Treino E (opcional)",
+      "tab": "Treino E (opcional)",
       "eyebrow": "TREINO E • SESSÃO OPCIONAL",
       "optional": true,
       "ex": [
-        {"n": "Cadeia posterior – terra convencional", "tag": "Opcional", "s": "Levantamento terra convencional (barra livre)", "wu": [["8–10 leve", "45–60 s"], ["4–6 moderada", "45–60 s"]], "w": [2, "5–8", "2–3 min"], "d": "Cadeia posterior: mantenha a técnica estável e a coluna neutra durante toda a série. Straps ajudam se a pegada limitar.", "c": "Exercício fixo: só o terra convencional, apenas neste treino opcional.", "r": "2–3", "x": "Não chegue à falha nem teste carga máxima."},
-        {"n": "Peitoral", "tag": "Opcional", "s": "Supino reto com halteres; Supino na máquina (chest press); Crucifixo na máquina (peck deck) ou na polia (crossover)", "op": ["Supino reto com halteres", "Supino na máquina (chest press)", "Crucifixo na máquina (peck deck)", "Crucifixo na polia (crossover)"], "wu": [["8–10 leve", "45–60 s"]], "w": [2, "10–15", "90 s"], "d": "Região média do peitoral (fibras esternais): banco reto e mãos na altura do meio do peito. Halteres e máquinas com pegada neutra poupam punhos e cotovelos."},
-        {"n": "Costas – remada ou puxada", "o": "Costas", "tag": "Opcional", "s": "Remada baixa na polia; Remada articulada (máquina); Puxada frontal na polia alta; Puxada com pegada neutra", "wu": [], "w": [2, "10–12", "90 s"], "d": "Escolha uma remada ou uma puxada, o padrão menos trabalhado recentemente. Remadas pegam mais a espessura; puxadas, a largura."},
-        {"n": "Quadríceps", "tag": "Opcional", "s": "Leg press 45°; Agachamento no Smith; Agachamento hack (máquina); Cadeira extensora", "wu": [["8–10 leve", "45–60 s"]], "w": [2, "10–15", "90 s"], "d": "Quadríceps: pés na largura dos ombros, na altura média da plataforma (ou um pouco à frente da barra no Smith) e joelhos avançando sobre os pés. Pés muito altos transferem trabalho para glúteos e posteriores."},
-        {"n": "Posterior de coxa – flexora", "o": "Posteriores – flexão de joelho", "tag": "Opcional", "s": "Cadeira flexora (sentado), melhor opção; Mesa flexora (deitado), só se não houver cadeira. Só se estiver recuperado", "wu": [], "w": [2, "10–15", "90 s"], "d": "Isquiotibiais: na cadeira flexora o quadril fica flexionado e o músculo trabalha mais alongado, o que mostrou maior ganho de massa em estudo (Maeo e colegas, 2021). Na mesa flexora, mantenha o quadril colado ao banco."},
-        {"n": "Deltoide lateral", "tag": "Opcional", "s": "Elevação lateral na máquina; Elevação lateral com halteres; Elevação lateral na polia (unilateral)", "wu": [], "w": [2, "12–20", "60 s"], "d": "Deltoide lateral: suba até a altura dos ombros com o cotovelo levemente flexionado, sem balançar o tronco nem encolher os ombros. A polia mantém tensão desde o início do movimento."},
-        {"n": "Bíceps", "tag": "Opcional", "s": "Rosca direta com barra W; Rosca alternada com halteres; Rosca na polia baixa; Rosca martelo", "wu": [["8–10 leve", "45–60 s"]], "w": [2, "10–15", "60 s"], "d": "Bíceps: a rosca supinada trabalha as duas cabeças e o martelo reforça braquial e braquiorradial. Cotovelos fixos ao lado do tronco; barra W ou halteres ajudam se punho ou cotovelo incomodarem."},
-        {"n": "Tríceps", "tag": "Opcional", "s": "Tríceps na polia com corda, de costas para a polia (acima da cabeça); Tríceps francês com halter; Tríceps na polia com corda, junto ao corpo", "wu": [], "w": [2, "10–15", "60 s"], "d": "Tríceps: prefira acima da cabeça, que alonga a cabeça longa. Sem dor no cotovelo; se incomodar, use a opção junto ao corpo ou pule o exercício."},
-        {"n": "Panturrilhas – gastrocnêmio ou sóleo", "o": "Panturrilhas", "tag": "Opcional", "s": "Panturrilha em pé na máquina (gastrocnêmio); Panturrilha sentada na máquina (sóleo)", "wu": [], "w": [2, "12–20", "60 s"], "d": "Escolha a região menos estimulada na semana: em pé para o gastrocnêmio, sentada para o sóleo."},
-        {"n": "Abdômen", "tag": "Opcional", "s": "Abdominal na polia (crunch); Pallof press na polia; Prancha lateral", "wu": [], "w": [2, "12–15", "60 s"], "d": "Reto abdominal no crunch; oblíquos e estabilização no Pallof press e na prancha lateral. Se a prancha incomodar punho ou cotovelo, troque pelo Pallof press."}
+        {
+          "n": "Costas – puxada",
+          "o": "Costas – largura (puxada)",
+          "tag": "Opcional",
+          "s": "Puxada frontal na polia alta; Puxada com pegada neutra (triângulo); Barra fixa assistida (graviton); Puxada articulada (máquina)",
+          "wu": [
+            [
+              "8–10 leve",
+              "45–60 s"
+            ]
+          ],
+          "w": [
+            4,
+            "8–12",
+            "90 s"
+          ],
+          "d": "Largura das costas (grande dorsal e redondo maior): leve os cotovelos para baixo e para os lados, com o peito aberto e sem jogar o tronco para trás. Pegada neutra poupa punhos e cotovelos."
+        },
+        {
+          "n": "Costas – remada",
+          "o": "Costas – espessura (remada)",
+          "tag": "Opcional",
+          "s": "Remada baixa na polia (triângulo); Remada articulada (máquina); Remada com apoio de peito (máquina ou banco inclinado)",
+          "wu": [],
+          "w": [
+            4,
+            "8–12",
+            "90 s"
+          ],
+          "d": "Espessura das costas (dorsal, romboides e trapézio médio): puxe o cotovelo para trás rente ao tronco, sem balançar o corpo. Pegada neutra e apoio de peito aliviam punhos e lombar."
+        },
+        {
+          "n": "Tríceps",
+          "tag": "Opcional",
+          "s": "3 séries acima da cabeça: tríceps na polia com corda, de costas para a polia, tríceps francês com halter (unilateral ou com as duas mãos) ou extensão acima da cabeça na polia alta; 1 série junto ao corpo: tríceps na polia com corda, com barra reta ou V, ou extensão de tríceps na máquina",
+          "op": [
+            "Tríceps na polia com corda, de costas (acima da cabeça)",
+            "Tríceps francês com halter",
+            "Extensão acima da cabeça na polia alta",
+            "Tríceps na polia com corda (junto ao corpo)",
+            "Tríceps na polia com barra reta ou V",
+            "Extensão de tríceps na máquina"
+          ],
+          "wu": [],
+          "w": [
+            4,
+            "10–15",
+            "60 s"
+          ],
+          "d": "Tríceps: acima da cabeça a cabeça longa fica mais alongada, e em estudo (Maeo e colegas, 2023) todas as cabeças cresceram mais nesse formato, mesmo com carga menor. Desça o cotovelo até flexionar bem, com controle. Se o cotovelo incomodar, faça as 4 séries junto ao corpo. Evite tríceps testa.",
+          "c": "Escolha uma opção em cada padrão (3 séries acima da cabeça e 1 junto ao corpo). Se o aparelho estiver ocupado, troque por outra opção do mesmo padrão e mantenha repetições e esforço."
+        },
+        {
+          "n": "Bíceps",
+          "tag": "Opcional",
+          "s": "2 séries de rosca supinada: rosca direta com barra W, rosca alternada com halteres, rosca inclinada com halteres ou rosca na polia baixa; 2 séries de rosca martelo: com halteres ou na polia com corda",
+          "op": [
+            "Rosca direta com barra W",
+            "Rosca alternada com halteres",
+            "Rosca inclinada com halteres",
+            "Rosca na polia baixa",
+            "Rosca martelo com halteres",
+            "Rosca martelo na polia com corda"
+          ],
+          "wu": [],
+          "w": [
+            4,
+            "10–15",
+            "60 s"
+          ],
+          "d": "Bíceps: a rosca supinada trabalha as duas cabeças e o martelo reforça braquial e braquiorradial. Na rosca inclinada o braço fica atrás do tronco e a cabeça longa trabalha alongada. Cotovelos fixos ao lado do tronco; barra W ou halteres ajudam se punho ou cotovelo incomodarem.",
+          "c": "Escolha uma opção em cada padrão (2 séries de cada). Se o aparelho estiver ocupado, troque por outra opção do mesmo padrão e mantenha repetições e esforço."
+        },
+        {
+          "n": "Deltoide lateral",
+          "tag": "Opcional",
+          "s": "Elevação lateral na máquina; Elevação lateral com halteres; Elevação lateral na polia (unilateral)",
+          "wu": [],
+          "w": [
+            3,
+            "12–20",
+            "60 s"
+          ],
+          "d": "Deltoide lateral: suba até a altura dos ombros com o cotovelo levemente flexionado, sem balançar o tronco nem encolher os ombros. A polia mantém tensão desde o início do movimento."
+        },
+        {
+          "n": "Trapézio superior",
+          "tag": "Opcional",
+          "s": "Encolhimento com halteres; Encolhimento na máquina; Encolhimento no Smith ou com barra (se confortável)",
+          "op": [
+            "Encolhimento com halteres",
+            "Encolhimento na máquina",
+            "Encolhimento no Smith",
+            "Encolhimento com barra"
+          ],
+          "wu": [],
+          "w": [
+            4,
+            "10–15",
+            "60 s"
+          ],
+          "d": "Trapézio superior: leve os ombros em direção às orelhas, sem girar. Use munhequeiras (straps) se a pegada limitar a série."
+        },
+        {
+          "n": "Panturrilha em pé",
+          "o": "Panturrilhas – gastrocnêmio",
+          "tag": "Opcional",
+          "s": "Panturrilha em pé na máquina; Panturrilha no leg press; Panturrilha em pé no Smith (com degrau)",
+          "wu": [],
+          "w": [
+            4,
+            "10–15",
+            "60 s"
+          ],
+          "d": "Em pé (gastrocnêmio): joelhos estendidos, amplitude completa (calcanhar abaixo do nível do apoio até ficar na ponta dos pés), com pausa curta embaixo e em cima. A panturrilha no leg press também conta como “em pé”, porque o joelho fica estendido."
+        },
+        {
+          "n": "Panturrilha sentado",
+          "o": "Panturrilhas – sóleo",
+          "tag": "Opcional",
+          "s": "Panturrilha sentada (máquina); Panturrilha sentada com halteres ou anilha sobre os joelhos",
+          "wu": [],
+          "w": [
+            4,
+            "12–20",
+            "60 s"
+          ],
+          "d": "Sentado (sóleo): com o joelho flexionado a cerca de 90°, o gastrocnêmio sai do movimento. “Máquina de sóleo” e “panturrilha sentada” são o mesmo exercício."
+        }
       ]
     }
   ],
-  "rest": {"eyebrow": "RECUPERAÇÃO", "name": "Descanso", "count": "Atividade opcional", "ex": {"n": "Descanso ou corrida leve", "tag": "Recuperação", "m": [["Intensidade", "Leve"], ["Duração sugerida", "20–30 min"], ["Objetivo", "Recuperação"]]}}
+  "rest": {
+    "eyebrow": "RECUPERAÇÃO",
+    "name": "Descanso",
+    "count": "Atividade opcional",
+    "ex": {
+      "n": "Descanso ou corrida leve",
+      "tag": "Recuperação",
+      "m": [
+        [
+          "Intensidade",
+          "Leve"
+        ],
+        [
+          "Duração sugerida",
+          "20–30 min"
+        ],
+        [
+          "Objetivo",
+          "Recuperação"
+        ]
+      ]
+    }
+  }
 };
 /* ============ MOTOR ============ */
 const K="fichaTreino_v6",$=s=>document.querySelector(s);
@@ -246,8 +903,10 @@ let S=load();
 function migrate(){/* nomes antigos (campo "o") -> nomes atuais */
   F.panels.forEach(p=>{const s=S.cur[p.id];
     if(s&&s.sig===p.ex.map(e=>(e.o||e.n)+steps(e).length).join("|"))s.sig=sig(p)});
-  S.hist.forEach(h=>{const p=F.panels.find(x=>x.name===h.p);if(!p||!Array.isArray(h.sets))return;
-    h.sets.forEach(y=>{const e=p.ex.find(x=>x.o===y.n);if(e)y.n=e.n})})}
+  const ren=n=>{for(const p of F.panels){const e=p.ex.find(x=>x.o===n);if(e)return e.n}return n};
+  S.hist.forEach(h=>{if(!Array.isArray(h.sets))return;
+    h.sets.forEach(y=>{y.n=ren(y.n)});
+    if(h.nt){const nn={};Object.entries(h.nt).forEach(([k,v])=>{nn[ren(k)]=v});h.nt=nn}})}
 migrate();
 
 function sess(p){let s=S.cur[p.id];if(!s||s.sig!==sig(p))s=S.cur[p.id]={sig:sig(p),t0:null,done:{},log:{},open:null};return s}
