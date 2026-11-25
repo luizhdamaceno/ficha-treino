@@ -34,6 +34,7 @@ h1{font-size:26px;margin:4px 0 0;letter-spacing:-.02em;line-height:1.15}
 .tab[aria-selected=true]{background:var(--navy);color:#fff;border-color:var(--navy)}
 @media(prefers-color-scheme:dark){.tab[aria-selected=true]{background:var(--gold);color:#142b45;border-color:var(--gold)}}
 .prog{display:flex;align-items:center;gap:10px;padding:0 14px 10px;max-width:760px;margin:0 auto}
+.prog[hidden]{display:none}
 .ring{--p:0%;width:40px;height:40px;flex:none;border-radius:50%;background:conic-gradient(var(--gold) var(--p),var(--line) 0);display:grid;place-items:center;position:relative;transition:background .4s}
 .ring:before{content:"";position:absolute;inset:4px;border-radius:50%;background:var(--bg)}
 .ring b{position:relative;font-size:11px;font-variant-numeric:tabular-nums}
@@ -64,6 +65,12 @@ h2{font-size:22px;margin:2px 0 0;letter-spacing:-.02em;color:var(--ink)}
 .step p{margin:4px 0 12px;color:var(--muted);font-size:14px}
 .in{display:grid;gap:8px;margin-bottom:12px}
 .in label{display:block;font-size:13px;font-weight:700;color:var(--muted);margin-bottom:3px}
+.in select#op{font-size:16px;text-align:left;padding:0 12px}
+textarea#nt{width:100%;min-height:64px;font:inherit;font-size:15px;color:inherit;border-radius:10px;border:1px solid var(--line);background:var(--card);padding:10px;resize:vertical}
+.ntl{margin:8px 0 0;font-size:14px;color:var(--muted)}
+details.nt{margin:8px 0 0}
+details.nt summary{font-weight:700;font-size:14px;min-height:36px}
+.h i{font-style:normal;font-weight:700;color:var(--ink)}
 .in input,.in select{width:100%;height:50px;font-size:20px;font-weight:700;border-radius:10px;border:1px solid var(--line);background:var(--card);text-align:center;padding:0 6px}
 .go{width:100%;min-height:58px;border:0;border-radius:14px;background:var(--gold);color:#142b45;font-size:18px;font-weight:800}
 .go:active{transform:scale(.98)}
@@ -133,15 +140,15 @@ const F={
       "eyebrow": "TREINO A • PROGRAMA PRINCIPAL",
       "optional": false,
       "ex": [
-        {"n": "Peitoral – região média", "tag": "Treino fixo", "s": "Supino reto com barra; Supino reto com halteres; Supino na máquina (chest press); Supino reto no Smith; Crucifixo na máquina (peck deck) ou na polia (crossover)", "wu": [["8–10 leve", "45–60 s"], ["4–6 moderada", "45–60 s"]], "w": [3, "8–12", "90 s"], "d": "Região média do peitoral (fibras esternais): banco reto e mãos na altura do meio do peito. Halteres e máquinas com pegada neutra poupam punhos e cotovelos."},
+        {"n": "Peitoral – região média", "tag": "Treino fixo", "s": "Supino reto com barra; Supino reto com halteres; Supino na máquina (chest press); Supino reto no Smith; Crucifixo na máquina (peck deck) ou na polia (crossover)", "op": ["Supino reto com barra", "Supino reto com halteres", "Supino na máquina (chest press)", "Supino reto no Smith", "Crucifixo na máquina (peck deck)", "Crucifixo na polia (crossover)"], "wu": [["8–10 leve", "45–60 s"], ["4–6 moderada", "45–60 s"]], "w": [3, "8–12", "90 s"], "d": "Região média do peitoral (fibras esternais): banco reto e mãos na altura do meio do peito. Halteres e máquinas com pegada neutra poupam punhos e cotovelos."},
         {"n": "Costas – espessura (remada)", "o": "Costas – espessura", "tag": "Treino fixo", "s": "Remada baixa na polia (triângulo); Remada articulada (máquina); Remada com apoio de peito (máquina ou banco inclinado); Remada unilateral com halter (serrote)", "wu": [["8–10 leve", "45–60 s"]], "w": [3, "8–12", "90 s"], "d": "Espessura das costas (dorsal, romboides e trapézio médio): puxe o cotovelo para trás rente ao tronco, sem balançar o corpo. Pegada neutra e apoio de peito aliviam punhos e lombar."},
         {"n": "Peitoral – região superior", "tag": "Treino fixo", "s": "Supino inclinado com halteres; Supino inclinado com barra; Supino inclinado na máquina; Supino inclinado no Smith; Crossover na polia baixa (de baixo para cima)", "wu": [], "w": [2, "8–12", "90 s"], "d": "Região superior do peitoral (fibras claviculares): banco inclinado entre 30° e 45°, pois acima disso o ombro tende a assumir o trabalho. No crossover, as mãos sobem em direção ao rosto."},
         {"n": "Costas – largura (puxada)", "o": "Costas – largura", "tag": "Treino fixo", "s": "Puxada frontal na polia alta; Puxada com pegada neutra (triângulo); Barra fixa assistida (graviton); Puxada articulada (máquina)", "wu": [], "w": [2, "8–12", "90 s"], "d": "Largura das costas (grande dorsal e redondo maior): leve os cotovelos para baixo e para os lados, com o peito aberto e sem jogar o tronco para trás. Pegada neutra poupa punhos e cotovelos."},
         {"n": "Deltoide anterior", "tag": "Treino fixo", "s": "Desenvolvimento na máquina (shoulder press); Desenvolvimento com halteres sentado; Desenvolvimento no Smith sentado", "wu": [], "w": [2, "8–12", "90 s"], "d": "Deltoide anterior: desenvolvimento sentado, com os cotovelos um pouco à frente do tronco. Pegada neutra ou semineutra nas máquinas e nos halteres poupa punhos e cotovelos."},
         {"n": "Deltoide lateral", "tag": "Treino fixo", "s": "Elevação lateral na máquina; Elevação lateral com halteres; Elevação lateral na polia (unilateral)", "wu": [], "w": [3, "12–20", "60 s"], "d": "Deltoide lateral: suba até a altura dos ombros com o cotovelo levemente flexionado, sem balançar o tronco nem encolher os ombros. A polia mantém tensão desde o início do movimento."},
         {"n": "Deltoide posterior", "tag": "Treino fixo", "s": "Crucifixo inverso na máquina (peck deck invertido); Crucifixo inverso com halteres (inclinado ou apoiado no banco); Crucifixo inverso na polia (cabos cruzados)", "wu": [], "w": [2, "12–15", "60 s"], "d": "Deltoide posterior: abra os braços na altura dos ombros, com cotovelos levemente flexionados, sem puxar as escápulas para trás, para o esforço não passar para o trapézio."},
-        {"n": "Trapézio superior", "tag": "Treino fixo", "s": "Encolhimento com halteres; Encolhimento na máquina; Encolhimento no Smith ou com barra (se confortável)", "wu": [], "w": [2, "10–15", "60 s"], "d": "Trapézio superior: leve os ombros em direção às orelhas, sem girar. Use munhequeiras (straps) se a pegada limitar a série."},
-        {"n": "Bíceps", "tag": "Treino fixo", "s": "2 séries de rosca supinada: rosca direta com barra W, rosca alternada com halteres ou rosca na polia baixa; 2 séries de rosca martelo: com halteres ou na polia com corda", "wu": [], "w": [4, "10–15", "60 s"], "d": "Bíceps: a rosca supinada trabalha as duas cabeças e o martelo reforça braquial e braquiorradial. Cotovelos fixos ao lado do tronco; barra W ou halteres ajudam se punho ou cotovelo incomodarem.", "c": "Escolha uma opção em cada padrão (2 séries de cada). Se o aparelho estiver ocupado, troque por outra opção do mesmo padrão e mantenha repetições e esforço."}
+        {"n": "Trapézio superior", "tag": "Treino fixo", "s": "Encolhimento com halteres; Encolhimento na máquina; Encolhimento no Smith ou com barra (se confortável)", "op": ["Encolhimento com halteres", "Encolhimento na máquina", "Encolhimento no Smith", "Encolhimento com barra"], "wu": [], "w": [2, "10–15", "60 s"], "d": "Trapézio superior: leve os ombros em direção às orelhas, sem girar. Use munhequeiras (straps) se a pegada limitar a série."},
+        {"n": "Bíceps", "tag": "Treino fixo", "s": "2 séries de rosca supinada: rosca direta com barra W, rosca alternada com halteres ou rosca na polia baixa; 2 séries de rosca martelo: com halteres ou na polia com corda", "op": ["Rosca direta com barra W", "Rosca alternada com halteres", "Rosca na polia baixa", "Rosca martelo com halteres", "Rosca martelo na polia com corda"], "wu": [], "w": [4, "10–15", "60 s"], "d": "Bíceps: a rosca supinada trabalha as duas cabeças e o martelo reforça braquial e braquiorradial. Cotovelos fixos ao lado do tronco; barra W ou halteres ajudam se punho ou cotovelo incomodarem.", "c": "Escolha uma opção em cada padrão (2 séries de cada). Se o aparelho estiver ocupado, troque por outra opção do mesmo padrão e mantenha repetições e esforço."}
       ]
     },
     {
@@ -158,7 +165,7 @@ const F={
         {"n": "Panturrilhas – gastrocnêmio", "o": "Panturrilhas – joelho estendido", "tag": "Treino fixo", "s": "Panturrilha em pé na máquina; Panturrilha no leg press; Panturrilha em pé no Smith (com degrau)", "wu": [], "w": [2, "10–15", "60 s"], "d": "Gastrocnêmio: joelhos estendidos, amplitude completa (calcanhar abaixo do nível do apoio até ficar na ponta dos pés), com pausa curta embaixo e em cima."},
         {"n": "Panturrilhas – sóleo", "o": "Panturrilhas – joelho flexionado", "tag": "Treino fixo", "s": "Panturrilha sentada (máquina); Panturrilha sentada com halteres ou anilha sobre os joelhos", "wu": [], "w": [1, "12–20", "60 s"], "d": "Sóleo: com o joelho flexionado a cerca de 90°, o gastrocnêmio sai do movimento. “Máquina de sóleo” e “panturrilha sentada” são o mesmo exercício."},
         {"n": "Abdômen – reto abdominal", "o": "Abdômen", "tag": "Treino fixo", "s": "Abdominal na polia (crunch ajoelhado com corda); Abdominal na máquina; Abdominal crunch no solo", "wu": [], "w": [2, "12–15", "60 s"], "d": "Reto abdominal: arredonde o tronco aproximando costelas e quadril, sem puxar com os braços nem com o quadril."},
-        {"n": "Tríceps", "tag": "Treino fixo", "s": "3 séries acima da cabeça: tríceps na polia com corda, de costas para a polia, tríceps francês com halter (unilateral ou com as duas mãos) ou extensão acima da cabeça na polia alta; 1 série junto ao corpo: tríceps na polia com corda, com barra reta ou V, ou extensão de tríceps na máquina", "wu": [["8–10 leve", "45–60 s"]], "w": [4, "10–15", "60 s"], "d": "Tríceps: acima da cabeça a cabeça longa fica mais alongada, e em estudo (Maeo e colegas, 2023) todas as cabeças cresceram mais nesse formato, mesmo com carga menor. Desça o cotovelo até flexionar bem, com controle. Se o cotovelo incomodar, faça as 4 séries junto ao corpo. Evite tríceps testa.", "c": "Escolha uma opção em cada padrão (3 séries acima da cabeça e 1 junto ao corpo). Se o aparelho estiver ocupado, troque por outra opção do mesmo padrão e mantenha repetições e esforço."}
+        {"n": "Tríceps", "tag": "Treino fixo", "s": "3 séries acima da cabeça: tríceps na polia com corda, de costas para a polia, tríceps francês com halter (unilateral ou com as duas mãos) ou extensão acima da cabeça na polia alta; 1 série junto ao corpo: tríceps na polia com corda, com barra reta ou V, ou extensão de tríceps na máquina", "op": ["Tríceps na polia com corda, de costas (acima da cabeça)", "Tríceps francês com halter", "Extensão acima da cabeça na polia alta", "Tríceps na polia com corda (junto ao corpo)", "Tríceps na polia com barra reta ou V", "Extensão de tríceps na máquina"], "wu": [["8–10 leve", "45–60 s"]], "w": [4, "10–15", "60 s"], "d": "Tríceps: acima da cabeça a cabeça longa fica mais alongada, e em estudo (Maeo e colegas, 2023) todas as cabeças cresceram mais nesse formato, mesmo com carga menor. Desça o cotovelo até flexionar bem, com controle. Se o cotovelo incomodar, faça as 4 séries junto ao corpo. Evite tríceps testa.", "c": "Escolha uma opção em cada padrão (3 séries acima da cabeça e 1 junto ao corpo). Se o aparelho estiver ocupado, troque por outra opção do mesmo padrão e mantenha repetições e esforço."}
       ]
     },
     {
@@ -171,12 +178,12 @@ const F={
         {"n": "Peitoral – região superior", "tag": "Treino fixo", "s": "Supino inclinado com halteres; Supino inclinado com barra; Supino inclinado na máquina; Supino inclinado no Smith; Crossover na polia baixa (de baixo para cima)", "wu": [["8–10 leve", "45–60 s"], ["4–6 moderada", "45–60 s"]], "w": [3, "8–12", "90 s"], "d": "Região superior do peitoral (fibras claviculares): banco inclinado entre 30° e 45°, pois acima disso o ombro tende a assumir o trabalho. No crossover, as mãos sobem em direção ao rosto."},
         {"n": "Costas – largura (puxada)", "o": "Costas – largura", "tag": "Treino fixo", "s": "Puxada frontal na polia alta; Puxada com pegada neutra (triângulo); Barra fixa assistida (graviton); Puxada articulada (máquina)", "wu": [["8–10 leve", "45–60 s"]], "w": [3, "8–12", "90 s"], "d": "Largura das costas (grande dorsal e redondo maior): leve os cotovelos para baixo e para os lados, com o peito aberto e sem jogar o tronco para trás. Pegada neutra poupa punhos e cotovelos."},
         {"n": "Costas – espessura (remada)", "o": "Costas – espessura", "tag": "Treino fixo", "s": "Remada baixa na polia (triângulo); Remada articulada (máquina); Remada com apoio de peito (máquina ou banco inclinado)", "wu": [], "w": [2, "8–12", "90 s"], "d": "Espessura das costas (dorsal, romboides e trapézio médio): puxe o cotovelo para trás rente ao tronco, sem balançar o corpo. Pegada neutra e apoio de peito aliviam punhos e lombar."},
-        {"n": "Peitoral – região média", "tag": "Treino fixo", "s": "Supino reto com barra; Supino reto com halteres; Supino na máquina (chest press); Supino reto no Smith; Crucifixo na máquina (peck deck) ou na polia (crossover)", "wu": [], "w": [2, "10–15", "90 s"], "d": "Região média do peitoral (fibras esternais): banco reto e mãos na altura do meio do peito. Halteres e máquinas com pegada neutra poupam punhos e cotovelos."},
+        {"n": "Peitoral – região média", "tag": "Treino fixo", "s": "Supino reto com barra; Supino reto com halteres; Supino na máquina (chest press); Supino reto no Smith; Crucifixo na máquina (peck deck) ou na polia (crossover)", "op": ["Supino reto com barra", "Supino reto com halteres", "Supino na máquina (chest press)", "Supino reto no Smith", "Crucifixo na máquina (peck deck)", "Crucifixo na polia (crossover)"], "wu": [], "w": [2, "10–15", "90 s"], "d": "Região média do peitoral (fibras esternais): banco reto e mãos na altura do meio do peito. Halteres e máquinas com pegada neutra poupam punhos e cotovelos."},
         {"n": "Deltoide anterior", "tag": "Treino fixo", "s": "Desenvolvimento na máquina (shoulder press); Desenvolvimento com halteres sentado; Desenvolvimento no Smith sentado", "wu": [], "w": [2, "8–12", "90 s"], "d": "Deltoide anterior: desenvolvimento sentado, com os cotovelos um pouco à frente do tronco. Pegada neutra ou semineutra nas máquinas e nos halteres poupa punhos e cotovelos."},
         {"n": "Deltoide lateral", "tag": "Treino fixo", "s": "Elevação lateral na máquina; Elevação lateral com halteres; Elevação lateral na polia (unilateral)", "wu": [], "w": [3, "12–20", "60 s"], "d": "Deltoide lateral: suba até a altura dos ombros com o cotovelo levemente flexionado, sem balançar o tronco nem encolher os ombros. A polia mantém tensão desde o início do movimento."},
         {"n": "Deltoide posterior", "tag": "Treino fixo", "s": "Crucifixo inverso na máquina (peck deck invertido); Crucifixo inverso com halteres (inclinado ou apoiado no banco); Crucifixo inverso na polia (cabos cruzados)", "wu": [], "w": [2, "12–15", "60 s"], "d": "Deltoide posterior: abra os braços na altura dos ombros, com cotovelos levemente flexionados, sem puxar as escápulas para trás, para o esforço não passar para o trapézio."},
-        {"n": "Trapézio superior", "tag": "Treino fixo", "s": "Encolhimento com halteres; Encolhimento na máquina; Encolhimento no Smith ou com barra (se confortável)", "wu": [], "w": [2, "10–15", "60 s"], "d": "Trapézio superior: leve os ombros em direção às orelhas, sem girar. Use munhequeiras (straps) se a pegada limitar a série."},
-        {"n": "Tríceps", "tag": "Treino fixo", "s": "3 séries acima da cabeça: tríceps na polia com corda, de costas para a polia, tríceps francês com halter (unilateral ou com as duas mãos) ou extensão acima da cabeça na polia alta; 1 série junto ao corpo: tríceps na polia com corda, com barra reta ou V, ou extensão de tríceps na máquina", "wu": [], "w": [4, "10–15", "60 s"], "d": "Tríceps: acima da cabeça a cabeça longa fica mais alongada, e em estudo (Maeo e colegas, 2023) todas as cabeças cresceram mais nesse formato, mesmo com carga menor. Desça o cotovelo até flexionar bem, com controle. Se o cotovelo incomodar, faça as 4 séries junto ao corpo. Evite tríceps testa.", "c": "Escolha uma opção em cada padrão (3 séries acima da cabeça e 1 junto ao corpo). Se o aparelho estiver ocupado, troque por outra opção do mesmo padrão e mantenha repetições e esforço."}
+        {"n": "Trapézio superior", "tag": "Treino fixo", "s": "Encolhimento com halteres; Encolhimento na máquina; Encolhimento no Smith ou com barra (se confortável)", "op": ["Encolhimento com halteres", "Encolhimento na máquina", "Encolhimento no Smith", "Encolhimento com barra"], "wu": [], "w": [2, "10–15", "60 s"], "d": "Trapézio superior: leve os ombros em direção às orelhas, sem girar. Use munhequeiras (straps) se a pegada limitar a série."},
+        {"n": "Tríceps", "tag": "Treino fixo", "s": "3 séries acima da cabeça: tríceps na polia com corda, de costas para a polia, tríceps francês com halter (unilateral ou com as duas mãos) ou extensão acima da cabeça na polia alta; 1 série junto ao corpo: tríceps na polia com corda, com barra reta ou V, ou extensão de tríceps na máquina", "op": ["Tríceps na polia com corda, de costas (acima da cabeça)", "Tríceps francês com halter", "Extensão acima da cabeça na polia alta", "Tríceps na polia com corda (junto ao corpo)", "Tríceps na polia com barra reta ou V", "Extensão de tríceps na máquina"], "wu": [], "w": [4, "10–15", "60 s"], "d": "Tríceps: acima da cabeça a cabeça longa fica mais alongada, e em estudo (Maeo e colegas, 2023) todas as cabeças cresceram mais nesse formato, mesmo com carga menor. Desça o cotovelo até flexionar bem, com controle. Se o cotovelo incomodar, faça as 4 séries junto ao corpo. Evite tríceps testa.", "c": "Escolha uma opção em cada padrão (3 séries acima da cabeça e 1 junto ao corpo). Se o aparelho estiver ocupado, troque por outra opção do mesmo padrão e mantenha repetições e esforço."}
       ]
     },
     {
@@ -194,7 +201,7 @@ const F={
         {"n": "Panturrilhas – gastrocnêmio", "o": "Panturrilhas – joelho estendido", "tag": "Treino fixo", "s": "Panturrilha em pé na máquina; Panturrilha no leg press; Panturrilha em pé no Smith (com degrau)", "wu": [], "w": [1, "10–15", "60 s"], "d": "Gastrocnêmio: joelhos estendidos, amplitude completa (calcanhar abaixo do nível do apoio até ficar na ponta dos pés), com pausa curta embaixo e em cima."},
         {"n": "Panturrilhas – sóleo", "o": "Panturrilhas – joelho flexionado", "tag": "Treino fixo", "s": "Panturrilha sentada (máquina); Panturrilha sentada com halteres ou anilha sobre os joelhos", "wu": [], "w": [2, "12–20", "60 s"], "d": "Sóleo: com o joelho flexionado a cerca de 90°, o gastrocnêmio sai do movimento. “Máquina de sóleo” e “panturrilha sentada” são o mesmo exercício."},
         {"n": "Abdômen – oblíquos e estabilização", "o": "Abdômen", "tag": "Treino fixo", "s": "Pallof press na polia; Rotação de tronco na polia (lenhador); Prancha lateral", "wu": [], "w": [2, "12–15", "60 s"], "d": "Oblíquos e estabilização do tronco: tronco firme, sem girar o quadril. Se a prancha lateral incomodar punho ou cotovelo, prefira o Pallof press ou o lenhador."},
-        {"n": "Bíceps", "tag": "Treino fixo", "s": "2 séries de rosca supinada: rosca direta com barra W, rosca alternada com halteres ou rosca na polia baixa; 2 séries de rosca martelo: com halteres ou na polia com corda", "wu": [["8–10 leve", "45–60 s"]], "w": [4, "10–15", "60 s"], "d": "Bíceps: a rosca supinada trabalha as duas cabeças e o martelo reforça braquial e braquiorradial. Cotovelos fixos ao lado do tronco; barra W ou halteres ajudam se punho ou cotovelo incomodarem.", "c": "Escolha uma opção em cada padrão (2 séries de cada). Se o aparelho estiver ocupado, troque por outra opção do mesmo padrão e mantenha repetições e esforço."}
+        {"n": "Bíceps", "tag": "Treino fixo", "s": "2 séries de rosca supinada: rosca direta com barra W, rosca alternada com halteres ou rosca na polia baixa; 2 séries de rosca martelo: com halteres ou na polia com corda", "op": ["Rosca direta com barra W", "Rosca alternada com halteres", "Rosca na polia baixa", "Rosca martelo com halteres", "Rosca martelo na polia com corda"], "wu": [["8–10 leve", "45–60 s"]], "w": [4, "10–15", "60 s"], "d": "Bíceps: a rosca supinada trabalha as duas cabeças e o martelo reforça braquial e braquiorradial. Cotovelos fixos ao lado do tronco; barra W ou halteres ajudam se punho ou cotovelo incomodarem.", "c": "Escolha uma opção em cada padrão (2 séries de cada). Se o aparelho estiver ocupado, troque por outra opção do mesmo padrão e mantenha repetições e esforço."}
       ]
     },
     {
@@ -205,7 +212,7 @@ const F={
       "optional": true,
       "ex": [
         {"n": "Cadeia posterior – terra convencional", "tag": "Opcional", "s": "Levantamento terra convencional (barra livre)", "wu": [["8–10 leve", "45–60 s"], ["4–6 moderada", "45–60 s"]], "w": [2, "5–8", "2–3 min"], "d": "Cadeia posterior: mantenha a técnica estável e a coluna neutra durante toda a série. Straps ajudam se a pegada limitar.", "c": "Exercício fixo: só o terra convencional, apenas neste treino opcional.", "r": "2–3", "x": "Não chegue à falha nem teste carga máxima."},
-        {"n": "Peitoral", "tag": "Opcional", "s": "Supino reto com halteres; Supino na máquina (chest press); Crucifixo na máquina (peck deck) ou na polia (crossover)", "wu": [["8–10 leve", "45–60 s"]], "w": [2, "10–15", "90 s"], "d": "Região média do peitoral (fibras esternais): banco reto e mãos na altura do meio do peito. Halteres e máquinas com pegada neutra poupam punhos e cotovelos."},
+        {"n": "Peitoral", "tag": "Opcional", "s": "Supino reto com halteres; Supino na máquina (chest press); Crucifixo na máquina (peck deck) ou na polia (crossover)", "op": ["Supino reto com halteres", "Supino na máquina (chest press)", "Crucifixo na máquina (peck deck)", "Crucifixo na polia (crossover)"], "wu": [["8–10 leve", "45–60 s"]], "w": [2, "10–15", "90 s"], "d": "Região média do peitoral (fibras esternais): banco reto e mãos na altura do meio do peito. Halteres e máquinas com pegada neutra poupam punhos e cotovelos."},
         {"n": "Costas – remada ou puxada", "o": "Costas", "tag": "Opcional", "s": "Remada baixa na polia; Remada articulada (máquina); Puxada frontal na polia alta; Puxada com pegada neutra", "wu": [], "w": [2, "10–12", "90 s"], "d": "Escolha uma remada ou uma puxada, o padrão menos trabalhado recentemente. Remadas pegam mais a espessura; puxadas, a largura."},
         {"n": "Quadríceps", "tag": "Opcional", "s": "Leg press 45°; Agachamento no Smith; Agachamento hack (máquina); Cadeira extensora", "wu": [["8–10 leve", "45–60 s"]], "w": [2, "10–15", "90 s"], "d": "Quadríceps: pés na largura dos ombros, na altura média da plataforma (ou um pouco à frente da barra no Smith) e joelhos avançando sobre os pés. Pés muito altos transferem trabalho para glúteos e posteriores."},
         {"n": "Posterior de coxa – flexora", "o": "Posteriores – flexão de joelho", "tag": "Opcional", "s": "Cadeira flexora (sentado), melhor opção; Mesa flexora (deitado), só se não houver cadeira. Só se estiver recuperado", "wu": [], "w": [2, "10–15", "90 s"], "d": "Isquiotibiais: na cadeira flexora o quadril fica flexionado e o músculo trabalha mais alongado, o que mostrou maior ganho de massa em estudo (Maeo e colegas, 2021). Na mesa flexora, mantenha o quadril colado ao banco."},
@@ -228,6 +235,7 @@ const num=v=>v===""||v==null||isNaN(v)?null:+v;
 const day=t=>new Date(t).toDateString();
 const P=id=>F.panels.find(p=>p.id===id);
 const steps=e=>[...e.wu.map(([r,d])=>({t:"a",reps:r,rest:d})),...Array.from({length:e.w[0]},()=>({t:"w",reps:e.w[1],rest:e.w[2]}))];
+const opts=e=>[...(e.op||e.s.split("; ").map(x=>x.replace(/, melhor opção$|, só se não houver cadeira.*$/,"").trim())),"Outro"];
 const sig=p=>p.ex.map(e=>e.n+steps(e).length).join("|");
 
 function load(){let o;try{o=JSON.parse(localStorage.getItem(K))}catch(e){}
@@ -246,10 +254,19 @@ function sess(p){let s=S.cur[p.id];if(!s||s.sig!==sig(p))s=S.cur[p.id]={sig:sig(
 function stat(p){const s=sess(p);let d=0,t=0;p.ex.forEach((e,i)=>{t+=e.w[0];d+=Math.max(0,(s.done[i]||0)-e.wu.length)});return{s,d,t}}
 const curEx=(p,s)=>s.open!=null?s.open:p.ex.findIndex((e,i)=>(s.done[i]||0)<steps(e).length);
 function archive(p,s){const sets=[];
-  p.ex.forEach((e,i)=>{let k=0;steps(e).forEach((x,j)=>{if(x.t!=="w")return;k++;const l=s.log[i+":"+j];if(l&&j<(s.done[i]||0))sets.push({n:e.n,k,kg:l.kg,reps:l.reps,rir:l.rir})})});
-  if(sets.length)S.hist.unshift({d:s.t0||Date.now(),p:p.name,sets});
+  p.ex.forEach((e,i)=>{let k=0;steps(e).forEach((x,j)=>{if(x.t!=="w")return;k++;const l=s.log[i+":"+j];if(l&&j<(s.done[i]||0))sets.push(l.v?{n:e.n,k,v:l.v,kg:l.kg,reps:l.reps,rir:l.rir}:{n:e.n,k,kg:l.kg,reps:l.reps,rir:l.rir})})});
+  const nt={};Object.entries(s.nt||{}).forEach(([i,t])=>{t=String(t).trim();if(t&&p.ex[i])nt[p.ex[i].n]=t});
+  const dur=s.t0&&s.t1?Math.max(1,Math.round((s.t1-s.t0)/60000)):null;
+  if(sets.length||Object.keys(nt).length){const x={d:s.t0||Date.now(),p:p.name,sets};if(dur)x.dur=dur;if(Object.keys(nt).length)x.nt=nt;S.hist.unshift(x)}
   S.hist=S.hist.slice(0,300);delete S.cur[p.id]}
-function lastSet(n,k){for(const h of S.hist){const x=(h.sets||[]).find(x=>x.n===n&&x.k===k);if(x)return x}return null}
+function lastSet(n,k,v){for(const h of S.hist){const x=(h.sets||[]).find(x=>x.n===n&&x.k===k&&(!v||!x.v||x.v===v));if(x)return x}return null}
+function histV(n,k){for(const h of S.hist){const x=(h.sets||[]).find(y=>y.n===n&&y.k===k&&y.v);if(x)return x.v}return""}
+function lastNote(n){for(const h of S.hist)if(h.nt&&h.nt[n])return h.nt[n];return""}
+/* exercício feito: o já escolhido > troca planejada no histórico > série anterior de hoje > histórico */
+function defV(e,i,k,s){const l=s.log[i+":"+k];if(l&&l.v!=null)return l.v;
+  const n=Math.max(1,k-e.wu.length+1),hk=histV(e.n,n),hp=n>1?histV(e.n,n-1):"";
+  let pv="";for(let j=k-1;j>=0;j--){const x=s.log[i+":"+j];if(x&&x.v){pv=x.v;break}}
+  if(hk&&hp&&hk!==hp)return hk;return pv||hk}
 
 /* sessões abertas em dias anteriores vão para o histórico */
 Object.keys(S.cur).forEach(id=>{const p=P(id),s=S.cur[id];
@@ -262,14 +279,15 @@ function render(){
   const tabs=[...F.week.map(t=>({t,l:isRest(t)?"Descanso":P(t).tab})),{t:"h",l:"Histórico"}];
   $("#tabs").innerHTML=tabs.map(x=>`<button class="tab" role="tab" aria-selected="${x.t===S.tab}" data-act="tab" data-v="${x.t}">${esc(x.l)}</button>`).join("");
   const p=!isRest(S.tab)&&S.tab!=="h"?P(S.tab):null;
-  if(p){const{s,d,t}=stat(p),pct=t?Math.round(d/t*100):0,c=curEx(p,s);
-    const st=d>=t?"Treino concluído":(s.t0||d)?"Em andamento":"Não iniciado";
-    $("#prog").innerHTML=`<div class="ring" style="--p:${pct}%" role="img" aria-label="${pct}% concluído"><b>${pct}%</b></div><div class="pt"><strong>${d}/${t} séries de trabalho</strong><span aria-live="polite">${st}${c>=0&&d<t?" · próximo: "+esc(p.ex[c].n):""}</span></div>`;
-    $("#prog").hidden=false;
-  }else $("#prog").hidden=true;
+  if(p){$("#prog").innerHTML=progHTML(p);$("#prog").hidden=false}else $("#prog").hidden=true;
   $("#main").innerHTML=p?panelHTML(p):S.tab==="h"?histHTML():restHTML();
   $("#tabs [aria-selected=true]")?.scrollIntoView({inline:"center",block:"nearest"});
 }
+const mins=(a,b)=>Math.max(1,Math.round((b-a)/60000));
+function progHTML(p){const{s,d,t}=stat(p),pct=t?Math.round(d/t*100):0,c=curEx(p,s);
+  const st=d>=t?"Treino concluído"+(s.t0&&s.t1?" · "+mins(s.t0,s.t1)+" min":""):(s.t0||d)?"Em andamento"+(s.t0?" · "+mins(s.t0,Date.now())+" min":""):"Não iniciado";
+  return`<div class="ring" style="--p:${pct}%" role="img" aria-label="${pct}% concluído"><b>${pct}%</b></div><div class="pt"><strong>${d}/${t} séries de trabalho</strong><span>${st}${c>=0&&d<t?" · próximo: "+esc(p.ex[c].n):""}</span></div>`}
+setInterval(()=>{const p=P(S.tab);if(p&&!$("#prog").hidden&&document.visibilityState==="visible")$("#prog").innerHTML=progHTML(p)},30000);
 function panelHTML(p){const{s,d,t}=stat(p),c=curEx(p,s);
   let h=`<div class="hd"><div><div class="eb">${esc(p.eyebrow)}</div><h2>${esc(p.name)}</h2></div><span class="sm">${pl(p.ex.length,"exercício","exercícios")}</span></div>`;
   p.ex.forEach((e,i)=>{const n=steps(e).length,k=s.done[i]||0;
@@ -281,18 +299,22 @@ function openHTML(e,i,s){const st=steps(e),k=s.done[i]||0,fin=k>=st.length,x=st[
   let h=`<article class="card cur"><div class="t2"><span class="num">${i+1}</span><h3 class="nm">${esc(e.n)}</h3>${e.tag==="Treino fixo"?"":`<span class="tag">${esc(e.tag)}</span>`}</div>
   <div class="sm" style="margin-top:8px;white-space:normal">${nw?pl(nw,"aquecimento","aquecimentos"):"Sem aquecimento"} · ${e.w[0]} × ${esc(e.w[1])} de trabalho</div>
   <div class="dots" aria-hidden="true">${st.map((y,j)=>`<span class="dot ${y.t==="w"?"w":""} ${j<k?"ok":""} ${j===k?"on":""}">${y.t==="a"?"A"+(j+1):"T"+(j-nw+1)}</span>`).join("")}</div>`;
+  const ln=lastNote(e.n);if(ln)h+=`<p class="ntl">📝 Última nota: ${esc(ln)}</p>`;
   if(!fin){const w=x.t==="w",n=w?k-nw+1:k+1,tot=w?e.w[0]:nw,prev=s.log[i+":"+(k-1)],
-      v=s.log[i+":"+k]||(w?{kg:prev&&k>nw?prev.kg:null,reps:null,rir:null}:{}),ls=w?lastSet(e.n,n):null;
-    if(w&&v.kg==null&&ls)v.kg=ls.kg;
+      vv=defV(e,i,k,s),v={...(s.log[i+":"+k]||{})},ls=w?lastSet(e.n,n,vv):null;let auto=null;
+    if(w&&v.kg==null){if(prev&&k>nw&&prev.kg!=null&&(prev.v||"")===vv)auto=prev.kg;else if(ls)auto=ls.kg;v.kg=auto}
     h+=`<div class="step ${w?"w":""}"><h4 aria-live="polite">${w?"Série de trabalho":"Aquecimento"} ${n} de ${tot}</h4>
     <p>Meta: ${esc(x.reps)} reps · descanso depois: ${esc(x.rest)}${ls?` · última vez: ${ls.kg??"—"} kg × ${ls.reps??"—"}`:""}</p>
+    <div class="in"><div><label for="op">Exercício feito</label><select id="op" data-ex="${i}" data-k="${k}"><option value="">Escolha a opção…</option>${opts(e).map(o=>`<option ${o===vv?"selected":""}>${esc(o)}</option>`).join("")}</select></div></div>
     <div class="in" style="grid-template-columns:repeat(${w?3:2},1fr)">
-      <div><label for="kg">Carga (kg)</label><input id="kg" type="number" inputmode="decimal" step="0.5" min="0" value="${v.kg??""}"></div>
+      <div><label for="kg">Carga (kg)</label><input id="kg" type="number" inputmode="decimal" step="0.5" min="0" value="${v.kg??""}" data-auto="${auto??""}"></div>
       <div><label for="rp">Reps feitas</label><input id="rp" type="number" inputmode="numeric" min="0" value="${v.reps??""}"></div>
       ${w?`<div><label for="rir">RIR</label><select id="rir"><option value="">—</option>${[0,1,2,3].map(r=>`<option ${v.rir===r?"selected":""}>${r}</option>`).join("")}</select></div>`:""}
     </div><button class="go" data-act="next" data-ex="${i}">Concluir série</button></div>`}
   else h+=`<div class="fin">✓ Exercício concluído</div>`;
   h+=`<div class="act"><button class="lk" data-act="back" data-ex="${i}" ${k?"":"disabled"}>← Voltar uma série</button></div>`;
+  const nv=(s.nt||{})[i]||"";
+  h+=`<details class="nt" ${nv?"open":""}><summary>Anotação de hoje${nv?" ✓":""}</summary><textarea id="nt" data-ex="${i}" maxlength="300" placeholder="Ex.: banco na posição 4, cotovelo sem dor, máquina ocupada">${esc(nv)}</textarea></details>`;
   if(e.s)h+=`<details class="sg"><summary>Opções de exercício</summary><ul>${e.s.split("; ").map(x=>`<li>${esc(x)}</li>`).join("")}</ul>${guideHTML(e)}</details>`;
   return h+"</article>"}
 function guideHTML(e){const g=F.guide,r=e.r||g.rir,L=[];
@@ -311,7 +333,9 @@ function histHTML(){
   let h=`<div class="hd"><div><div class="eb">Seus treinos salvos</div><h2>Histórico</h2></div><span class="sm">${pl(S.hist.length,"treino","treinos")}</span></div>`;
   if(!S.hist.length)h+=`<div class="card">Nenhum treino salvo ainda. Conclua séries e toque em “Salvar no histórico” para registrar cargas e repetições.</div>`;
   S.hist.slice(0,60).forEach(x=>{const g={};let vol=0;(x.sets||[]).forEach(y=>{(g[y.n]=g[y.n]||[]).push(y);if(y.kg!=null&&y.reps!=null)vol+=y.kg*y.reps});
-    h+=`<details class="h"><summary>${new Date(x.d).toLocaleDateString("pt-BR",{weekday:"short",day:"2-digit",month:"2-digit"})} · ${esc(x.p)}</summary><p><b>${pl(x.sets.length,"série","séries")}</b> · volume ${Math.round(vol).toLocaleString("pt-BR")} kg</p>${Object.entries(g).map(([n,a])=>`<p><b>${esc(n)}</b><br>${a.map(y=>`${y.kg??"—"} kg × ${y.reps??"—"}${y.rir!=null?` (RIR ${y.rir})`:""}`).join(" · ")}</p>`).join("")}</details>`});
+    const nt=x.nt||{};Object.keys(nt).forEach(n=>{g[n]=g[n]||[]});
+    h+=`<details class="h"><summary>${new Date(x.d).toLocaleDateString("pt-BR",{weekday:"short",day:"2-digit",month:"2-digit"})} · ${esc(x.p)}${x.dur?" · "+x.dur+" min":""}</summary><p><b>${pl(x.sets.length,"série","séries")}</b> · volume ${Math.round(vol).toLocaleString("pt-BR")} kg</p>${Object.entries(g).map(([n,a])=>{let lv;const t=a.map(y=>{const pre=y.v&&y.v!==lv?`<i>${esc(y.v)}:</i> `:"";lv=y.v;return pre+`${y.kg??"—"} kg × ${y.reps??"—"}${y.rir!=null?` (RIR ${y.rir})`:""}`}).join(" · ");
+      return`<p><b>${esc(n)}</b>${t?"<br>"+t:""}${nt[n]?`<br>📝 ${esc(nt[n])}`:""}</p>`}).join("")}</details>`});
   return h+`<div class="act"><button class="lk" data-act="export">Exportar backup</button><button class="lk" data-act="import">Importar backup</button><button class="lk" data-act="clear">Apagar histórico</button></div>`}
 
 /* ---------- descanso, aviso, tela ligada ---------- */
@@ -330,8 +354,7 @@ function toast(msg,undo){$("#tm").textContent=msg;$("#tu").hidden=!undo;$("#toas
 function focusCur(){requestAnimationFrame(()=>{const c=$(".card.cur");if(c)scrollTo({top:c.getBoundingClientRect().top+scrollY-$(".top").offsetHeight-10,behavior:reduce?"auto":"smooth"})})}
 
 /* ---------- ações ---------- */
-function back(p,i){const s=sess(p),k=s.done[i]||0;if(k>0){s.done[i]=k-1;s.open=i;stopRest();if("serviceWorker"in navigator&&location.protocol==="https:")addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
-save();render();focusCur()}}
+function back(p,i){const s=sess(p),k=s.done[i]||0;if(k>0){s.done[i]=k-1;s.open=i;stopRest();save();render();focusCur()}}
 document.addEventListener("click",ev=>{const b=ev.target.closest("[data-act]");if(!b)return;
   const a=b.dataset.act,i=+b.dataset.ex,p=P(S.tab),s=p&&sess(p);
   if(a==="tab"){S.tab=b.dataset.v;save();render();scrollTo(0,0)}
@@ -339,8 +362,8 @@ document.addEventListener("click",ev=>{const b=ev.target.closest("[data-act]");i
   else if(a==="back")back(p,i);
   else if(a==="undo"){if(U){const q=P(U.p);if(q)back(q,U.i)}$("#toast").className=""}
   else if(a==="next"){audio();const e=p.ex[i],st=steps(e),k=s.done[i]||0;if(k>=st.length)return;
-    const w=st[k].t==="w";s.t0=s.t0||Date.now();
-    s.log[i+":"+k]={kg:num($("#kg").value),reps:num($("#rp").value),rir:w?num($("#rir").value):null};
+    const w=st[k].t==="w";s.t0=s.t0||Date.now()-60000;s.t1=Date.now();
+    s.log[i+":"+k]={kg:num($("#kg").value),reps:num($("#rp").value),rir:w?num($("#rir").value):null,v:$("#op")?.value||null};
     s.done[i]=k+1;s.open=k+1<st.length?i:null;
     const all=p.ex.every((x,j)=>(s.done[j]||0)>=steps(x).length),nx=curEx(p,s);
     save();wake();vibe(40);
@@ -362,6 +385,12 @@ $("#imp").addEventListener("change",async e=>{const f=e.target.files[0];e.target
     const seen=new Set(S.hist.map(h=>h.d+h.p));o.hist.forEach(h=>{if(h&&Array.isArray(h.sets)&&!seen.has(h.d+h.p))S.hist.push(h)});
     migrate();S.hist.sort((a,b)=>b.d-a.d);save();render();toast("Backup importado")}
   catch(x){toast("Arquivo inválido. Use um backup exportado por esta ficha.")}});
+/* troca do exercício feito: guarda o que foi digitado e recalcula a carga sugerida */
+document.addEventListener("change",ev=>{const t=ev.target;if(t.id!=="op")return;const p=P(S.tab);if(!p)return;const s=sess(p),kgI=$("#kg"),rir=$("#rir");
+  const kg=kgI&&kgI.value!==kgI.dataset.auto?num(kgI.value):null;
+  s.log[t.dataset.ex+":"+t.dataset.k]={kg,reps:num($("#rp")?.value),rir:rir?num(rir.value):null,v:t.value||null};save();render()});
+document.addEventListener("input",ev=>{const t=ev.target;if(t.id!=="nt")return;const p=P(S.tab);if(!p)return;const s=sess(p);
+  (s.nt=s.nt||{})[t.dataset.ex]=t.value;save();const sm=t.closest("details")?.querySelector("summary");if(sm)sm.textContent="Anotação de hoje"+(t.value.trim()?" ✓":"")});
 document.addEventListener("focusin",e=>{if(e.target.matches("input[type=number]"))e.target.select()});
 document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"){if(Object.values(S.cur).some(s=>s&&s.t0))wake();tick()}});
 
@@ -370,6 +399,7 @@ $("#who").textContent=F.person||"";document.title=(F.title||"Ficha de Treino")+"
 $("#pills").innerHTML=(F.stats||[]).map(x=>`<span class="pill">${esc(x)}</span>`).join("");
 $("#sig").textContent=F.signature||"";
 save();render();
+if("serviceWorker"in navigator&&location.protocol==="https:")navigator.serviceWorker.register("sw.js").catch(()=>{});
 </script>
 </body>
 </html>
