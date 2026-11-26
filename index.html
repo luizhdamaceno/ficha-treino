@@ -1634,7 +1634,7 @@ const opts=e=>[...(e.op||e.s.split("; ").map(x=>x.replace(/, melhor opção$|, s
 const sig=p=>p.ex.map(e=>e.n+steps(e).length).join("|");
 
 /* histórico gravado em formato compacto: nomes e variações viram índices, cada série vira uma lista */
-const HMAX=3000,HWARN=1800000;let lastLen=0,saveFail=false;
+const HMAX=3000,HWARN=1800000;let histRev=0;let lastLen=0,saveFail=false;
 function packH(hist){const N=[],V=[],ni={},vi={},ix=(m,a,x)=>x in m?m[x]:(a.push(x),m[x]=a.length-1);
   const H=hist.map(h=>{const o={d:h.d,p:h.p,z:(h.sets||[]).map(y=>{const r=[ix(ni,N,y.n),y.k,y.v?ix(vi,V,y.v):-1,y.kg??null,y.reps??null,y.rir??null,y.a?1:0];
       while(r.length>2&&(r[r.length-1]===null||r[r.length-1]===0&&r.length===7))r.pop();return r})};
@@ -1646,10 +1646,13 @@ function load(){let o;try{o=JSON.parse(localStorage.getItem(K))}catch(e){}
   if(o&&o.hz&&!Array.isArray(o.hist))o.hist=unpackH(o.hz);
   if(!o||typeof o!=="object"||Array.isArray(o))o={};
   return{v:1,exp:typeof o.exp==="number"?o.exp:null,mode:o.mode&&typeof o.mode==="object"&&!Array.isArray(o.mode)?o.mode:{},tab:o.tab||null,cur:o.cur&&typeof o.cur==="object"&&!Array.isArray(o.cur)?o.cur:{},hist:Array.isArray(o.hist)?o.hist:[]}}
-function save(){const{hist,...rest}=S;const str=JSON.stringify({...rest,hz:packH(hist)});lastLen=str.length;
+let hzC=null,hzK="";
+function save(){const{hist,...rest}=S,key=hist.length+"|"+(hist[0]?.d||0)+"|"+histRev;
+  if(key!==hzK||!hzC){hzC=JSON.stringify(packH(hist));hzK=key}
+  const str=JSON.stringify(rest).slice(0,-1)+(Object.keys(rest).length?",":"")+'"hz":'+hzC+"}";lastLen=str.length;
   try{localStorage.setItem(K,str);if(saveFail){saveFail=false}}catch(e){saveFail=true;try{toast("⚠️ Memória do app cheia: exporte o backup agora.")}catch(x){}}}
 let S=load();
-function migrate(){/* nomes antigos (campo "o") -> nomes atuais */
+function migrate(){histRev++;/* nomes antigos (campo "o") -> nomes atuais */
   /* treino B de 25/11/2026: o leg press feito foi o unilateral */
   S.hist.forEach(h=>{if(h.d===1795651366693&&Array.isArray(h.sets))h.sets.forEach(y=>{if(y.n==="Quadríceps – Legpress (ou agachamento)"&&y.v==="Leg press 45°")y.v="Leg press 45° unilateral"})});
   F.panels.forEach(p=>{const s=S.cur[p.id];if(s&&s.t0&&S.mode[p.id]==null&&s.sig===sig(p))S.mode[p.id]="full"});
@@ -1671,7 +1674,7 @@ function archive(p,s){const sets=[];
   const nt={};Object.entries(s.nt||{}).forEach(([i,t])=>{t=String(t).trim();if(t&&p.ex[i])nt[p.ex[i].n]=t});
   const dur=s.t0&&s.t1?Math.max(1,Math.round((s.t1-s.t0)/60000)):null;
   if(sets.length||Object.keys(nt).length){const x={d:s.t0||Date.now(),p:p.name,sets};if(dur)x.dur=dur;if(Object.keys(nt).length)x.nt=nt;S.hist.unshift(x)}
-  S.hist=S.hist.slice(0,HMAX);delete S.cur[p.id]}
+  S.hist=S.hist.slice(0,HMAX);histRev++;delete S.cur[p.id]}
 function lastSet(n,k,v,aq){for(const h of S.hist){const x=(h.sets||[]).find(x=>x.n===n&&x.k===k&&!!x.a===!!aq&&(x.kg!=null||x.reps!=null)&&(!v||!x.v||x.v===v));if(x)return x}return null}
 function histV(n,k){for(const h of S.hist){const x=(h.sets||[]).find(y=>y.n===n&&y.k===k&&!y.a&&y.v);if(x)return x.v}return""}
 function lastNote(n){for(const h of S.hist)if(h.nt&&h.nt[n])return h.nt[n];return""}
@@ -1681,9 +1684,14 @@ function defV(e,i,k,s){const l=s.log[i+":"+k];if(l&&l.v!=null)return l.v;
   let pv="";for(let j=k-1;j>=0;j--){const x=s.log[i+":"+j];if(x&&x.v){pv=x.v;break}}
   if(hk&&hp&&hk!==hp)return hk;return pv||hk}
 
-/* sessões abertas em dias anteriores vão para o histórico */
-Object.keys(S.cur).forEach(id=>{const p=P(id),s=S.cur[id];
-  if(!p||!s)delete S.cur[id];else if(s.t0&&day(s.t0)!==day(Date.now()))archive(p,s)});
+/* treino parado há mais de 3 h (ou aberto em outro dia) vai para o histórico; sessões vazias de treino já feito somem */
+const IDLE=3*3600e3;
+function sweep(){let ch=false;Object.keys(S.cur).forEach(id=>{const p=P(id),s=S.cur[id];
+    if(!p||!s){delete S.cur[id];ch=true;return}
+    const la=s.t1||s.t0;
+    if(s.t0&&(Date.now()-la>IDLE||day(la)!==day(Date.now())&&Date.now()-la>3600e3)){archive(p,s);ch=true}
+    else if(!s.t0&&!Object.keys(s.done||{}).length&&S.tab!==id&&typeof phase==="function"&&phase().last[id]){delete S.cur[id];ch=true}});
+  return ch}
 
 /* ---------- render ---------- */
 const isRest=t=>t[0]==="r";
@@ -1886,7 +1894,7 @@ function focusCur(){requestAnimationFrame(()=>{const c=$(".card.cur");if(c)scrol
 function back(p,i){const s=sess(p),k=s.done[i]||0;if(k>0){s.done[i]=k-1;s.open=i;stopRest();save();render();focusCur()}}
 document.addEventListener("click",ev=>{const b=ev.target.closest("[data-act]");if(!b)return;
   const a=b.dataset.act,i=+b.dataset.ex,p=P(S.tab),s=p&&sess(p);
-  if(a==="tab"){S.tab=b.dataset.v;save();render();scrollTo(0,0)}
+  if(a==="tab"){S.tab=b.dataset.v;sweep();save();render();scrollTo(0,0)}
   else if(a==="mode"){const m=b.dataset.m;if(verOf(p.id)===m)return;
     if((s.t0||Object.keys(s.done).length)&&!confirm("Trocar de versão reinicia o treino de hoje. Continuar?"))return;
     delete S.cur[p.id];S.mode[p.id]=m;stopRest();save();render();scrollTo(0,0)}
@@ -1901,7 +1909,7 @@ document.addEventListener("click",ev=>{const b=ev.target.closest("[data-act]");i
       clearTimeout(b._t);b._t=setTimeout(()=>{b.dataset.armed="";b.classList.remove("armed");b.textContent="Concluir série"},4000);return}
     clearTimeout(b._t);doneFx();const e=p.ex[i],st=steps(e),k=s.done[i]||0;if(k>=st.length)return;
     const w=st[k].t==="w";s.t0=s.t0||Date.now()-60000;s.t1=Date.now();
-    s.log[i+":"+k]={kg:num($("#kg").value),reps:num($("#rp").value),rir:w?num($("#rir").value):null,v:$("#op")?.value||null};
+    s.log[i+":"+k]={kg:num($("#kg").value),reps:num($("#rp").value),rir:w?num($("#rir").value):null,v:$("#op")?.value??null};
     s.done[i]=k+1;s.open=k+1<st.length?i:null;
     const all=p.ex.every((x,j)=>(s.done[j]||0)>=steps(x).length),nx=curEx(p,s);
     save();wake();vibe(40);
@@ -1919,8 +1927,8 @@ document.addEventListener("click",ev=>{const b=ev.target.closest("[data-act]");i
   else if(a==="import")$("#imp").click();
   else if(a==="delh"){const j=+b.dataset.i,x=S.hist[j];if(!x||String(x.d)!==b.dataset.d)return;
     if(!confirm(`Apagar o treino de ${new Date(x.d).toLocaleDateString("pt-BR",{weekday:"short",day:"2-digit",month:"2-digit"})} (${x.p})? Esta ação não pode ser desfeita.`))return;
-    S.hist.splice(j,1);save();render();toast("Treino apagado")}
-  else if(a==="clear"){if(confirm("Apagar todo o histórico? Esta ação não pode ser desfeita.")){S.hist=[];save();render()}}
+    S.hist.splice(j,1);histRev++;save();render();toast("Treino apagado")}
+  else if(a==="clear"){if(confirm("Apagar todo o histórico? Esta ação não pode ser desfeita.")){S.hist=[];histRev++;save();render()}}
 });
 $("#imp").addEventListener("change",async e=>{const f=e.target.files[0];e.target.value="";if(!f)return;
   try{const o=JSON.parse(await f.text());if(!o||!Array.isArray(o.hist))throw 0;
@@ -1934,13 +1942,15 @@ document.addEventListener("change",ev=>{const t=ev.target;if(t.id!=="op")return;
 document.addEventListener("input",ev=>{const t=ev.target;if(t.id!=="nt")return;const p=P(S.tab);if(!p)return;const s=sess(p);
   (s.nt=s.nt||{})[t.dataset.ex]=t.value;save();const sm=t.closest("details")?.querySelector("summary");if(sm)sm.textContent="Anotação de hoje"+(t.value.trim()?" ✓":"")});
 document.addEventListener("focusin",e=>{if(e.target.matches("input[type=number]"))e.target.select()});
-document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"){if(Object.values(S.cur).some(s=>s&&s.t0))wake();tick()}});
+function resume(){if(sweep()){stopRest();save();render()}}
+addEventListener("pageshow",resume);
+document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"){resume();if(Object.values(S.cur).some(s=>s&&s.t0))wake();tick()}});
 
 /* ---------- início ---------- */
 $("#who").textContent=F.person||"";document.title=(F.title||"Ficha de Treino")+" | "+(F.person||"");
 $("#pills").innerHTML=(F.stats||[]).map(x=>`<span class="pill">${esc(x)}</span>`).join("");
 $("#sig").textContent=F.signature||"";
-save();render();
+sweep();save();render();
 if("serviceWorker"in navigator&&location.protocol==="https:")navigator.serviceWorker.register("sw.js").catch(()=>{});
 </script>
 </body>
