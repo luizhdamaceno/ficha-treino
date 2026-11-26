@@ -53,7 +53,9 @@ h2{font-size:22px;margin:2px 0 0;letter-spacing:-.02em;color:var(--ink)}
 .nm{flex:1;min-width:0;font-weight:750;font-size:16px;margin:0;line-height:1.25}
 .tag{font-size:12px;font-weight:700;color:var(--muted);background:var(--soft);padding:4px 9px;border-radius:99px;white-space:nowrap}
 .row{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 14px;margin-bottom:10px;min-height:56px}
-.row.done .num{background:var(--okbg);color:var(--ok)}
+.row.done{background:var(--okbg);border-color:var(--ok);color:var(--ok)}
+.row.done .num{background:transparent;color:var(--ok);font-size:18px}
+.row.done .sm{color:var(--ok)}
 .dots{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0}
 .dot{min-width:32px;height:28px;padding:0 8px;border-radius:8px;display:grid;place-items:center;font-size:12px;font-weight:800;background:var(--warmbg);color:var(--warm)}
 .dot.w{background:var(--workbg);color:var(--work)}
@@ -144,6 +146,11 @@ details.evo summary::-webkit-details-marker{display:none}
 .fk{color:#b3261e;font-weight:700}@media(prefers-color-scheme:dark){.fk{color:#ff8a80}}
 .tab.dn{background:var(--okbg);color:var(--ok);border-color:var(--ok)}
 .tab.dn[aria-selected=true]{background:var(--ok);color:#fff;border-color:var(--ok)}
+.tg{width:100%;background:none;border:0;padding:0;text-align:left;color:inherit;min-height:44px}
+.chv{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;opacity:.55}
+.card.cur .t2 .chv{transform:rotate(180deg)}
+.row .chv{margin-left:-4px}
+.row{transition:transform .15s ease}.row:active,.tg:active{transform:scale(.985)}
 </style>
 </head>
 <body>
@@ -1642,7 +1649,7 @@ migrate();
 
 function sess(p){let s=S.cur[p.id];if(!s||s.sig!==sig(p))s=S.cur[p.id]={sig:sig(p),t0:null,done:{},log:{},open:null};return s}
 function stat(p){const s=sess(p);let d=0,t=0;p.ex.forEach((e,i)=>{t+=e.w[0];d+=Math.max(0,(s.done[i]||0)-e.wu.length)});return{s,d,t}}
-const curEx=(p,s)=>s.open!=null?s.open:p.ex.findIndex((e,i)=>(s.done[i]||0)<steps(e).length);
+const curEx=(p,s)=>s.open===-1?-1:s.open!=null?s.open:p.ex.findIndex((e,i)=>(s.done[i]||0)<steps(e).length);
 function archive(p,s){const sets=[];
   p.ex.forEach((e,i)=>{let k=0,ak=0;steps(e).forEach((x,j)=>{
     if(x.t!=="w"){ak++;const q=s.log[i+":"+j];if(q&&j<(s.done[i]||0)&&(q.kg!=null||q.reps!=null)){const y={n:e.n,k:ak,a:1,kg:q.kg,reps:q.reps};if(q.v)y.v=q.v;sets.push(y)}return}
@@ -1694,12 +1701,12 @@ function panelHTML(p){const{s,d,t}=stat(p),c=curEx(p,s);
   const vf=F.panels.find(x=>x.id===p.id),vs=F.short.find(x=>x.id===p.id),sc=q=>q.ex.reduce((a,e)=>a+e.w[0],0),cv=verOf(p.id);
   h+=`<div class="seg" role="group" aria-label="Versão do treino"><button data-act="mode" data-m="short" aria-pressed="${cv==="short"}">Versão 60 min<small>${sc(vs)} séries</small></button><button data-act="mode" data-m="full" aria-pressed="${cv==="full"}">Versão completa<small>${sc(vf)} séries</small></button></div>`;
   p.ex.forEach((e,i)=>{const n=steps(e).length,k=s.done[i]||0;
-    h+=i===c?openHTML(e,i,s):`<button class="row ${k>=n?"done":""}" data-act="open" data-ex="${i}"><span class="num">${k>=n?"✓":i+1}</span><span class="nm">${esc(e.n)}</span><span class="sm">${Math.max(0,k-e.wu.length)}/${e.w[0]} ${e.w[0]===1?"série":"séries"}</span></button>`});
+    h+=i===c?openHTML(e,i,s):`<button class="row ${k>=n?"done":""}" data-act="open" data-ex="${i}"><span class="num">${k>=n?"✓":i+1}</span><span class="nm">${esc(e.n)}</span><span class="sm">${Math.max(0,k-e.wu.length)}/${e.w[0]} ${e.w[0]===1?"série":"séries"}</span><svg class="chv" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>`});
   if(d>=t)h+=`<div class="ban"><div><b>Treino concluído</b><br>Bom trabalho! Salve para guardar suas cargas.</div></div><button class="go" data-act="finish">Salvar no histórico</button>`;
   else if(s.t0)h+=`<div class="act"><button class="lk" data-act="finish">Encerrar e salvar</button><button class="lk" data-act="reset">Reiniciar treino</button></div>`;
   return h}
 function openHTML(e,i,s){const st=steps(e),k=s.done[i]||0,fin=k>=st.length,x=st[k],nw=e.wu.length;
-  let h=`<article class="card cur"><div class="t2"><span class="num">${i+1}</span><h3 class="nm">${esc(e.n)}</h3>${e.tag==="Treino fixo"?"":`<span class="tag">${esc(e.tag)}</span>`}</div>
+  let h=`<article class="card cur"><button class="t2 tg" data-act="close" data-ex="${i}" aria-expanded="true"><span class="num">${i+1}</span><h3 class="nm">${esc(e.n)}</h3>${e.tag==="Treino fixo"?"":`<span class="tag">${esc(e.tag)}</span>`}<svg class="chv" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button><div class="cb">
   
   <div class="dots" aria-hidden="true">${st.map((y,j)=>`<span class="dot ${y.t==="w"?"w":""} ${j<k?"ok":""} ${j===k?"on":""}">${y.t==="a"?"A"+(j+1):"T"+(j-nw+1)}</span>`).join("")}</div>`;
   h+=evoChips(e.n);
@@ -1720,7 +1727,7 @@ function openHTML(e,i,s){const st=steps(e),k=s.done[i]||0,fin=k>=st.length,x=st[
   const nv=(s.nt||{})[i]||"";
   h+=`<details class="nt" ${nv?"open":""}><summary>Anotação de hoje${nv?" ✓":""}</summary><textarea id="nt" data-ex="${i}" maxlength="300" placeholder="Ex.: banco na posição 4, cotovelo sem dor, máquina ocupada">${esc(nv)}</textarea></details>`;
   if(e.s)h+=`<details class="sg"><summary>Opções de exercício</summary><ul>${e.s.split("; ").map(x=>`<li>${esc(x)}</li>`).join("")}</ul>${guideHTML(e)}</details>`;
-  return h+"</article>"}
+  return h+"</div></article>"}
 function guideHTML(e){const g=F.guide,r=e.r||g.rir,L=[];
   if(e.d)L.push(["Foco",e.d]);
   L.push(["Como escolher",e.c||g.escolha]);
@@ -1835,6 +1842,18 @@ function tick(){if(!T)return;const l=Math.max(0,Math.ceil((T.end-Date.now())/100
   $("#rt").textContent=Math.floor(l/60)+":"+String(l%60).padStart(2,"0");
   if(!l&&!T.fin){T.fin=true;$("#rest").className="on end";$("#rl").textContent="Descanso terminou";vibe([300,150,300]);beep();setTimeout(()=>{if(T&&T.fin)stopRest()},8000)}}
 function toast(msg,undo){$("#tm").textContent=msg;$("#tu").hidden=!undo;$("#toast").className="on";clearTimeout(tt);tt=setTimeout(()=>$("#toast").className="",6000)}
+/* animação de abrir/fechar o cartão */
+const EZ="cubic-bezier(.22,1,.36,1)";
+function animOpen(){if(reduce)return;const c=$(".card.cur");if(!c||!c.animate)return;const h=c.offsetHeight;
+  c.style.overflow="hidden";
+  c.animate([{height:"56px",borderRadius:"14px"},{height:h+"px",borderRadius:"16px"}],{duration:420,easing:EZ}).onfinish=()=>{c.style.overflow=""};
+  const b=c.querySelector(".cb");if(b)b.animate([{opacity:0,transform:"translateY(-8px)"},{opacity:1,transform:"none"}],{duration:380,delay:90,easing:EZ,fill:"backwards"});
+  const v=c.querySelector(".chv");if(v)v.animate([{transform:"rotate(0)"},{transform:"rotate(180deg)"}],{duration:380,easing:EZ})}
+function animClose(done){const c=$(".card.cur");if(reduce||!c||!c.animate){done();return}const h=c.offsetHeight;c.style.overflow="hidden";
+  const b=c.querySelector(".cb");if(b)b.animate([{opacity:1},{opacity:0}],{duration:160,fill:"forwards"});
+  const v=c.querySelector(".chv");if(v)v.animate([{transform:"rotate(180deg)"},{transform:"rotate(0)"}],{duration:300,easing:EZ,fill:"forwards"});
+  const a=c.animate([{height:h+"px",borderRadius:"16px"},{height:"56px",borderRadius:"14px"}],{duration:320,easing:EZ,fill:"forwards"});
+  a.onfinish=done}
 function focusCur(){requestAnimationFrame(()=>{const c=$(".card.cur");if(c)scrollTo({top:c.getBoundingClientRect().top+scrollY-$(".top").offsetHeight-10,behavior:reduce?"auto":"smooth"})})}
 
 /* ---------- ações ---------- */
@@ -1846,7 +1865,8 @@ document.addEventListener("click",ev=>{const b=ev.target.closest("[data-act]");i
   else if(a==="mode"){const m=b.dataset.m;if(verOf(p.id)===m)return;
     if((s.t0||Object.keys(s.done).length)&&!confirm("Trocar de versão reinicia o treino de hoje. Continuar?"))return;
     delete S.cur[p.id];S.mode[p.id]=m;stopRest();save();render();scrollTo(0,0)}
-  else if(a==="open"){s.open=i;render();focusCur()}
+  else if(a==="open"){s.open=i;render();animOpen();focusCur()}
+  else if(a==="close"){animClose(()=>{s.open=-1;save();render()})}
   else if(a==="back")back(p,i);
   else if(a==="undo"){if(U){const q=P(U.p);if(q)back(q,U.i)}$("#toast").className=""}
   else if(a==="next"){audio();
@@ -1880,7 +1900,7 @@ $("#imp").addEventListener("change",async e=>{const f=e.target.files[0];e.target
 /* troca do exercício feito: guarda o que foi digitado e recalcula a carga sugerida */
 document.addEventListener("change",ev=>{const t=ev.target;if(t.id!=="op")return;const p=P(S.tab);if(!p)return;const s=sess(p),kgI=$("#kg"),rir=$("#rir");
   const kg=kgI&&kgI.value!==kgI.dataset.auto?num(kgI.value):null;
-  s.log[t.dataset.ex+":"+t.dataset.k]={kg,reps:num($("#rp")?.value),rir:rir?num(rir.value):null,v:t.value||null};save();render()});
+  s.log[t.dataset.ex+":"+t.dataset.k]={kg,reps:num($("#rp")?.value),rir:rir?num(rir.value):null,v:t.value};save();render()});
 document.addEventListener("input",ev=>{const t=ev.target;if(t.id!=="nt")return;const p=P(S.tab);if(!p)return;const s=sess(p);
   (s.nt=s.nt||{})[t.dataset.ex]=t.value;save();const sm=t.closest("details")?.querySelector("summary");if(sm)sm.textContent="Anotação de hoje"+(t.value.trim()?" ✓":"")});
 document.addEventListener("focusin",e=>{if(e.target.matches("input[type=number]"))e.target.select()});
