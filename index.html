@@ -151,6 +151,7 @@ details.evo summary::-webkit-details-marker{display:none}
 .card.cur .t2 .chv{transform:rotate(180deg)}
 .row .chv{margin-left:-4px}
 .row{transition:transform .15s ease}.row:active,.tg:active{transform:scale(.985)}
+.dvn{margin:0 2px 12px;font-size:13.5px;font-weight:700;color:var(--ok)}
 </style>
 </head>
 <body>
@@ -1678,8 +1679,8 @@ let EV=null,EVD=null;
 const FIX=F.panels.filter(p=>!p.optional).map(p=>p.id);
 const pidOf=name=>{for(const L of[F.panels,F.short]){const p=L.find(x=>x.name===name);if(p)return p.id}
   const m=String(name).match(/^Treino ([A-E])\b/);return m?String("ABCDE".indexOf(m[1])):null};
-function phase(){let done=new Set(),n=0;[...S.hist].sort((a,b)=>a.d-b.d).forEach(h=>{const id=pidOf(h.p);if(id==null||!F.panels.some(p=>p.id===id))return;
-    done.add(id);if(FIX.every(x=>done.has(x))){done=new Set();n++}});return{done,n}}
+function phase(){let done=new Set(),n=0,last={};[...S.hist].sort((a,b)=>a.d-b.d).forEach(h=>{const id=pidOf(h.p);if(id==null||!F.panels.some(p=>p.id===id))return;
+    done.add(id);last[id]=h;if(FIX.every(x=>done.has(x))){done=new Set();last={};n++}});return{done,n,last}}
 function render(){
   EV=evoData(S.hist,8);
   if(!F.week.includes(S.tab)&&S.tab!=="h"&&S.tab!=="e")S.tab=F.week.find(t=>!isRest(t)&&S.cur[t]?.t0)||F.week[0];
@@ -1692,11 +1693,17 @@ function render(){
   $("#tabs [aria-selected=true]")?.scrollIntoView({inline:"center",block:"nearest"});
 }
 const mins=(a,b)=>Math.max(1,Math.round((b-a)/60000));
-function progHTML(p){const{s,d,t}=stat(p),pct=t?Math.round(d/t*100):0,c=curEx(p,s);
+function doneView(p){const h=phase().last[p.id],s=S.cur[p.id];
+  if(!h||(s&&s.sig===sig(p)&&(s.t0||Object.keys(s.done||{}).length||s.open!=null)))return null;
+  const cnt=p.ex.map(e=>(h.sets||[]).filter(y=>y.n===e.n&&!y.a).length);return{h,cnt}}
+const fdate=t=>new Date(t).toLocaleDateString("pt-BR",{weekday:"short",day:"2-digit",month:"2-digit"});
+function progHTML(p){const dv=doneView(p);
+  if(dv){const tot=dv.cnt.reduce((a,b)=>a+b,0);
+    return`<div class="ring" style="--p:100%" role="img" aria-label="Concluído"><b>✓</b></div><div class="pt"><strong>${pl(tot,"série feita","séries feitas")}</strong><span>Concluído em ${fdate(dv.h.d)}${dv.h.dur?" · "+dv.h.dur+" min":""}</span></div>`}const{s,d,t}=stat(p),pct=t?Math.round(d/t*100):0,c=curEx(p,s);
   const st=d>=t?"Treino concluído"+(s.t0&&s.t1?" · "+mins(s.t0,s.t1)+" min":""):(s.t0||d)?"Em andamento"+(s.t0?" · "+mins(s.t0,Date.now())+" min":""):"Não iniciado";
   return`<div class="ring" style="--p:${pct}%" role="img" aria-label="${pct}% concluído"><b>${pct}%</b></div><div class="pt"><strong>${d}/${t} séries de trabalho</strong><span>${st}${c>=0&&d<t?" · próximo: "+esc(p.ex[c].n):""}</span></div>`}
 setInterval(()=>{const p=P(S.tab);if(p&&!$("#prog").hidden&&document.visibilityState==="visible")$("#prog").innerHTML=progHTML(p)},30000);
-function panelHTML(p){const{s,d,t}=stat(p),c=curEx(p,s);
+function panelHTML(p){const dv=doneView(p);if(dv)return doneHTML(p,dv);const{s,d,t}=stat(p),c=curEx(p,s);
   let h=`<div class="hd"><div><div class="eb">${esc(p.eyebrow)}</div><h2>${esc(p.name)}</h2></div><span class="sm">${pl(p.ex.length,"exercício","exercícios")}</span></div>`;
   const vf=F.panels.find(x=>x.id===p.id),vs=F.short.find(x=>x.id===p.id),sc=q=>q.ex.reduce((a,e)=>a+e.w[0],0),cv=verOf(p.id);
   h+=`<div class="seg" role="group" aria-label="Versão do treino"><button data-act="mode" data-m="short" aria-pressed="${cv==="short"}">Versão 60 min<small>${sc(vs)} séries</small></button><button data-act="mode" data-m="full" aria-pressed="${cv==="full"}">Versão completa<small>${sc(vf)} séries</small></button></div>`;
@@ -1704,6 +1711,12 @@ function panelHTML(p){const{s,d,t}=stat(p),c=curEx(p,s);
     h+=i===c?openHTML(e,i,s):`<button class="row ${k>=n?"done":""}" data-act="open" data-ex="${i}"><span class="num">${k>=n?"✓":i+1}</span><span class="nm">${esc(e.n)}</span><span class="sm">${Math.max(0,k-e.wu.length)}/${e.w[0]} ${e.w[0]===1?"série":"séries"}</span><svg class="chv" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>`});
   if(d>=t)h+=`<div class="ban"><div><b>Treino concluído</b><br>Bom trabalho! Salve para guardar suas cargas.</div></div><button class="go" data-act="finish">Salvar no histórico</button>`;
   else if(s.t0)h+=`<div class="act"><button class="lk" data-act="finish">Encerrar e salvar</button><button class="lk" data-act="reset">Reiniciar treino</button></div>`;
+  return h}
+function headHTML(p){const vf=F.panels.find(x=>x.id===p.id),vs=F.short.find(x=>x.id===p.id),sc=q=>q.ex.reduce((a,e)=>a+e.w[0],0),cv=verOf(p.id);
+  return`<div class="hd"><div><div class="eb">${esc(p.eyebrow)}</div><h2>${esc(p.name)}</h2></div><span class="sm">${pl(p.ex.length,"exercício","exercícios")}</span></div><div class="seg" role="group" aria-label="Versão do treino"><button data-act="mode" data-m="short" aria-pressed="${cv==="short"}">Versão 60 min<small>${sc(vs)} séries</small></button><button data-act="mode" data-m="full" aria-pressed="${cv==="full"}">Versão completa<small>${sc(vf)} séries</small></button></div>`}
+function doneHTML(p,dv){let h=headHTML(p)+`<p class="dvn">✓ Feito nesta fase em ${fdate(dv.h.d)}. Toque em um exercício para treinar de novo.</p>`;
+  p.ex.forEach((e,i)=>{const c=dv.cnt[i];
+    h+=`<button class="row ${c?"done":""}" data-act="open" data-ex="${i}"><span class="num">${c?"✓":i+1}</span><span class="nm">${esc(e.n)}</span><span class="sm">${c?pl(c,"série","séries"):"0/"+e.w[0]+" séries"}</span><svg class="chv" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>`});
   return h}
 function openHTML(e,i,s){const st=steps(e),k=s.done[i]||0,fin=k>=st.length,x=st[k],nw=e.wu.length;
   let h=`<article class="card cur"><button class="t2 tg" data-act="close" data-ex="${i}" aria-expanded="true"><span class="num">${i+1}</span><h3 class="nm">${esc(e.n)}</h3>${e.tag==="Treino fixo"?"":`<span class="tag">${esc(e.tag)}</span>`}<svg class="chv" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button><div class="cb">
@@ -1842,18 +1855,28 @@ function tick(){if(!T)return;const l=Math.max(0,Math.ceil((T.end-Date.now())/100
   $("#rt").textContent=Math.floor(l/60)+":"+String(l%60).padStart(2,"0");
   if(!l&&!T.fin){T.fin=true;$("#rest").className="on end";$("#rl").textContent="Descanso terminou";vibe([300,150,300]);beep();setTimeout(()=>{if(T&&T.fin)stopRest()},8000)}}
 function toast(msg,undo){$("#tm").textContent=msg;$("#tu").hidden=!undo;$("#toast").className="on";clearTimeout(tt);tt=setTimeout(()=>$("#toast").className="",6000)}
-/* animação de abrir/fechar o cartão */
-const EZ="cubic-bezier(.22,1,.36,1)";
-function animOpen(){if(reduce)return;const c=$(".card.cur");if(!c||!c.animate)return;const h=c.offsetHeight;
-  c.style.overflow="hidden";
-  c.animate([{height:"56px",borderRadius:"14px"},{height:h+"px",borderRadius:"16px"}],{duration:420,easing:EZ}).onfinish=()=>{c.style.overflow=""};
-  const b=c.querySelector(".cb");if(b)b.animate([{opacity:0,transform:"translateY(-8px)"},{opacity:1,transform:"none"}],{duration:380,delay:90,easing:EZ,fill:"backwards"});
-  const v=c.querySelector(".chv");if(v)v.animate([{transform:"rotate(0)"},{transform:"rotate(180deg)"}],{duration:380,easing:EZ})}
-function animClose(done){const c=$(".card.cur");if(reduce||!c||!c.animate){done();return}const h=c.offsetHeight;c.style.overflow="hidden";
-  const b=c.querySelector(".cb");if(b)b.animate([{opacity:1},{opacity:0}],{duration:160,fill:"forwards"});
-  const v=c.querySelector(".chv");if(v)v.animate([{transform:"rotate(180deg)"},{transform:"rotate(0)"}],{duration:300,easing:EZ,fill:"forwards"});
-  const a=c.animate([{height:h+"px",borderRadius:"16px"},{height:"56px",borderRadius:"14px"}],{duration:320,easing:EZ,fill:"forwards"});
-  a.onfinish=done}
+/* animação de abrir/fechar o cartão: só transform, opacidade e recorte (fluido no iPhone) */
+const EZ="cubic-bezier(.22,1,.36,1)",AD=360;
+const below=c=>{const r=[];let x=c.nextElementSibling;while(x){r.push(x);x=x.nextElementSibling}return r};
+function animOpen(rh){if(reduce)return;const c=$(".card.cur");if(!c||!c.animate)return;const h=c.offsetHeight,dh=Math.max(0,h-(rh||56));
+  const o={duration:AD,easing:EZ};
+  c.animate([{clipPath:`inset(0 0 ${dh}px 0 round 14px)`},{clipPath:"inset(0 0 0 0 round 16px)"}],o);
+  below(c).forEach(x=>x.animate([{transform:`translate3d(0,${-dh}px,0)`},{transform:"translate3d(0,0,0)"}],o));
+  const bd=c.querySelector(".cb");if(bd)bd.animate([{opacity:0,transform:"translate3d(0,-6px,0)"},{opacity:1,transform:"translate3d(0,0,0)"}],{duration:300,delay:70,easing:EZ,fill:"backwards"});
+  const v=c.querySelector(".chv");if(v)v.animate([{transform:"rotate(0)"},{transform:"rotate(180deg)"}],o)}
+/* fechar: troca para a lista na hora e anima uma "cópia" do cartão encolhendo sobre a linha (sem salto no final) */
+function animClose(done,i){const c=$(".card.cur");if(reduce||!c||!c.animate){done();return}
+  const r0=c.getBoundingClientRect(),g=c.cloneNode(true);g.querySelectorAll("[id]").forEach(x=>x.removeAttribute("id"));
+  done();
+  const r=$(`button.row[data-ex="${i}"]`);if(!r)return;const rr=r.getBoundingClientRect(),nh=rr.height,dh=Math.max(0,r0.height-nh);
+  Object.assign(g.style,{position:"absolute",top:(rr.top+scrollY)+"px",left:(rr.left+scrollX)+"px",width:rr.width+"px",margin:"0",pointerEvents:"none",zIndex:"3",boxSizing:"border-box"});
+  g.setAttribute("aria-hidden","true");document.body.appendChild(g);
+  const o={duration:300,easing:EZ,fill:"forwards"};
+  const gb=g.querySelector(".cb");if(gb)gb.animate([{opacity:1},{opacity:0}],{duration:150,fill:"forwards"});
+  const gv=g.querySelector(".chv");if(gv)gv.animate([{transform:"rotate(180deg)"},{transform:"rotate(0)"}],o);
+  g.animate([{clipPath:"inset(0 0 0 0 round 16px)",opacity:1},{clipPath:`inset(0 0 ${dh}px 0 round 14px)`,opacity:1,offset:.8},{clipPath:`inset(0 0 ${dh}px 0 round 14px)`,opacity:0}],o).onfinish=()=>g.remove();
+  r.animate([{opacity:0},{opacity:0,offset:.6},{opacity:1}],{duration:300});
+  below(r).forEach(x=>x.animate([{transform:`translate3d(0,${dh}px,0)`},{transform:"translate3d(0,0,0)"}],{duration:300,easing:EZ}))}
 function focusCur(){requestAnimationFrame(()=>{const c=$(".card.cur");if(c)scrollTo({top:c.getBoundingClientRect().top+scrollY-$(".top").offsetHeight-10,behavior:reduce?"auto":"smooth"})})}
 
 /* ---------- ações ---------- */
@@ -1865,8 +1888,9 @@ document.addEventListener("click",ev=>{const b=ev.target.closest("[data-act]");i
   else if(a==="mode"){const m=b.dataset.m;if(verOf(p.id)===m)return;
     if((s.t0||Object.keys(s.done).length)&&!confirm("Trocar de versão reinicia o treino de hoje. Continuar?"))return;
     delete S.cur[p.id];S.mode[p.id]=m;stopRest();save();render();scrollTo(0,0)}
-  else if(a==="open"){s.open=i;render();animOpen();focusCur()}
-  else if(a==="close"){animClose(()=>{s.open=-1;save();render()})}
+  else if(a==="open"){const rh=b.offsetHeight;s.open=i;render();animOpen(rh);
+    const c=$(".card.cur"),tp=c&&c.getBoundingClientRect().top,hb=$(".top").offsetHeight;if(c&&(tp<hb||tp>innerHeight*.55))setTimeout(focusCur,AD)}
+  else if(a==="close"){animClose(()=>{if(phase().last[p.id]&&!s.t0&&!Object.keys(s.done).length)delete S.cur[p.id];else s.open=-1;save();render()},i)}
   else if(a==="back")back(p,i);
   else if(a==="undo"){if(U){const q=P(U.p);if(q)back(q,U.i)}$("#toast").className=""}
   else if(a==="next"){audio();
