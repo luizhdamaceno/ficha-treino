@@ -152,6 +152,8 @@ details.evo summary::-webkit-details-marker{display:none}
 .row .chv{margin-left:-4px}
 .row{transition:transform .15s ease}.row:active,.tg:active{transform:scale(.985)}
 .dvn{margin:0 2px 12px;font-size:13.5px;font-weight:700;color:var(--ok)}
+.bkf{color:#b3261e}@media(prefers-color-scheme:dark){.bkf{color:#ff8a80}}
+.lk.del{color:#b3261e;margin-left:auto}@media(prefers-color-scheme:dark){.lk.del{color:#ff8a80}}
 </style>
 </head>
 <body>
@@ -1631,10 +1633,21 @@ const steps=e=>[...e.wu.map(([r,d])=>({t:"a",reps:r,rest:d})),...Array.from({len
 const opts=e=>[...(e.op||e.s.split("; ").map(x=>x.replace(/, melhor opção$|, só se não houver cadeira.*$/,"").trim())),"Outro"];
 const sig=p=>p.ex.map(e=>e.n+steps(e).length).join("|");
 
+/* histórico gravado em formato compacto: nomes e variações viram índices, cada série vira uma lista */
+const HMAX=3000,HWARN=1800000;let lastLen=0,saveFail=false;
+function packH(hist){const N=[],V=[],ni={},vi={},ix=(m,a,x)=>x in m?m[x]:(a.push(x),m[x]=a.length-1);
+  const H=hist.map(h=>{const o={d:h.d,p:h.p,z:(h.sets||[]).map(y=>{const r=[ix(ni,N,y.n),y.k,y.v?ix(vi,V,y.v):-1,y.kg??null,y.reps??null,y.rir??null,y.a?1:0];
+      while(r.length>2&&(r[r.length-1]===null||r[r.length-1]===0&&r.length===7))r.pop();return r})};
+    if(h.dur)o.dur=h.dur;if(h.nt)o.nt=h.nt;return o});return{N,V,H}}
+function unpackH(z){if(!z||!Array.isArray(z.H))return[];const N=z.N||[],V=z.V||[];
+  return z.H.map(h=>{const o={d:h.d,p:h.p,sets:(h.z||[]).map(r=>{const y={n:N[r[0]],k:r[1]};if(r[2]!=null&&r[2]>=0)y.v=V[r[2]];
+      if(r[6])y.a=1;y.kg=r[3]??null;y.reps=r[4]??null;if(!y.a)y.rir=r[5]??null;return y})};if(h.dur)o.dur=h.dur;if(h.nt)o.nt=h.nt;return o})}
 function load(){let o;try{o=JSON.parse(localStorage.getItem(K))}catch(e){}
+  if(o&&o.hz&&!Array.isArray(o.hist))o.hist=unpackH(o.hz);
   if(!o||typeof o!=="object"||Array.isArray(o))o={};
   return{v:1,exp:typeof o.exp==="number"?o.exp:null,mode:o.mode&&typeof o.mode==="object"&&!Array.isArray(o.mode)?o.mode:{},tab:o.tab||null,cur:o.cur&&typeof o.cur==="object"&&!Array.isArray(o.cur)?o.cur:{},hist:Array.isArray(o.hist)?o.hist:[]}}
-function save(){try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}}
+function save(){const{hist,...rest}=S;const str=JSON.stringify({...rest,hz:packH(hist)});lastLen=str.length;
+  try{localStorage.setItem(K,str);if(saveFail){saveFail=false}}catch(e){saveFail=true;try{toast("⚠️ Memória do app cheia: exporte o backup agora.")}catch(x){}}}
 let S=load();
 function migrate(){/* nomes antigos (campo "o") -> nomes atuais */
   /* treino B de 25/11/2026: o leg press feito foi o unilateral */
@@ -1658,8 +1671,8 @@ function archive(p,s){const sets=[];
   const nt={};Object.entries(s.nt||{}).forEach(([i,t])=>{t=String(t).trim();if(t&&p.ex[i])nt[p.ex[i].n]=t});
   const dur=s.t0&&s.t1?Math.max(1,Math.round((s.t1-s.t0)/60000)):null;
   if(sets.length||Object.keys(nt).length){const x={d:s.t0||Date.now(),p:p.name,sets};if(dur)x.dur=dur;if(Object.keys(nt).length)x.nt=nt;S.hist.unshift(x)}
-  S.hist=S.hist.slice(0,300);delete S.cur[p.id]}
-function lastSet(n,k,v,aq){for(const h of S.hist){const x=(h.sets||[]).find(x=>x.n===n&&x.k===k&&!!x.a===!!aq&&(!v||!x.v||x.v===v));if(x)return x}return null}
+  S.hist=S.hist.slice(0,HMAX);delete S.cur[p.id]}
+function lastSet(n,k,v,aq){for(const h of S.hist){const x=(h.sets||[]).find(x=>x.n===n&&x.k===k&&!!x.a===!!aq&&(x.kg!=null||x.reps!=null)&&(!v||!x.v||x.v===v));if(x)return x}return null}
 function histV(n,k){for(const h of S.hist){const x=(h.sets||[]).find(y=>y.n===n&&y.k===k&&!y.a&&y.v);if(x)return x.v}return""}
 function lastNote(n){for(const h of S.hist)if(h.nt&&h.nt[n])return h.nt[n];return""}
 /* exercício feito: o já escolhido > troca planejada no histórico > série anterior de hoje > histórico */
@@ -1701,7 +1714,7 @@ function progHTML(p){const dv=doneView(p);
   if(dv){const tot=dv.cnt.reduce((a,b)=>a+b,0);
     return`<div class="ring" style="--p:100%" role="img" aria-label="Concluído"><b>✓</b></div><div class="pt"><strong>${pl(tot,"série feita","séries feitas")}</strong><span>Concluído em ${fdate(dv.h.d)}${dv.h.dur?" · "+dv.h.dur+" min":""}</span></div>`}const{s,d,t}=stat(p),pct=t?Math.round(d/t*100):0,c=curEx(p,s);
   const st=d>=t?"Treino concluído"+(s.t0&&s.t1?" · "+mins(s.t0,s.t1)+" min":""):(s.t0||d)?"Em andamento"+(s.t0?" · "+mins(s.t0,Date.now())+" min":""):"Não iniciado";
-  return`<div class="ring" style="--p:${pct}%" role="img" aria-label="${pct}% concluído"><b>${pct}%</b></div><div class="pt"><strong>${d}/${t} séries de trabalho</strong><span>${st}${c>=0&&d<t?" · próximo: "+esc(p.ex[c].n):""}</span></div>`}
+  return`<div class="ring" style="--p:${pct}%" role="img" aria-label="${pct}% concluído"><b>${pct}%</b></div><div class="pt"><strong>${d}/${t} séries de trabalho</strong><span>${st}${(()=>{if(d>=t)return"";const left=j=>(s.done[j]||0)<steps(p.ex[j]).length,o=p.ex.map((_,j)=>j),nx=o.find(j=>j!==c&&left(j));return nx!=null?" · próximo: "+esc(p.ex[nx].n):""})()}</span></div>`}
 setInterval(()=>{const p=P(S.tab);if(p&&!$("#prog").hidden&&document.visibilityState==="visible")$("#prog").innerHTML=progHTML(p)},30000);
 function panelHTML(p){const dv=doneView(p);if(dv)return doneHTML(p,dv);const{s,d,t}=stat(p),c=curEx(p,s);
   let h=`<div class="hd"><div><div class="eb">${esc(p.eyebrow)}</div><h2>${esc(p.name)}</h2></div><span class="sm">${pl(p.ex.length,"exercício","exercícios")}</span></div>`;
@@ -1767,7 +1780,7 @@ function evoData(hist,N){const now=Date.now(),w0=wkOf(now),W=Array.from({length:
   hist.forEach(h=>{first=Math.min(first,wkOf(h.d));const i=idx(h.d);if(i<0)return;
     (h.sets||[]).forEach(y=>{if(y.a)return;const g=grpOf(y.n);if(!g)return;const o=G[g];o.sets[i]++;o.days[i].add(day(h.d));
       if(y.kg!=null&&y.reps!=null)o.vol[i]+=y.kg*y.reps;
-      const r=e1(y.kg,y.reps);if(r){const x=o.ex[y.n]=o.ex[y.n]||W.map(()=>null);if(!x[i]||r>x[i].r)x[i]={r,kg:y.kg,reps:y.reps}}})});
+      const r=e1(y.kg,y.reps),key=y.n+"\u0001"+(y.v||"");if(r){const x=o.ex[key]=o.ex[key]||W.map(()=>null);if(!x[i]||r>x[i].r)x[i]={r,kg:y.kg,reps:y.reps}}})});
   const meta={};GRP.forEach(([,g])=>meta[g]={sets:0,days:0,full:0});
   ["0","1","2","3"].forEach(id=>{const s=F.short.find(p=>p.id===id),f=F.panels.find(p=>p.id===id),seen={};
     s.ex.forEach(e=>{const g=grpOf(e.n);if(!g)return;meta[g].sets+=e.w[0];if(!seen[g]){seen[g]=1;meta[g].days++}});
@@ -1805,7 +1818,7 @@ function evoHTML(){const hist=S.hist,N=8,E=evoData(hist,N),{W,G}=E;
       <span class="chips"><span class="ch ${tcls(o.trS,.1)}">Séries ${arr(o.trS,.1)} ${pct(o.trS)}</span><span class="ch ${tcls(o.trF,.1)}">Freq. ${arr(o.trF,.1)} ${pct(o.trF)}</span><span class="ch ${tcls(o.trK,.02)}">Carga ${arr(o.trK,.02)} ${pct(o.trK)}</span></span></div></summary>
       <div class="evb">${bars(o,W,N)}<div class="bl"><span>${dm(W[0])}</span><span>meta ${m.sets} (completa ${m.full})</span><span>atual</span></div>
       <table class="evt"><thead><tr><th>Semana</th><th>Séries</th><th>Dias</th><th>Volume (kg)</th></tr></thead><tbody>${W.map((w,i)=>[w,i]).reverse().map(([w,i])=>`<tr class="${i===N-1?"cur":""}"><td>${dm(w)}${i===N-1?" (atual)":""}</td><td>${o.sets[i]}</td><td>${o.days[i].size}</td><td>${Math.round(o.vol[i]).toLocaleString("pt-BR")}</td></tr>`).join("")}</tbody></table>
-      ${Object.entries(o.ex).map(([n,a])=>{const pts=a.map((x,i)=>x?`<span><i>${dm(W[i])}</i> ${x.kg}×${x.reps}</span>`:"").filter(Boolean).slice(-6);return`<p class="evx"><b>${esc(n)}</b><br>${pts.join(" ")}</p>`}).join("")||`<p class="evx">Sem cargas registradas nas últimas ${N} semanas.</p>`}
+      ${Object.entries(o.ex).map(([key,a])=>{const[nn,vv]=key.split("\u0001"),n=nn+(vv?" · "+vv:"");const pts=a.map((x,i)=>x?`<span><i>${dm(W[i])}</i> ${x.kg}×${x.reps}</span>`:"").filter(Boolean).slice(-6);return`<p class="evx"><b>${esc(n)}</b><br>${pts.join(" ")}</p>`}).join("")||`<p class="evx">Sem cargas registradas nas últimas ${N} semanas.</p>`}
       </div></details>`});
   return h}
 function evoChips(n){const g=grpOf(n);let o=g&&EV&&EV.G[g];if(!o)return"";let fk=false;
@@ -1816,19 +1829,20 @@ function doneFx(){if(reduce)return;let o=document.getElementById("dfx");if(o)o.r
   document.body.appendChild(o);setTimeout(()=>o.remove(),900)}
 function bkHTML(){const fd=t=>new Date(t).toLocaleDateString("pt-BR",{weekday:"short",day:"2-digit",month:"2-digit"});
   const last=S.hist.length?Math.max(...S.hist.map(x=>x.d)):null,ex=S.exp,dd=ex?Math.floor((new Date().setHours(0,0,0,0)-new Date(ex).setHours(0,0,0,0))/864e5):null;
-  const pend=S.hist.filter(x=>!ex||x.d>ex).length,warn=pend>0&&(!ex||dd>=7);
+  const pend=S.hist.filter(x=>!ex||x.d>ex).length,warn=saveFail||lastLen>HWARN||pend>0&&(!ex||dd>=7);
   return`<div class="card bk ${warn?"warn":pend?"":"okb"}"><div class="bkr"><span>Último treino salvo</span><b>${last?fd(last):"—"}</b></div>
   <div class="bkr"><span>Último backup exportado</span><b>${ex?fd(ex)+" · "+(dd===0?"hoje":pl(dd,"dia","dias")+" atrás"):"nunca"}</b></div>
   <p class="bkm">${!S.hist.length?"Nenhum treino para exportar ainda.":pend?`${warn?"⚠️ ":""}${pl(pend,"treino ainda não está","treinos ainda não estão")} no backup.${warn?" Exporte para não perder seus dados.":""}`:"✓ Todos os treinos estão no último backup."}</p>
-  ${pend?`<button class="go bkb" data-act="export">Exportar backup agora</button>`:""}</div>`}
+  ${saveFail||lastLen>HWARN||S.hist.length>HMAX*.9?`<p class="bkm bkf">⚠️ A memória do app está ${saveFail?"cheia: o último treino pode não ter sido gravado":"quase cheia"}. Exporte o backup e guarde o arquivo.</p>`:""}
+  ${pend||saveFail?`<button class="go bkb" data-act="export">Exportar backup agora</button>`:""}</div>`}
 function histHTML(){
   let h=`<div class="hd"><div><div class="eb">Seus treinos salvos</div><h2>Histórico</h2></div><span class="sm">${pl(S.hist.length,"treino","treinos")}</span></div>`;
   h+=bkHTML();
   if(!S.hist.length)h+=`<div class="card">Nenhum treino salvo ainda. Conclua séries e toque em “Salvar no histórico” para registrar cargas e repetições.</div>`;
-  S.hist.slice(0,60).forEach(x=>{const g={};let vol=0;(x.sets||[]).forEach(y=>{(g[y.n]=g[y.n]||[]).push(y);if(!y.a&&y.kg!=null&&y.reps!=null)vol+=y.kg*y.reps});
+  S.hist.slice(0,60).forEach((x,hi)=>{const g={};let vol=0;(x.sets||[]).forEach(y=>{(g[y.n]=g[y.n]||[]).push(y);if(!y.a&&y.kg!=null&&y.reps!=null)vol+=y.kg*y.reps});
     const nt=x.nt||{};Object.keys(nt).forEach(n=>{g[n]=g[n]||[]});
     h+=`<details class="h"><summary>${new Date(x.d).toLocaleDateString("pt-BR",{weekday:"short",day:"2-digit",month:"2-digit"})} · ${esc(x.p)}${x.dur?" · "+x.dur+" min":""}</summary><p><b>${pl(x.sets.filter(y=>!y.a).length,"série","séries")}</b> · volume ${Math.round(vol).toLocaleString("pt-BR")} kg</p>${Object.entries(g).map(([n,a])=>{let lv;const t=a.map(y=>{const pre=y.v&&y.v!==lv?`<i>${esc(y.v)}:</i> `:"";lv=y.v;return pre+`${y.a?"aq ":""}${y.kg??"—"} kg × ${y.reps??"—"}${y.rir!=null?` (RIR ${y.rir})`:""}`}).join(" · ");
-      return`<p><b>${esc(n)}</b>${t?"<br>"+t:""}${nt[n]?`<br>📝 ${esc(nt[n])}`:""}</p>`}).join("")}</details>`});
+      return`<p><b>${esc(n)}</b>${t?"<br>"+t:""}${nt[n]?`<br>📝 ${esc(nt[n])}`:""}</p>`}).join("")}<div class="act"><button class="lk del" data-act="delh" data-i="${hi}" data-d="${x.d}">Apagar este treino</button></div></details>`});
   return h+`<div class="act"><button class="lk" data-act="export">Exportar backup</button><button class="lk" data-act="import">Importar backup</button><button class="lk" data-act="clear">Apagar histórico</button></div>`}
 
 /* ---------- descanso, aviso, tela ligada ---------- */
@@ -1882,7 +1896,8 @@ document.addEventListener("click",ev=>{const b=ev.target.closest("[data-act]");i
   else if(a==="back")back(p,i);
   else if(a==="undo"){if(U){const q=P(U.p);if(q)back(q,U.i)}$("#toast").className=""}
   else if(a==="next"){audio();
-    if(b.dataset.armed!=="1"){b.dataset.armed="1";b.classList.add("armed");b.textContent="Confirmar";vibe(20);
+    const full=$("#kg")?.value!==""&&$("#rp")?.value!==""&&(!$("#rir")||$("#rir").value!=="");
+    if(!full&&b.dataset.armed!=="1"){b.dataset.armed="1";b.classList.add("armed");b.textContent="Confirmar";vibe(20);
       clearTimeout(b._t);b._t=setTimeout(()=>{b.dataset.armed="";b.classList.remove("armed");b.textContent="Concluir série"},4000);return}
     clearTimeout(b._t);doneFx();const e=p.ex[i],st=steps(e),k=s.done[i]||0;if(k>=st.length)return;
     const w=st[k].t==="w";s.t0=s.t0||Date.now()-60000;s.t1=Date.now();
@@ -1902,6 +1917,9 @@ document.addEventListener("click",ev=>{const b=ev.target.closest("[data-act]");i
     l.href=u;l.download="ficha-treino-backup.json";document.body.appendChild(l);l.click();l.remove();setTimeout(()=>URL.revokeObjectURL(u),2000);
     S.exp=Date.now();save();if(S.tab==="h")render();toast("Backup exportado")}
   else if(a==="import")$("#imp").click();
+  else if(a==="delh"){const j=+b.dataset.i,x=S.hist[j];if(!x||String(x.d)!==b.dataset.d)return;
+    if(!confirm(`Apagar o treino de ${new Date(x.d).toLocaleDateString("pt-BR",{weekday:"short",day:"2-digit",month:"2-digit"})} (${x.p})? Esta ação não pode ser desfeita.`))return;
+    S.hist.splice(j,1);save();render();toast("Treino apagado")}
   else if(a==="clear"){if(confirm("Apagar todo o histórico? Esta ação não pode ser desfeita.")){S.hist=[];save();render()}}
 });
 $("#imp").addEventListener("change",async e=>{const f=e.target.files[0];e.target.value="";if(!f)return;
