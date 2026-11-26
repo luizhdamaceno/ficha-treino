@@ -108,6 +108,42 @@ details.sg{margin:12px 0 0}
 .seg button{border:1px solid var(--line);background:var(--card);color:inherit;border-radius:12px;min-height:52px;padding:6px 10px;font-size:14px;font-weight:700;line-height:1.25}
 .seg button small{display:block;font-size:12px;font-weight:650;opacity:.75}
 .seg button[aria-pressed=true]{background:var(--gold);color:#142b45;border-color:var(--gold)}
+.evs{display:grid;grid-template-columns:1fr 1fr;gap:12px;text-align:left}
+.evs b{font-size:28px;display:block;line-height:1.1}.evs span{font-size:12px;color:var(--muted);font-weight:650}
+.ev-note{font-size:12px;color:var(--muted);margin:0 2px 12px}
+details.evo summary{display:block;list-style:none;padding:10px 0;min-height:44px;cursor:pointer}
+details.evo summary::-webkit-details-marker{display:none}
+.gn{display:block;font-weight:800;font-size:16px}.gs{display:block;font-size:12.5px;color:var(--muted);font-weight:650;margin-top:1px}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.ch{font-size:12px;font-weight:700;border:1px solid var(--line);border-radius:99px;padding:2px 8px;background:var(--soft);color:var(--muted)}
+.ch.up{color:var(--ok);border-color:var(--ok)}.ch.eq{color:var(--btn);border-color:var(--btn);background:color-mix(in srgb,var(--btn) 10%,transparent)}
+@media(prefers-color-scheme:dark){.ch.eq{color:var(--acc);border-color:var(--acc)}}.ch.dn{color:#b3261e;border-color:#b3261e}
+@media(prefers-color-scheme:dark){.ch.dn{color:#ff8a80;border-color:#ff8a80}}
+.evb{padding-bottom:6px}.bars{width:100%;height:64px;display:block}.bars rect{fill:var(--acc);opacity:.55}.bars rect.cur{opacity:1;fill:var(--gold)}.bars .mt{stroke:var(--muted);stroke-width:.5;stroke-dasharray:2 2;vector-effect:non-scaling-stroke}
+.bl{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-bottom:8px}
+.evt{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:10px}.evt th,.evt td{text-align:right;padding:5px 4px;border-bottom:1px solid var(--line)}.evt th:first-child,.evt td:first-child{text-align:left}.evt tr.cur td{font-weight:800}
+.evx{font-size:12.5px;margin:0 0 10px !important;line-height:1.7}.evx span{white-space:nowrap;margin-right:8px}.evx i{font-style:normal;color:var(--muted)}
+.go.armed{background:#b3261e;color:#fff}
+.lh{display:table;white-space:nowrap;font-size:11.5px;font-weight:800;letter-spacing:-.01em;color:var(--muted);border:1px solid var(--line);background:var(--soft);border-radius:99px;padding:1px 7px;margin:4px 0 3px}
+.lh.on{color:var(--btn);border-color:var(--btn);background:color-mix(in srgb,var(--btn) 10%,transparent)}
+@media(prefers-color-scheme:dark){.lh.on{color:var(--acc);border-color:var(--acc)}}
+.evc{margin:8px 0 2px}.evw{white-space:normal;margin:6px 0 0}.ch.gname{background:var(--navy);color:#fff;border-color:var(--navy)}
+.go.armed{animation:arm .9s ease-in-out infinite}
+@keyframes arm{0%,100%{transform:scale(1)}50%{transform:scale(1.02)}}
+#dfx{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:50}
+#dfx svg{width:120px;height:120px;animation:dpop .9s ease-out forwards}
+#dfx circle{fill:var(--ok);opacity:.95}
+#dfx path{fill:none;stroke:#fff;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:40;stroke-dashoffset:40;animation:ddraw .35s .12s ease-out forwards}
+@keyframes dpop{0%{transform:scale(.4);opacity:0}25%{transform:scale(1.08);opacity:1}45%{transform:scale(1)}75%{opacity:1}100%{transform:scale(1.15);opacity:0}}
+@keyframes ddraw{to{stroke-dashoffset:0}}
+.bk{padding:14px 16px}.bkr{display:flex;justify-content:space-between;gap:10px;font-size:14px;padding:3px 0}.bkr span{color:var(--muted);font-weight:650}
+.bkm{margin:8px 0 0;font-size:13.5px;font-weight:700}.bk.warn{border-color:#b3261e}.bk.warn .bkm{color:#b3261e}.bk.okb .bkm{color:var(--ok)}
+@media(prefers-color-scheme:dark){.bk.warn .bkm{color:#ff8a80}}
+.bkb{min-height:48px;font-size:16px;margin-top:10px}
+@media(prefers-color-scheme:dark){.ch.gname{background:var(--acc);border-color:var(--acc);color:#0d1520}}
+.fk{color:#b3261e;font-weight:700}@media(prefers-color-scheme:dark){.fk{color:#ff8a80}}
+.tab.dn{background:var(--okbg);color:var(--ok);border-color:var(--ok)}
+.tab.dn[aria-selected=true]{background:var(--ok);color:#fff;border-color:var(--ok)}
 </style>
 </head>
 <body>
@@ -320,7 +356,7 @@ const F={
           "n": "Quadríceps – Legpress (ou agachamento)",
           "o": "Quadríceps – agachamento ou leg press",
           "tag": "Treino fixo",
-          "s": "Agachamento no Smith; Leg press 45°; Agachamento hack (máquina)",
+          "s": "Agachamento no Smith; Leg press 45°; Leg press 45° unilateral; Agachamento hack (máquina)",
           "wu": [
             [
               "8–10 leve",
@@ -1030,7 +1066,7 @@ const F={
           "n": "Quadríceps – Legpress (ou agachamento)",
           "o": "Quadríceps – agachamento ou leg press",
           "tag": "Treino fixo",
-          "s": "Agachamento no Smith; Leg press 45°; Agachamento hack (máquina)",
+          "s": "Agachamento no Smith; Leg press 45°; Leg press 45° unilateral; Agachamento hack (máquina)",
           "wu": [
             [
               "8–10 leve",
@@ -1589,10 +1625,12 @@ const sig=p=>p.ex.map(e=>e.n+steps(e).length).join("|");
 
 function load(){let o;try{o=JSON.parse(localStorage.getItem(K))}catch(e){}
   if(!o||typeof o!=="object"||Array.isArray(o))o={};
-  return{v:1,mode:o.mode&&typeof o.mode==="object"&&!Array.isArray(o.mode)?o.mode:{},tab:o.tab||null,cur:o.cur&&typeof o.cur==="object"&&!Array.isArray(o.cur)?o.cur:{},hist:Array.isArray(o.hist)?o.hist:[]}}
+  return{v:1,exp:typeof o.exp==="number"?o.exp:null,mode:o.mode&&typeof o.mode==="object"&&!Array.isArray(o.mode)?o.mode:{},tab:o.tab||null,cur:o.cur&&typeof o.cur==="object"&&!Array.isArray(o.cur)?o.cur:{},hist:Array.isArray(o.hist)?o.hist:[]}}
 function save(){try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}}
 let S=load();
 function migrate(){/* nomes antigos (campo "o") -> nomes atuais */
+  /* treino B de 25/11/2026: o leg press feito foi o unilateral */
+  S.hist.forEach(h=>{if(h.d===1795651366693&&Array.isArray(h.sets))h.sets.forEach(y=>{if(y.n==="Quadríceps – Legpress (ou agachamento)"&&y.v==="Leg press 45°")y.v="Leg press 45° unilateral"})});
   F.panels.forEach(p=>{const s=S.cur[p.id];if(s&&s.t0&&S.mode[p.id]==null&&s.sig===sig(p))S.mode[p.id]="full"});
   F.panels.forEach(p=>{const s=S.cur[p.id];
     if(s&&s.sig===p.ex.map(e=>(e.o||e.n)+steps(e).length).join("|"))s.sig=sig(p)});
@@ -1606,13 +1644,15 @@ function sess(p){let s=S.cur[p.id];if(!s||s.sig!==sig(p))s=S.cur[p.id]={sig:sig(
 function stat(p){const s=sess(p);let d=0,t=0;p.ex.forEach((e,i)=>{t+=e.w[0];d+=Math.max(0,(s.done[i]||0)-e.wu.length)});return{s,d,t}}
 const curEx=(p,s)=>s.open!=null?s.open:p.ex.findIndex((e,i)=>(s.done[i]||0)<steps(e).length);
 function archive(p,s){const sets=[];
-  p.ex.forEach((e,i)=>{let k=0;steps(e).forEach((x,j)=>{if(x.t!=="w")return;k++;const l=s.log[i+":"+j];if(l&&j<(s.done[i]||0))sets.push(l.v?{n:e.n,k,v:l.v,kg:l.kg,reps:l.reps,rir:l.rir}:{n:e.n,k,kg:l.kg,reps:l.reps,rir:l.rir})})});
+  p.ex.forEach((e,i)=>{let k=0,ak=0;steps(e).forEach((x,j)=>{
+    if(x.t!=="w"){ak++;const q=s.log[i+":"+j];if(q&&j<(s.done[i]||0)&&(q.kg!=null||q.reps!=null)){const y={n:e.n,k:ak,a:1,kg:q.kg,reps:q.reps};if(q.v)y.v=q.v;sets.push(y)}return}
+    k++;const l=s.log[i+":"+j];if(l&&j<(s.done[i]||0))sets.push(l.v?{n:e.n,k,v:l.v,kg:l.kg,reps:l.reps,rir:l.rir}:{n:e.n,k,kg:l.kg,reps:l.reps,rir:l.rir})})});
   const nt={};Object.entries(s.nt||{}).forEach(([i,t])=>{t=String(t).trim();if(t&&p.ex[i])nt[p.ex[i].n]=t});
   const dur=s.t0&&s.t1?Math.max(1,Math.round((s.t1-s.t0)/60000)):null;
   if(sets.length||Object.keys(nt).length){const x={d:s.t0||Date.now(),p:p.name,sets};if(dur)x.dur=dur;if(Object.keys(nt).length)x.nt=nt;S.hist.unshift(x)}
   S.hist=S.hist.slice(0,300);delete S.cur[p.id]}
-function lastSet(n,k,v){for(const h of S.hist){const x=(h.sets||[]).find(x=>x.n===n&&x.k===k&&(!v||!x.v||x.v===v));if(x)return x}return null}
-function histV(n,k){for(const h of S.hist){const x=(h.sets||[]).find(y=>y.n===n&&y.k===k&&y.v);if(x)return x.v}return""}
+function lastSet(n,k,v,aq){for(const h of S.hist){const x=(h.sets||[]).find(x=>x.n===n&&x.k===k&&!!x.a===!!aq&&(!v||!x.v||x.v===v));if(x)return x}return null}
+function histV(n,k){for(const h of S.hist){const x=(h.sets||[]).find(y=>y.n===n&&y.k===k&&!y.a&&y.v);if(x)return x.v}return""}
 function lastNote(n){for(const h of S.hist)if(h.nt&&h.nt[n])return h.nt[n];return""}
 /* exercício feito: o já escolhido > troca planejada no histórico > série anterior de hoje > histórico */
 function defV(e,i,k,s){const l=s.log[i+":"+k];if(l&&l.v!=null)return l.v;
@@ -1626,13 +1666,22 @@ Object.keys(S.cur).forEach(id=>{const p=P(id),s=S.cur[id];
 
 /* ---------- render ---------- */
 const isRest=t=>t[0]==="r";
+let EV=null,EVD=null;
+/* fase: treinos A–D feitos desde o fim da última fase completa (E é opcional e não fecha a fase) */
+const FIX=F.panels.filter(p=>!p.optional).map(p=>p.id);
+const pidOf=name=>{for(const L of[F.panels,F.short]){const p=L.find(x=>x.name===name);if(p)return p.id}
+  const m=String(name).match(/^Treino ([A-E])\b/);return m?String("ABCDE".indexOf(m[1])):null};
+function phase(){let done=new Set(),n=0;[...S.hist].sort((a,b)=>a.d-b.d).forEach(h=>{const id=pidOf(h.p);if(id==null||!F.panels.some(p=>p.id===id))return;
+    done.add(id);if(FIX.every(x=>done.has(x))){done=new Set();n++}});return{done,n}}
 function render(){
-  if(!F.week.includes(S.tab)&&S.tab!=="h")S.tab=F.week.find(t=>!isRest(t)&&S.cur[t]?.t0)||F.week[0];
-  const tabs=[...F.week.map(t=>({t,l:isRest(t)?"Descanso":P(t).tab})),{t:"h",l:"Histórico"}];
-  $("#tabs").innerHTML=tabs.map(x=>`<button class="tab" role="tab" aria-selected="${x.t===S.tab}" data-act="tab" data-v="${x.t}">${esc(x.l)}</button>`).join("");
-  const p=!isRest(S.tab)&&S.tab!=="h"?P(S.tab):null;
+  EV=evoData(S.hist,8);
+  if(!F.week.includes(S.tab)&&S.tab!=="h"&&S.tab!=="e")S.tab=F.week.find(t=>!isRest(t)&&S.cur[t]?.t0)||F.week[0];
+  const tabs=[...F.week.map(t=>({t,l:isRest(t)?"Descanso":P(t).tab})),{t:"e",l:"Evolução"},{t:"h",l:"Histórico"}];
+  const PH=phase();
+  $("#tabs").innerHTML=tabs.map(x=>{const dn=PH.done.has(x.t);return`<button class="tab${dn?" dn":""}" role="tab" aria-selected="${x.t===S.tab}" data-act="tab" data-v="${x.t}"${dn?` aria-label="${esc(x.l)}, concluído nesta fase"`:""}>${dn?"✓ ":""}${esc(x.l)}</button>`}).join("");
+  const p=!isRest(S.tab)&&S.tab!=="h"&&S.tab!=="e"?P(S.tab):null;
   if(p){$("#prog").innerHTML=progHTML(p);$("#prog").hidden=false}else $("#prog").hidden=true;
-  $("#main").innerHTML=p?panelHTML(p):S.tab==="h"?histHTML():restHTML();
+  $("#main").innerHTML=p?panelHTML(p):S.tab==="h"?histHTML():S.tab==="e"?evoHTML():restHTML();
   $("#tabs [aria-selected=true]")?.scrollIntoView({inline:"center",block:"nearest"});
 }
 const mins=(a,b)=>Math.max(1,Math.round((b-a)/60000));
@@ -1651,19 +1700,20 @@ function panelHTML(p){const{s,d,t}=stat(p),c=curEx(p,s);
   return h}
 function openHTML(e,i,s){const st=steps(e),k=s.done[i]||0,fin=k>=st.length,x=st[k],nw=e.wu.length;
   let h=`<article class="card cur"><div class="t2"><span class="num">${i+1}</span><h3 class="nm">${esc(e.n)}</h3>${e.tag==="Treino fixo"?"":`<span class="tag">${esc(e.tag)}</span>`}</div>
-  <div class="sm" style="margin-top:8px;white-space:normal">${nw?pl(nw,"aquecimento","aquecimentos"):"Sem aquecimento"} · ${e.w[0]} × ${esc(e.w[1])} de trabalho</div>
+  
   <div class="dots" aria-hidden="true">${st.map((y,j)=>`<span class="dot ${y.t==="w"?"w":""} ${j<k?"ok":""} ${j===k?"on":""}">${y.t==="a"?"A"+(j+1):"T"+(j-nw+1)}</span>`).join("")}</div>`;
+  h+=evoChips(e.n);
   const ln=lastNote(e.n);if(ln)h+=`<p class="ntl">📝 Última nota: ${esc(ln)}</p>`;
   if(!fin){const w=x.t==="w",n=w?k-nw+1:k+1,tot=w?e.w[0]:nw,prev=s.log[i+":"+(k-1)],
-      vv=defV(e,i,k,s),v={...(s.log[i+":"+k]||{})},ls=w?lastSet(e.n,n,vv):null;let auto=null;
+      vv=defV(e,i,k,s),v={...(s.log[i+":"+k]||{})},ls=lastSet(e.n,n,vv,!w);let auto=null;
     if(w&&v.kg==null){if(prev&&k>nw&&prev.kg!=null&&(prev.v||"")===vv)auto=prev.kg;else if(ls)auto=ls.kg;v.kg=auto}
     h+=`<div class="step ${w?"w":""}"><h4 aria-live="polite">${w?"Série de trabalho":"Aquecimento"} ${n} de ${tot}</h4>
-    <p>Meta: ${esc(x.reps)} reps · descanso depois: ${esc(x.rest)}${ls?` · última vez: ${ls.kg??"—"} kg × ${ls.reps??"—"}`:""}</p>
+    <p>Meta: ${esc(x.reps)} reps</p>
     <div class="in"><div><label for="op">Exercício feito</label><select id="op" data-ex="${i}" data-k="${k}"><option value="">Escolha a opção…</option>${opts(e).map(o=>`<option ${o===vv?"selected":""}>${esc(o)}</option>`).join("")}</select></div></div>
     <div class="in" style="grid-template-columns:repeat(${w?3:2},1fr)">
-      <div><label for="kg">Carga (kg)</label><input id="kg" type="number" inputmode="decimal" step="0.5" min="0" value="${v.kg??""}" data-auto="${auto??""}"></div>
-      <div><label for="rp">Reps feitas</label><input id="rp" type="number" inputmode="numeric" min="0" value="${v.reps??""}"></div>
-      ${w?`<div><label for="rir">RIR</label><select id="rir"><option value="">—</option>${[0,1,2,3].map(r=>`<option ${v.rir===r?"selected":""}>${r}</option>`).join("")}</select></div>`:""}
+      <div><label for="kg">Carga (kg)<small class="lh ${ls&&ls.kg!=null?"on":""}">Última ${ls&&ls.kg!=null?ls.kg+" kg":"—"}</small></label><input id="kg" type="number" inputmode="decimal" step="0.5" min="0" value="${v.kg??""}" data-auto="${auto??""}"></div>
+      <div><label for="rp">Reps feitas<small class="lh ${ls&&ls.reps!=null?"on":""}">Última ${ls&&ls.reps!=null?ls.reps+" reps":"—"}</small></label><input id="rp" type="number" inputmode="numeric" min="0" value="${v.reps??""}"></div>
+      ${w?`<div><label for="rir">RIR<small class="lh" style="visibility:hidden">—</small></label><select id="rir"><option value="">—</option>${[0,1,2,3].map(r=>`<option ${v.rir===r?"selected":""}>${r}</option>`).join("")}</select></div>`:""}
     </div><button class="go" data-act="next" data-ex="${i}">Concluir série</button></div>`}
   else h+=`<div class="fin">✓ Exercício concluído</div>`;
   h+=`<div class="act"><button class="lk" data-act="back" data-ex="${i}" ${k?"":"disabled"}>← Voltar uma série</button></div>`;
@@ -1683,12 +1733,92 @@ function restHTML(){const x=F.rest.ex;
   <div class="ban"><div><b>Descanso também é treino</b><br>É na recuperação que o músculo se adapta.</div></div>
   <article class="card"><div class="t2"><span class="num">1</span><h3 class="nm">${esc(x.n)}</h3><span class="tag">${esc(x.tag)}</span></div>
   <div class="met" style="grid-template-columns:repeat(${x.m.length},1fr)">${x.m.map(([a,b])=>`<div><span>${esc(a)}</span><strong>${esc(b)}</strong></div>`).join("")}</div></article>`}
+/* ---------- evolução por grupo ---------- */
+const GRP=[["Tríceps","Tríceps"],["Bíceps","Bíceps"],["Deltoide lateral","Delt. lateral"],["Posterior de coxa","Posteriores"],["Panturrilha","Panturrilhas"],["Abdômen","Abdômen"],["Trapézio","Trapézio"],["Costas","Costas"],["Peitoral","Peitoral"],["Deltoide posterior","Delt. posterior"],["Deltoide anterior","Delt. anterior"],["Quadríceps","Quadríceps"]];
+const grpOf=n=>{const g=GRP.find(([k])=>String(n).startsWith(k));return g?g[1]:null};
+const wkOf=t=>{const d=new Date(t);d.setHours(0,0,0,0);d.setDate(d.getDate()-((d.getDay()+6)%7));return d.getTime()};
+const addW=(t,n)=>{const d=new Date(t);d.setDate(d.getDate()+7*n);return d.getTime()};
+const e1=(kg,r)=>kg>0&&r>0&&r<=20?kg*(1+r/30):null;
+const avg=a=>a.length?a.reduce((x,y)=>x+y,0)/a.length:0;
+let EVO_DEMO=false;
+function demoHist(){let sd=7;const rnd=()=>(sd=(sd*9301+49297)%233280)/233280;const out=[],now=Date.now(),w0=wkOf(now);
+  const base={};
+  for(let w=8;w>=1;w--){F.short.filter(p=>["0","1","2","3"].includes(p.id)).forEach((p,pi)=>{
+    if(w===3&&pi===3)return;                          /* semana com treino faltando */
+    const d=addW(w0,-w)+pi*864e5+36e5*8,sets=[];
+    p.ex.forEach(e=>{const g=grpOf(e.n);let n=e.w[0];if(g==="Peitoral"&&w<=2)n=Math.max(1,n-1);
+      base[e.n]=base[e.n]||20+Math.round(rnd()*40);const kg=base[e.n]+(g==="Costas"?(9-w)*.5:0);
+      for(let k=1;k<=n;k++)sets.push({n:e.n,k,kg:Math.round(kg*(1+(k-1)*.03)*2)/2,reps:8+Math.round(rnd()*4),rir:1+Math.round(rnd())})});
+    out.push({d,p:p.name,sets,dur:55+Math.round(rnd()*10)})})}
+  return out.sort((a,b)=>b.d-a.d)}
+function evoData(hist,N){const now=Date.now(),w0=wkOf(now),W=Array.from({length:N},(_,i)=>addW(w0,i-N+1)),idx=t=>W.indexOf(wkOf(t));
+  const G={};GRP.forEach(([,g])=>G[g]={sets:W.map(()=>0),days:W.map(()=>new Set()),vol:W.map(()=>0),ex:{}});
+  let first=Infinity;
+  hist.forEach(h=>{first=Math.min(first,wkOf(h.d));const i=idx(h.d);if(i<0)return;
+    (h.sets||[]).forEach(y=>{if(y.a)return;const g=grpOf(y.n);if(!g)return;const o=G[g];o.sets[i]++;o.days[i].add(day(h.d));
+      if(y.kg!=null&&y.reps!=null)o.vol[i]+=y.kg*y.reps;
+      const r=e1(y.kg,y.reps);if(r){const x=o.ex[y.n]=o.ex[y.n]||W.map(()=>null);if(!x[i]||r>x[i].r)x[i]={r,kg:y.kg,reps:y.reps}}})});
+  const meta={};GRP.forEach(([,g])=>meta[g]={sets:0,days:0,full:0});
+  ["0","1","2","3"].forEach(id=>{const s=F.short.find(p=>p.id===id),f=F.panels.find(p=>p.id===id),seen={};
+    s.ex.forEach(e=>{const g=grpOf(e.n);if(!g)return;meta[g].sets+=e.w[0];if(!seen[g]){seen[g]=1;meta[g].days++}});
+    f.ex.forEach(e=>{const g=grpOf(e.n);if(g)meta[g].full+=e.w[0]})});
+  /* tendências: última semana completa x média das 3 anteriores (só semanas já dentro do histórico) */
+  const L=N-2,base=[];for(let i=Math.max(0,L-3);i<L;i++)if(W[i]>=first)base.push(i);
+  const hasTr=W[L]>=first&&base.length>0;
+  GRP.forEach(([,g])=>{const o=G[g];o.meta=meta[g];o.nowSets=o.sets[N-1];o.nowDays=o.days[N-1].size;
+    o.trS=hasTr?(()=>{const b=avg(base.map(i=>o.sets[i])),l=o.sets[L];return b?l/b-1:(l?null:0)})():undefined;
+    o.trF=hasTr?(()=>{const b=avg(base.map(i=>o.days[i].size)),l=o.days[L].size;return b?l/b-1:(l?null:0)})():undefined;
+    const ch=[];Object.values(o.ex).forEach(a=>{let li=-1;for(let i=N-1;i>=0;i--)if(a[i]){li=i;break}
+      if(li<0)return;const pr=[];for(let i=li-1;i>=Math.max(0,li-3);i--)if(a[i])pr.push(a[i].r);if(pr.length)ch.push(a[li].r/avg(pr)-1)});
+    o.trK=ch.length?avg(ch):undefined});
+  return{W,G,N,L,first,hasTr}}
+const pct=v=>{if(v===undefined)return"—";if(v===null)return"novo";const r=Math.round(v*100);return(r>0?"+":r<0?"−":"")+Math.abs(r)+"%"};
+/* a cor segue o número mostrado: −2% arredondado já conta como queda */
+const rp=v=>Math.round(v*100),rt=t=>Math.round(t*100);
+/* qualquer variação conta: + verde, − vermelho, 0% azul */
+const arr=(v)=>v===undefined||v===null?"":rp(v)>0?"↑":rp(v)<0?"↓":"→";
+const tcls=(v)=>v===undefined||v===null?"":rp(v)>0?"up":rp(v)<0?"dn":"eq";
+const dm=t=>new Date(t).toLocaleDateString("pt-BR",{day:"2-digit",month:"2-digit"});
+function bars(o,W,N){const mx=Math.max(o.meta.sets,...o.sets,1),bw=100/N;
+  return`<svg viewBox="0 0 100 34" preserveAspectRatio="none" class="bars" role="img" aria-label="Séries por semana">`+
+  o.sets.map((v,i)=>{const h=v/mx*28;return`<rect x="${i*bw+bw*.15}" y="${30-h}" width="${bw*.7}" height="${Math.max(h,v?.6:.25)}" class="${i===N-1?"cur":""}"/>`}).join("")+
+  `<line x1="0" x2="100" y1="${30-o.meta.sets/mx*28}" y2="${30-o.meta.sets/mx*28}" class="mt"/></svg>`}
+function evoHTML(){const hist=EVO_DEMO?demoHist():S.hist,N=8,E=evoData(hist,N),{W,G}=E;
+  const weeksWith=new Set(hist.map(h=>wkOf(h.d))).size;
+  let h=`<div class="hd"><div><div class="eb">${EVO_DEMO?"Exemplo com dados fictícios":"Volume, frequência e carga"}</div><h2>Evolução</h2></div><span class="sm">${N} semanas</span></div>`;
+  if(EVO_DEMO)h+=`<div class="card" style="border-color:#b3261e"><b>Exemplo fictício.</b> Nada aqui foi salvo no seu histórico.<div class="act"><button class="lk" data-act="demo">← Voltar aos meus dados</button></div></div>`;
+  else if(weeksWith<3)h+=`<div class="card">Você tem ${pl(weeksWith,"semana","semanas")} de treino salvo${weeksWith===1?"":"s"}. As setas de tendência aparecem a partir da 2ª semana completa.<div class="act"><button class="lk" data-act="demo">Ver exemplo com dados fictícios</button></div></div>`;
+  const totNow=GRP.reduce((a,[,g])=>a+G[g].nowSets,0),totMeta=GRP.reduce((a,[,g])=>a+G[g].meta.sets,0);
+  h+=`<div class="card evs"><div><b>${totNow}</b><span>séries na semana atual<br>(meta 4 dias · 60 min: ${totMeta})</span></div><div><b>${GRP.filter(([,g])=>E.hasTr&&G[g].trS!==undefined&&G[g].trS!==null&&rp(G[g].trS)<0).length}</b><span>grupos com séries em queda</span></div></div>`;
+  h+=`<p class="ev-note">Semana de segunda a domingo. A semana atual é parcial e fica fora das setas: compara-se a última semana completa com a média das 3 anteriores. Verde = subiu, vermelho = caiu, azul = igual. Carga = melhor série estimada (kg × reps) de cada exercício.</p>`;
+  GRP.forEach(([,g])=>{const o=G[g],m=o.meta;
+    h+=`<details class="evo"><summary><div class="sw"><span class="gn">${esc(g)}</span><span class="gs">${o.nowSets}/${m.sets} séries · ${o.nowDays}/${m.days} ${m.days===1?"dia":"dias"} esta semana</span>
+      <span class="chips"><span class="ch ${tcls(o.trS,.1)}">Séries ${arr(o.trS,.1)} ${pct(o.trS)}</span><span class="ch ${tcls(o.trF,.1)}">Freq. ${arr(o.trF,.1)} ${pct(o.trF)}</span><span class="ch ${tcls(o.trK,.02)}">Carga ${arr(o.trK,.02)} ${pct(o.trK)}</span></span></div></summary>
+      <div class="evb">${bars(o,W,N)}<div class="bl"><span>${dm(W[0])}</span><span>meta ${m.sets} (completa ${m.full})</span><span>atual</span></div>
+      <table class="evt"><thead><tr><th>Semana</th><th>Séries</th><th>Dias</th><th>Volume (kg)</th></tr></thead><tbody>${W.map((w,i)=>[w,i]).reverse().map(([w,i])=>`<tr class="${i===N-1?"cur":""}"><td>${dm(w)}${i===N-1?" (atual)":""}</td><td>${o.sets[i]}</td><td>${o.days[i].size}</td><td>${Math.round(o.vol[i]).toLocaleString("pt-BR")}</td></tr>`).join("")}</tbody></table>
+      ${Object.entries(o.ex).map(([n,a])=>{const pts=a.map((x,i)=>x?`<span><i>${dm(W[i])}</i> ${x.kg}×${x.reps}</span>`:"").filter(Boolean).slice(-6);return`<p class="evx"><b>${esc(n)}</b><br>${pts.join(" ")}</p>`}).join("")||`<p class="evx">Sem cargas registradas nas últimas ${N} semanas.</p>`}
+      </div></details>`});
+  return h}
+function evoChips(n){const g=grpOf(n);let o=g&&EV&&EV.G[g];if(!o)return"";let fk=false;
+  return`<div class="chips evc" aria-label="Evolução de ${esc(g)}"><span class="ch gname">${esc(g)}</span><span class="ch ${tcls(o.trS,.1)}">Séries ${arr(o.trS,.1)} ${pct(o.trS)}</span><span class="ch ${tcls(o.trF,.1)}">Freq. ${arr(o.trF,.1)} ${pct(o.trF)}</span><span class="ch ${tcls(o.trK,.02)}">Carga ${arr(o.trK,.02)} ${pct(o.trK)}</span></div>`}
+function doneFx(){if(reduce)return;let o=document.getElementById("dfx");if(o)o.remove();
+  o=document.createElement("div");o.id="dfx";o.setAttribute("aria-hidden","true");
+  o.innerHTML='<svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="24"/><path d="M15 27l7 7 15-15"/></svg>';
+  document.body.appendChild(o);setTimeout(()=>o.remove(),900)}
+function bkHTML(){const fd=t=>new Date(t).toLocaleDateString("pt-BR",{weekday:"short",day:"2-digit",month:"2-digit"});
+  const last=S.hist.length?Math.max(...S.hist.map(x=>x.d)):null,ex=S.exp,dd=ex?Math.floor((new Date().setHours(0,0,0,0)-new Date(ex).setHours(0,0,0,0))/864e5):null;
+  const pend=S.hist.filter(x=>!ex||x.d>ex).length,warn=pend>0&&(!ex||dd>=7);
+  return`<div class="card bk ${warn?"warn":pend?"":"okb"}"><div class="bkr"><span>Último treino salvo</span><b>${last?fd(last):"—"}</b></div>
+  <div class="bkr"><span>Último backup exportado</span><b>${ex?fd(ex)+" · "+(dd===0?"hoje":pl(dd,"dia","dias")+" atrás"):"nunca"}</b></div>
+  <p class="bkm">${!S.hist.length?"Nenhum treino para exportar ainda.":pend?`${warn?"⚠️ ":""}${pl(pend,"treino ainda não está","treinos ainda não estão")} no backup.${warn?" Exporte para não perder seus dados.":""}`:"✓ Todos os treinos estão no último backup."}</p>
+  ${pend?`<button class="go bkb" data-act="export">Exportar backup agora</button>`:""}</div>`}
 function histHTML(){
   let h=`<div class="hd"><div><div class="eb">Seus treinos salvos</div><h2>Histórico</h2></div><span class="sm">${pl(S.hist.length,"treino","treinos")}</span></div>`;
+  h+=bkHTML();
   if(!S.hist.length)h+=`<div class="card">Nenhum treino salvo ainda. Conclua séries e toque em “Salvar no histórico” para registrar cargas e repetições.</div>`;
-  S.hist.slice(0,60).forEach(x=>{const g={};let vol=0;(x.sets||[]).forEach(y=>{(g[y.n]=g[y.n]||[]).push(y);if(y.kg!=null&&y.reps!=null)vol+=y.kg*y.reps});
+  S.hist.slice(0,60).forEach(x=>{const g={};let vol=0;(x.sets||[]).forEach(y=>{(g[y.n]=g[y.n]||[]).push(y);if(!y.a&&y.kg!=null&&y.reps!=null)vol+=y.kg*y.reps});
     const nt=x.nt||{};Object.keys(nt).forEach(n=>{g[n]=g[n]||[]});
-    h+=`<details class="h"><summary>${new Date(x.d).toLocaleDateString("pt-BR",{weekday:"short",day:"2-digit",month:"2-digit"})} · ${esc(x.p)}${x.dur?" · "+x.dur+" min":""}</summary><p><b>${pl(x.sets.length,"série","séries")}</b> · volume ${Math.round(vol).toLocaleString("pt-BR")} kg</p>${Object.entries(g).map(([n,a])=>{let lv;const t=a.map(y=>{const pre=y.v&&y.v!==lv?`<i>${esc(y.v)}:</i> `:"";lv=y.v;return pre+`${y.kg??"—"} kg × ${y.reps??"—"}${y.rir!=null?` (RIR ${y.rir})`:""}`}).join(" · ");
+    h+=`<details class="h"><summary>${new Date(x.d).toLocaleDateString("pt-BR",{weekday:"short",day:"2-digit",month:"2-digit"})} · ${esc(x.p)}${x.dur?" · "+x.dur+" min":""}</summary><p><b>${pl(x.sets.filter(y=>!y.a).length,"série","séries")}</b> · volume ${Math.round(vol).toLocaleString("pt-BR")} kg</p>${Object.entries(g).map(([n,a])=>{let lv;const t=a.map(y=>{const pre=y.v&&y.v!==lv?`<i>${esc(y.v)}:</i> `:"";lv=y.v;return pre+`${y.a?"aq ":""}${y.kg??"—"} kg × ${y.reps??"—"}${y.rir!=null?` (RIR ${y.rir})`:""}`}).join(" · ");
       return`<p><b>${esc(n)}</b>${t?"<br>"+t:""}${nt[n]?`<br>📝 ${esc(nt[n])}`:""}</p>`}).join("")}</details>`});
   return h+`<div class="act"><button class="lk" data-act="export">Exportar backup</button><button class="lk" data-act="import">Importar backup</button><button class="lk" data-act="clear">Apagar histórico</button></div>`}
 
@@ -1712,13 +1842,17 @@ function back(p,i){const s=sess(p),k=s.done[i]||0;if(k>0){s.done[i]=k-1;s.open=i
 document.addEventListener("click",ev=>{const b=ev.target.closest("[data-act]");if(!b)return;
   const a=b.dataset.act,i=+b.dataset.ex,p=P(S.tab),s=p&&sess(p);
   if(a==="tab"){S.tab=b.dataset.v;save();render();scrollTo(0,0)}
+  else if(a==="demo"){EVO_DEMO=!EVO_DEMO;render();scrollTo(0,0)}
   else if(a==="mode"){const m=b.dataset.m;if(verOf(p.id)===m)return;
     if((s.t0||Object.keys(s.done).length)&&!confirm("Trocar de versão reinicia o treino de hoje. Continuar?"))return;
     delete S.cur[p.id];S.mode[p.id]=m;stopRest();save();render();scrollTo(0,0)}
   else if(a==="open"){s.open=i;render();focusCur()}
   else if(a==="back")back(p,i);
   else if(a==="undo"){if(U){const q=P(U.p);if(q)back(q,U.i)}$("#toast").className=""}
-  else if(a==="next"){audio();const e=p.ex[i],st=steps(e),k=s.done[i]||0;if(k>=st.length)return;
+  else if(a==="next"){audio();
+    if(b.dataset.armed!=="1"){b.dataset.armed="1";b.classList.add("armed");b.textContent="Confirmar";vibe(20);
+      clearTimeout(b._t);b._t=setTimeout(()=>{b.dataset.armed="";b.classList.remove("armed");b.textContent="Concluir série"},4000);return}
+    clearTimeout(b._t);doneFx();const e=p.ex[i],st=steps(e),k=s.done[i]||0;if(k>=st.length)return;
     const w=st[k].t==="w";s.t0=s.t0||Date.now()-60000;s.t1=Date.now();
     s.log[i+":"+k]={kg:num($("#kg").value),reps:num($("#rp").value),rir:w?num($("#rir").value):null,v:$("#op")?.value||null};
     s.done[i]=k+1;s.open=k+1<st.length?i:null;
@@ -1730,10 +1864,11 @@ document.addEventListener("click",ev=>{const b=ev.target.closest("[data-act]");i
   else if(a==="plus"&&T){T.end+=15000;T.fin=false;$("#rest").className="on";$("#rl").textContent="Descanso";tick()}
   else if(a==="skip")stopRest();
   else if(a==="finish"){const{d,t}=stat(p);if(d<t&&!confirm("Salvar o treino como está e encerrar?"))return;
-    archive(p,s);stopRest();save();render();scrollTo(0,0);toast("Treino salvo no histórico")}
+    const ph0=phase().n;archive(p,s);stopRest();save();render();scrollTo(0,0);toast(phase().n>ph0?"Fase completa! Os treinos recomeçam do zero.":"Treino salvo no histórico")}
   else if(a==="reset"){if(confirm("Reiniciar este treino? O progresso de hoje será apagado.")){delete S.cur[p.id];stopRest();save();render()}}
   else if(a==="export"){const u=URL.createObjectURL(new Blob([JSON.stringify({hist:S.hist},null,1)],{type:"application/json"})),l=document.createElement("a");
-    l.href=u;l.download="ficha-treino-backup.json";document.body.appendChild(l);l.click();l.remove();setTimeout(()=>URL.revokeObjectURL(u),2000)}
+    l.href=u;l.download="ficha-treino-backup.json";document.body.appendChild(l);l.click();l.remove();setTimeout(()=>URL.revokeObjectURL(u),2000);
+    S.exp=Date.now();save();if(S.tab==="h")render();toast("Backup exportado")}
   else if(a==="import")$("#imp").click();
   else if(a==="clear"){if(confirm("Apagar todo o histórico? Esta ação não pode ser desfeita.")){S.hist=[];save();render()}}
 });
