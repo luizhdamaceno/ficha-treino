@@ -198,6 +198,13 @@ details.evo.fzg{border:1.5px solid #b3261e}
 details.fz{display:block;padding:7px 11px;margin:8px 0 2px}details.fz summary{display:flex;align-items:center;gap:9px;list-style:none;cursor:pointer;min-height:28px}details.fz summary::-webkit-details-marker{display:none}
 details.fz .fzi{width:24px;height:24px}details.fz .fzi svg{width:13px;height:13px}details.fz b{font-size:12.5px}
 details.fz .fzt{display:block;font-size:12.5px;color:var(--muted);margin:6px 0 2px 33px}
+.med .mv{color:var(--ink,inherit);font-size:15px}.ch.neu{color:var(--acc);border-color:var(--acc)}
+.mspk polyline{stroke:var(--acc)}.mspk circle{fill:var(--acc)}
+.mvol{font-size:12.5px;color:var(--muted);margin:6px 0 8px;line-height:1.5}.mt2{margin-top:6px}
+.c-up{color:var(--ok)}.c-dn{color:#b3261e}@media(prefers-color-scheme:dark){.c-dn{color:#ff8a80}}
+.medf{padding:14px 16px}.medf .mt{white-space:normal;margin:4px 0 8px}
+.per{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:6px 0;border-bottom:1px solid var(--line);font-size:14px;font-weight:650}.per small{color:var(--muted);font-weight:600}
+.pein{width:120px;height:40px;text-align:center;font:inherit;font-weight:800;border:1px solid var(--line);border-radius:10px;background:var(--soft);color:inherit}
 </style>
 </head>
 <body>
@@ -1698,7 +1705,7 @@ function unpackH(z){if(!z||!Array.isArray(z.H))return[];const N=z.N||[],V=z.V||[
 function load(){let o;try{o=JSON.parse(localStorage.getItem(K))}catch(e){}
   if(o&&o.hz&&!Array.isArray(o.hist))o.hist=unpackH(o.hz);
   if(!o||typeof o!=="object"||Array.isArray(o))o={};
-  return{v:1,exp:typeof o.exp==="number"?o.exp:null,mode:o.mode&&typeof o.mode==="object"&&!Array.isArray(o.mode)?o.mode:{},plan:o.plan&&typeof o.plan==="object"&&!Array.isArray(o.plan)?o.plan:{},tab:o.tab||null,cur:o.cur&&typeof o.cur==="object"&&!Array.isArray(o.cur)?o.cur:{},hist:Array.isArray(o.hist)?o.hist:[]}}
+  return{v:1,med:Array.isArray(o.med)?o.med.filter(m=>m&&typeof m.d==="number"):[],exp:typeof o.exp==="number"?o.exp:null,mode:o.mode&&typeof o.mode==="object"&&!Array.isArray(o.mode)?o.mode:{},plan:o.plan&&typeof o.plan==="object"&&!Array.isArray(o.plan)?o.plan:{},tab:o.tab||null,cur:o.cur&&typeof o.cur==="object"&&!Array.isArray(o.cur)?o.cur:{},hist:Array.isArray(o.hist)?o.hist:[]}}
 let hzC=null,hzK="";
 function save(){const{hist,...rest}=S,key=hist.length+"|"+(hist[0]?.d||0)+"|"+histRev;
   if(key!==hzK||!hzC){hzC=JSON.stringify(packH(hist));hzK=key}
@@ -1772,13 +1779,13 @@ function phase(){let done=new Set(),n=0,last={};[...S.hist].sort((a,b)=>a.d-b.d)
     done.add(id);last[id]=h;if(FIX.every(x=>done.has(x))){done=new Set();last={};n++}});return{done,n,last}}
 function render(){
   EV=evoData(S.hist,8);FG=fatigue();
-  if(!F.week.includes(S.tab)&&S.tab!=="h"&&S.tab!=="e")S.tab=F.week.find(t=>!isRest(t)&&S.cur[t]?.t0)||F.week[0];
-  const tabs=[...F.week.map(t=>({t,l:isRest(t)?"Descanso":P(t).tab})),{t:"e",l:"Evolução"},{t:"h",l:"Histórico"}];
+  if(!F.week.includes(S.tab)&&S.tab!=="h"&&S.tab!=="e"&&S.tab!=="m")S.tab=F.week.find(t=>!isRest(t)&&S.cur[t]?.t0)||F.week[0];
+  const tabs=[...F.week.map(t=>({t,l:isRest(t)?"Descanso":P(t).tab})),{t:"e",l:"Evolução"},{t:"m",l:"Medidas"},{t:"h",l:"Histórico"}];
   const PH=phase();
   $("#tabs").innerHTML=tabs.map(x=>{const dn=PH.done.has(x.t);return`<button class="tab${dn?" dn":""}" role="tab" aria-selected="${x.t===S.tab}" data-act="tab" data-v="${x.t}"${dn?` aria-label="${esc(x.l)}, concluído nesta fase"`:""}>${dn?"✓ ":""}${esc(x.l)}</button>`}).join("");
-  const p=!isRest(S.tab)&&S.tab!=="h"&&S.tab!=="e"?P(S.tab):null;
+  const p=!isRest(S.tab)&&S.tab!=="h"&&S.tab!=="e"&&S.tab!=="m"?P(S.tab):null;
   if(p){$("#prog").innerHTML=progHTML(p);$("#prog").hidden=false}else $("#prog").hidden=true;
-  $("#main").innerHTML=p?panelHTML(p):S.tab==="h"?histHTML():S.tab==="e"?evoHTML():restHTML();
+  $("#main").innerHTML=p?panelHTML(p):S.tab==="h"?histHTML():S.tab==="e"?evoHTML():S.tab==="m"?medHTML():restHTML();
   $("#tabs [aria-selected=true]")?.scrollIntoView({inline:"center",block:"nearest"});
 }
 const mins=(a,b)=>Math.max(1,Math.round((b-a)/60000));
@@ -1960,6 +1967,41 @@ function histEdHTML(x){let h=`<details class="h" open><summary>${fdate(x.d)} · 
   x.sets.forEach((y,si)=>{if(y.n!==ln){h+=`<p class="heh"><b>${esc(y.n)}</b>${y.v?` · <i>${esc(y.v)}</i>`:""}</p>`;ln=y.n}
     h+=`<div class="her"><span>${y.a?"Aq "+y.k:"Série "+y.k}</span><label>kg<input data-si="${si}" data-f="kg" type="number" inputmode="decimal" step="0.5" min="0" value="${y.kg??""}"></label><label>reps<input data-si="${si}" data-f="reps" type="number" inputmode="numeric" min="0" value="${y.reps??""}"></label>${y.a?"<span></span>":`<label>RIR<select data-si="${si}" data-f="rir"><option value="">—</option>${[0,1,2,3].map(r=>`<option ${y.rir===r?"selected":""}>${r}</option>`).join("")}</select></label>`}</div>`});
   return h+`<button class="go" data-act="hsave" data-d="${x.d}">Salvar correções</button><div class="act"><button class="lk" data-act="hcancel">Cancelar</button></div></details>`}
+
+/* ---------- medidas corporais ---------- */
+/* up: true = aumentar é evolução (músculo); false = diminuir é evolução (cintura); null = neutro (peso) */
+const MEDS=[{k:"peso",l:"Peso",u:"kg",up:null,g:[]},{k:"peit",l:"Peitoral",u:"cm",up:true,g:["Peitoral","Costas"]},{k:"omb",l:"Ombros",u:"cm",up:true,g:["Delt. lateral","Delt. anterior","Delt. posterior","Trapézio"]},
+  {k:"braco",l:"Braço (contraído)",u:"cm",up:true,g:["Bíceps","Tríceps"]},{k:"cint",l:"Cintura",u:"cm",up:false,g:["Abdômen"]},{k:"coxa",l:"Coxa",u:"cm",up:true,g:["Quadríceps","Posteriores"]},{k:"pant",l:"Panturrilha",u:"cm",up:true,g:["Panturrilhas"]}];
+let MEDF=false;
+const nf=v=>(Math.round(v*10)/10).toLocaleString("pt-BR");
+/* séries de trabalho por semana dos grupos, média das 4 semanas antes da data */
+function setsPerWeek(groups,until){if(!groups.length)return null;const from=until-28*864e5;let n=0;
+  S.hist.forEach(h=>{if(h.d<=from||h.d>until)return;(h.sets||[]).forEach(y=>{if(!y.a&&groups.includes(grpOf(y.n)))n++})});return n/4}
+function medSpark(pts,good){if(pts.length<2)return"";const vs=pts.map(p=>p.v),mn=Math.min(...vs),mx=Math.max(...vs),rg=mx-mn||1,t0=pts[0].d,t1=pts[pts.length-1].d,
+  X=d=>8+(d-t0)/Math.max(1,t1-t0)*284,Y=v=>38-(v-mn)/rg*30;
+  return`<svg class="spk mspk ${good}" viewBox="0 0 300 46" aria-hidden="true"><polyline points="${pts.map(p=>X(p.d).toFixed(1)+","+Y(p.v).toFixed(1)).join(" ")}"/>${pts.map(p=>`<circle cx="${X(p.d).toFixed(1)}" cy="${Y(p.v).toFixed(1)}" r="3.5"/>`).join("")}</svg>`}
+function medHTML(){const M=(S.med||[]).slice().sort((a,b)=>a.d-b.d),last=M[M.length-1],dd=last?Math.floor((Date.now()-last.d)/864e5):null;
+  let h=`<div class="hd"><div><div class="eb">Evolução ou involução</div><h2>Medidas</h2></div><span class="sm">${pl(M.length,"medição","medições")}</span></div>`;
+  h+=`<div class="card bk ${!last||dd>=30?"warn":""}"><div class="bkr"><span>Última medição</span><b>${last?fdate(last.d)+" · "+(dd===0?"hoje":pl(dd,"dia","dias")+" atrás"):"nenhuma"}</b></div>
+    <p class="bkm">${!last?"Registre a primeira medição para começar a acompanhar.":dd>=30?"⏰ Já passou um mês: hora de medir de novo.":"Próxima medição sugerida em "+pl(30-dd,"dia","dias")+"."}</p>
+    ${MEDF?"":`<button class="go bkb" data-act="mednew">+ Nova medição</button>`}</div>`;
+  if(MEDF){const pv=last||{};h+=`<div class="card medf"><h3 class="nm">Nova medição</h3><p class="sm mt">Meça pela manhã, em jejum, sempre no mesmo ponto e com a fita sem apertar. O braço é medido contraído; as demais medidas, relaxadas. Deixe em branco o que não mediu.</p>
+    <div class="per"><span>Data</span><input id="md-d" class="pein" type="date" value="${new Date(Date.now()-new Date().getTimezoneOffset()*6e4).toISOString().slice(0,10)}"></div>
+    ${MEDS.map(m=>`<div class="per"><span>${m.l} <small>(${m.u})</small></span><input id="md-${m.k}" class="pein" type="number" inputmode="decimal" step="0.1" min="0" placeholder="${pv[m.k]!=null?nf(pv[m.k]):""}"></div>`).join("")}
+    <button class="go" data-act="medsave">Salvar medição</button><div class="act"><button class="lk" data-act="medcancel">Cancelar</button></div></div>`}
+  if(!M.length)return h;
+  MEDS.forEach(m=>{const pts=M.filter(x=>x[m.k]!=null).map(x=>({d:x.d,v:x[m.k]}));if(!pts.length)return;
+    const a=pts[pts.length-1],b=pts[pts.length-2],f=pts[0],ch=b?a.v-b.v:null,tot=pts.length>1?a.v-f.v:null;
+    const cls=v=>v==null||Math.abs(v)<.05?"eq":m.up===null?"neu":(v>0)===m.up?"up":"dn";
+    const tag=v=>{if(v==null)return"—";const c=cls(v);return`${Math.abs(v)<.05?"→":v>0?"↑":"↓"} ${v>0?"+":v<0?"−":""}${nf(Math.abs(v))} ${m.u}`+(c==="up"?" · evolução":c==="dn"?" · involução":"")};
+    const sNow=setsPerWeek(m.g,a.d),sBef=b?setsPerWeek(m.g,b.d):null;
+    h+=`<details class="evo med"><summary><div class="sw"><span class="gn">${m.l}</span><span class="gs"><b class="mv">${nf(a.v)} ${m.u}</b> · ${fdate(a.d)}</span>
+      <span class="chips"><span class="ch ${cls(ch)}">Última: ${tag(ch)}</span>${pts.length>2?`<span class="ch ${cls(tot)}">Desde o início: ${tag(tot)}</span>`:""}</span></div></summary>
+      <div class="evb">${medSpark(pts,m.up===null?"neu":"")}${pts.length>1?`<span class="spl">${nf(f.v)} → <b>${nf(a.v)} ${m.u}</b> em ${pl(pts.length,"medição","medições")}</span>`:""}
+      ${sNow!=null?`<p class="mvol">Volume de treino (${m.g.join(", ")}): <b>${nf(sNow)} séries/semana</b> nas 4 semanas antes desta medição${sBef!=null?` · antes da medição anterior: ${nf(sBef)}`:""}</p>`:""}
+      <table class="evt mt2"><thead><tr><th>Data</th><th class="r">Medida</th><th class="r">Variação</th></tr></thead><tbody>${pts.slice().reverse().map((p,i,arr)=>{const q=arr[i+1],v=q?p.v-q.v:null;return`<tr><td>${fdate(p.d)}</td><td class="r">${nf(p.v)} ${m.u}</td><td class="r ${"c-"+cls(v)}">${v==null?"—":(v>0?"+":v<0?"−":"")+nf(Math.abs(v))}</td></tr>`}).join("")}</tbody></table></div></details>`});
+  h+=`<details class="h"><summary>Medições registradas</summary>${M.slice().reverse().map(x=>`<p><b>${fdate(x.d)}</b><br>${MEDS.filter(m=>x[m.k]!=null).map(m=>m.l+" "+nf(x[m.k])+" "+m.u).join(" · ")}</p><div class="act"><button class="lk del" data-act="meddel" data-d="${x.d}">Apagar esta medição</button></div>`).join("")}</details>`;
+  return h}
 function histHTML(){
   let h=`<div class="hd"><div><div class="eb">Seus treinos salvos</div><h2>Histórico</h2></div><span class="sm">${pl(S.hist.length,"treino","treinos")}</span></div>`;
   h+=bkHTML();
@@ -2012,7 +2054,7 @@ function focusCur(){requestAnimationFrame(()=>{const c=$(".card.cur");if(c)scrol
 function back(p,i){const s=sess(p),k=s.done[i]||0;if(k>0){s.done[i]=k-1;s.open=i;stopRest();save();render();focusCur()}}
 document.addEventListener("click",ev=>{const b=ev.target.closest("[data-act]");if(!b)return;
   const a=b.dataset.act,i=+b.dataset.ex,p=P(S.tab),s=p&&sess(p);
-  if(a==="tab"){EDH=null;S.tab=b.dataset.v;sweep();save();render();scrollTo(0,0)}
+  if(a==="tab"){EDH=null;MEDF=false;S.tab=b.dataset.v;sweep();save();render();scrollTo(0,0)}
   else if(a==="hedit"){EDH=+b.dataset.d;render()}
   else if(a==="hcancel"){EDH=null;render()}
   else if(a==="hsave"){const x=S.hist.find(h=>h.d===+b.dataset.d);if(x){document.querySelectorAll(".her [data-si]").forEach(inp=>{const y=x.sets[+inp.dataset.si];if(y)y[inp.dataset.f]=num(inp.value)});histRev++}
@@ -2043,10 +2085,17 @@ document.addEventListener("click",ev=>{const b=ev.target.closest("[data-act]");i
   else if(a==="finish"){const{d,t}=stat(p);if(d<t&&!confirm("Salvar o treino como está e encerrar?"))return;
     const ph0=phase().n;archive(p,s);stopRest();save();render();scrollTo(0,0);toast(phase().n>ph0?"Fase completa! Os treinos recomeçam do zero.":"Treino salvo no histórico")}
   else if(a==="reset"){if(confirm("Reiniciar este treino? O progresso de hoje será apagado.")){delete S.cur[p.id];stopRest();save();render()}}
-  else if(a==="export"){const u=URL.createObjectURL(new Blob([JSON.stringify({hist:S.hist,mode:S.mode||{}},null,1)],{type:"application/json"})),l=document.createElement("a");
+  else if(a==="export"){const u=URL.createObjectURL(new Blob([JSON.stringify({hist:S.hist,mode:S.mode||{},med:S.med||[]},null,1)],{type:"application/json"})),l=document.createElement("a");
     l.href=u;l.download="ficha-treino-backup.json";document.body.appendChild(l);l.click();l.remove();setTimeout(()=>URL.revokeObjectURL(u),2000);
     S.exp=Date.now();save();if(S.tab==="h")render();toast("Backup exportado")}
   else if(a==="import")$("#imp").click();
+  else if(a==="mednew"){MEDF=true;render();setTimeout(()=>$("#md-peso")?.focus(),50)}
+  else if(a==="medcancel"){MEDF=false;render()}
+  else if(a==="medsave"){const dv=$("#md-d")?.value,m={};MEDS.forEach(x=>{const v=num($("#md-"+x.k)?.value);if(v!=null&&v>0)m[x.k]=v});
+    if(!Object.keys(m).length){toast("Preencha pelo menos uma medida.");return}
+    const dt=dv?new Date(dv+"T08:00:00").getTime():Date.now();m.d=dt;S.med=(S.med||[]).filter(x=>day(x.d)!==day(dt));S.med.push(m);S.med.sort((a,b)=>b.d-a.d);
+    MEDF=false;save();render();scrollTo(0,0);toast("Medição salva")}
+  else if(a==="meddel"){const d0=+b.dataset.d;if(!confirm("Apagar esta medição?"))return;S.med=(S.med||[]).filter(x=>x.d!==d0);save();render();toast("Medição apagada")}
   else if(a==="delh"){const j=+b.dataset.i,x=S.hist[j];if(!x||String(x.d)!==b.dataset.d)return;
     if(!confirm(`Apagar o treino de ${new Date(x.d).toLocaleDateString("pt-BR",{weekday:"short",day:"2-digit",month:"2-digit"})} (${x.p})? Esta ação não pode ser desfeita.`))return;
     S.hist.splice(j,1);histRev++;save();render();toast("Treino apagado")}
@@ -2056,6 +2105,7 @@ $("#imp").addEventListener("change",async e=>{const f=e.target.files[0];e.target
   try{const o=JSON.parse(await f.text());if(!o||!Array.isArray(o.hist))throw 0;
     const seen=new Set(S.hist.map(h=>h.d+h.p));o.hist.forEach(h=>{if(h&&Array.isArray(h.sets)&&!seen.has(h.d+h.p))S.hist.push(h)});
     if(o.mode&&typeof o.mode==="object"&&!Array.isArray(o.mode))S.mode={...o.mode,...(S.mode||{})};
+    if(Array.isArray(o.med)){const have=new Set((S.med||[]).map(m=>day(m.d)));S.med=[...(S.med||[]),...o.med.filter(m=>m&&typeof m.d==="number"&&!have.has(day(m.d)))].sort((a,b)=>b.d-a.d)}
     migrate();S.hist.sort((a,b)=>b.d-a.d);save();render();toast("Backup importado")}
   catch(x){toast("Arquivo inválido. Use um backup exportado por esta ficha.")}});
 /* troca do exercício feito: guarda o que foi digitado e recalcula a carga sugerida */
