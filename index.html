@@ -205,6 +205,9 @@ details.fz .fzt{display:block;font-size:12.5px;color:var(--muted);margin:6px 0 2
 .medf{padding:14px 16px}.medf .mt{white-space:normal;margin:4px 0 8px}
 .per{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:6px 0;border-bottom:1px solid var(--line);font-size:14px;font-weight:650}.per small{color:var(--muted);font-weight:600}
 .pein{width:120px;height:40px;text-align:center;font:inherit;font-weight:800;border:1px solid var(--line);border-radius:10px;background:var(--soft);color:inherit}
+.fdg{margin:10px 0 4px;border:1px solid var(--line);border-radius:12px;padding:8px 12px}.fdg summary{font-weight:800;font-size:14px;cursor:pointer;min-height:32px;display:flex;align-items:center}
+.fh{display:block;font-size:11px;font-weight:600;color:var(--muted);margin-top:1px}
+.medh{margin:18px 2px 8px;font-size:15px;font-weight:800}.medh small{font-size:12px;color:var(--muted);font-weight:650}
 </style>
 </head>
 <body>
@@ -1705,7 +1708,7 @@ function unpackH(z){if(!z||!Array.isArray(z.H))return[];const N=z.N||[],V=z.V||[
 function load(){let o;try{o=JSON.parse(localStorage.getItem(K))}catch(e){}
   if(o&&o.hz&&!Array.isArray(o.hist))o.hist=unpackH(o.hz);
   if(!o||typeof o!=="object"||Array.isArray(o))o={};
-  return{v:1,med:Array.isArray(o.med)?o.med.filter(m=>m&&typeof m.d==="number"):[],exp:typeof o.exp==="number"?o.exp:null,mode:o.mode&&typeof o.mode==="object"&&!Array.isArray(o.mode)?o.mode:{},plan:o.plan&&typeof o.plan==="object"&&!Array.isArray(o.plan)?o.plan:{},tab:o.tab||null,cur:o.cur&&typeof o.cur==="object"&&!Array.isArray(o.cur)?o.cur:{},hist:Array.isArray(o.hist)?o.hist:[]}}
+  return{v:1,age:typeof o.age==="number"?o.age:null,med:Array.isArray(o.med)?o.med.filter(m=>m&&typeof m.d==="number"):[],exp:typeof o.exp==="number"?o.exp:null,mode:o.mode&&typeof o.mode==="object"&&!Array.isArray(o.mode)?o.mode:{},plan:o.plan&&typeof o.plan==="object"&&!Array.isArray(o.plan)?o.plan:{},tab:o.tab||null,cur:o.cur&&typeof o.cur==="object"&&!Array.isArray(o.cur)?o.cur:{},hist:Array.isArray(o.hist)?o.hist:[]}}
 let hzC=null,hzK="";
 function save(){const{hist,...rest}=S,key=hist.length+"|"+(hist[0]?.d||0)+"|"+histRev;
   if(key!==hzK||!hzC){hzC=JSON.stringify(packH(hist));hzK=key}
@@ -1973,6 +1976,18 @@ function histEdHTML(x){let h=`<details class="h" open><summary>${fdate(x.d)} · 
 const MEDS=[{k:"peso",l:"Peso",u:"kg",up:null,g:[]},{k:"peit",l:"Peitoral",u:"cm",up:true,g:["Peitoral","Costas"]},{k:"omb",l:"Ombros",u:"cm",up:true,g:["Delt. lateral","Delt. anterior","Delt. posterior","Trapézio"]},
   {k:"braco",l:"Braço (contraído)",u:"cm",up:true,g:["Bíceps","Tríceps"]},{k:"cint",l:"Cintura",u:"cm",up:false,g:["Abdômen"]},{k:"coxa",l:"Coxa",u:"cm",up:true,g:["Quadríceps","Posteriores"]},{k:"pant",l:"Panturrilha",u:"cm",up:true,g:["Panturrilhas"]}];
 let MEDF=false;
+/* dobras cutâneas (mm), lado direito; Jackson & Pollock (homens) + Siri */
+const FOLDS=[{k:"f_pt",l:"Peitoral",h:"diagonal, entre a axila e o mamilo"},{k:"f_ax",l:"Axilar média",h:"vertical, na linha da axila, altura do esterno"},{k:"f_tr",l:"Tríceps",h:"vertical, atrás do braço, no meio"},
+  {k:"f_sb",l:"Subescapular",h:"diagonal, abaixo da ponta da escápula"},{k:"f_ab",l:"Abdominal",h:"vertical, 2 cm ao lado do umbigo"},{k:"f_si",l:"Suprailíaca",h:"diagonal, acima do osso do quadril"},{k:"f_cx",l:"Coxa",h:"vertical, na frente, meio da coxa"}];
+const DER=[{k:"bf",l:"Gordura corporal",u:"%",up:false,g:[],der:1},{k:"mm",l:"Massa magra",u:"kg",up:true,g:[],der:1},{k:"mg",l:"Massa gorda",u:"kg",up:false,g:[],der:1},{k:"sd7",l:"Soma das 7 dobras",u:"mm",up:false,g:[],der:1},{k:"sd3",l:"Soma de 3 dobras (peitoral, abdominal, coxa)",u:"mm",up:false,g:[],der:1}];
+/* meth: 7 = usa JP7 quando houver as 7 dobras; 3 = usa sempre JP3 (para manter a série comparável) */
+function comp(x,meth){const f=FOLDS.map(z=>x[z.k]),all7=f.every(v=>v!=null),s3=[x.f_pt,x.f_ab,x.f_cx],has3=s3.every(v=>v!=null),o={};
+  let S7=all7?f.reduce((a,b)=>a+b,0):null;const S3=has3?s3.reduce((a,b)=>a+b,0):null;
+  if(S7!=null)o.sd7=S7;if(S3!=null)o.sd3=S3;if(meth===3)S7=null;
+  const age=x.age;if(age&&(S7!=null||S3!=null)){
+    const D=S7!=null?1.112-0.00043499*S7+0.00000055*S7*S7-0.00028826*age:1.10938-0.0008267*S3+0.0000016*S3*S3-0.0002574*age;
+    const bf=495/D-450;if(bf>2&&bf<60){o.bf=bf;o.met=S7!=null?"7 dobras":"3 dobras";if(x.peso){o.mg=x.peso*bf/100;o.mm=x.peso-o.mg}}}
+  return o}
 const nf=v=>(Math.round(v*10)/10).toLocaleString("pt-BR");
 /* séries de trabalho por semana dos grupos, média das 4 semanas antes da data */
 function setsPerWeek(groups,until){if(!groups.length)return null;const from=until-28*864e5;let n=0;
@@ -1988,9 +2003,17 @@ function medHTML(){const M=(S.med||[]).slice().sort((a,b)=>a.d-b.d),last=M[M.len
   if(MEDF){const pv=last||{};h+=`<div class="card medf"><h3 class="nm">Nova medição</h3><p class="sm mt">Meça pela manhã, em jejum, sempre no mesmo ponto e com a fita sem apertar. O braço é medido contraído; as demais medidas, relaxadas. Deixe em branco o que não mediu.</p>
     <div class="per"><span>Data</span><input id="md-d" class="pein" type="date" value="${new Date(Date.now()-new Date().getTimezoneOffset()*6e4).toISOString().slice(0,10)}"></div>
     ${MEDS.map(m=>`<div class="per"><span>${m.l} <small>(${m.u})</small></span><input id="md-${m.k}" class="pein" type="number" inputmode="decimal" step="0.1" min="0" placeholder="${pv[m.k]!=null?nf(pv[m.k]):""}"></div>`).join("")}
+    <details class="fdg"${FOLDS.some(z=>pv[z.k]!=null)?" open":""}><summary>Dobras cutâneas (mm) · opcional</summary>
+      <p class="sm mt">Use o adipômetro do lado direito, com o corpo relaxado. Pince a pele e a gordura (não o músculo), meça 2 a 3 vezes e anote a média. Com as 7 dobras o app usa Jackson & Pollock 7; com peitoral, abdominal e coxa, usa a versão de 3 dobras.</p>
+      <div class="per"><span>Idade <small>(anos)</small></span><input id="md-age" class="pein" type="number" inputmode="numeric" min="15" max="90" value="${S.age??""}"></div>
+      ${FOLDS.map(z=>`<div class="per"><span>${z.l}<small class="fh">${z.h}</small></span><input id="md-${z.k}" class="pein" type="number" inputmode="decimal" step="0.5" min="0" placeholder="${pv[z.k]!=null?nf(pv[z.k]):""}"></div>`).join("")}
+    </details>
     <button class="go" data-act="medsave">Salvar medição</button><div class="act"><button class="lk" data-act="medcancel">Cancelar</button></div></div>`}
   if(!M.length)return h;
-  MEDS.forEach(m=>{const pts=M.filter(x=>x[m.k]!=null).map(x=>({d:x.d,v:x[m.k]}));if(!pts.length)return;
+  const wf=M.filter(x=>FOLDS.some(z=>x[z.k]!=null)),meth=wf.length&&wf.every(x=>FOLDS.every(z=>x[z.k]!=null))?7:3;
+  const MX=M.map(x=>({...x,...comp(x,meth)}));let dh=false;
+  [...MEDS,...DER].forEach(m=>{const pts=MX.filter(x=>x[m.k]!=null).map(x=>({d:x.d,v:x[m.k]}));if(!pts.length)return;
+    if(m.der&&!dh){dh=true;h+=`<p class="medh">Composição corporal</p>`}
     const a=pts[pts.length-1],b=pts[pts.length-2],f=pts[0],ch=b?a.v-b.v:null,tot=pts.length>1?a.v-f.v:null;
     const cls=v=>v==null||Math.abs(v)<.05?"eq":m.up===null?"neu":(v>0)===m.up?"up":"dn";
     const tag=v=>{if(v==null)return"—";const c=cls(v);return`${Math.abs(v)<.05?"→":v>0?"↑":"↓"} ${v>0?"+":v<0?"−":""}${nf(Math.abs(v))} ${m.u}`+(c==="up"?" · evolução":c==="dn"?" · involução":"")};
@@ -2000,7 +2023,7 @@ function medHTML(){const M=(S.med||[]).slice().sort((a,b)=>a.d-b.d),last=M[M.len
       <div class="evb">${medSpark(pts,m.up===null?"neu":"")}${pts.length>1?`<span class="spl">${nf(f.v)} → <b>${nf(a.v)} ${m.u}</b> em ${pl(pts.length,"medição","medições")}</span>`:""}
       ${sNow!=null?`<p class="mvol">Volume de treino (${m.g.join(", ")}): <b>${nf(sNow)} séries/semana</b> nas 4 semanas antes desta medição${sBef!=null?` · antes da medição anterior: ${nf(sBef)}`:""}</p>`:""}
       <table class="evt mt2"><thead><tr><th>Data</th><th class="r">Medida</th><th class="r">Variação</th></tr></thead><tbody>${pts.slice().reverse().map((p,i,arr)=>{const q=arr[i+1],v=q?p.v-q.v:null;return`<tr><td>${fdate(p.d)}</td><td class="r">${nf(p.v)} ${m.u}</td><td class="r ${"c-"+cls(v)}">${v==null?"—":(v>0?"+":v<0?"−":"")+nf(Math.abs(v))}</td></tr>`}).join("")}</tbody></table></div></details>`});
-  h+=`<details class="h"><summary>Medições registradas</summary>${M.slice().reverse().map(x=>`<p><b>${fdate(x.d)}</b><br>${MEDS.filter(m=>x[m.k]!=null).map(m=>m.l+" "+nf(x[m.k])+" "+m.u).join(" · ")}</p><div class="act"><button class="lk del" data-act="meddel" data-d="${x.d}">Apagar esta medição</button></div>`).join("")}</details>`;
+  h+=`<details class="h"><summary>Medições registradas</summary>${M.slice().reverse().map(x=>`<p><b>${fdate(x.d)}</b><br>${MEDS.filter(m=>x[m.k]!=null).map(m=>m.l+" "+nf(x[m.k])+" "+m.u).join(" · ")}${FOLDS.some(z=>x[z.k]!=null)?"<br><small>Dobras (mm): "+FOLDS.filter(z=>x[z.k]!=null).map(z=>z.l+" "+nf(x[z.k])).join(" · ")+(x.age?" · idade "+x.age:"")+"</small>":""}</p><div class="act"><button class="lk del" data-act="meddel" data-d="${x.d}">Apagar esta medição</button></div>`).join("")}</details>`;
   return h}
 function histHTML(){
   let h=`<div class="hd"><div><div class="eb">Seus treinos salvos</div><h2>Histórico</h2></div><span class="sm">${pl(S.hist.length,"treino","treinos")}</span></div>`;
@@ -2091,7 +2114,8 @@ document.addEventListener("click",ev=>{const b=ev.target.closest("[data-act]");i
   else if(a==="import")$("#imp").click();
   else if(a==="mednew"){MEDF=true;render();setTimeout(()=>$("#md-peso")?.focus(),50)}
   else if(a==="medcancel"){MEDF=false;render()}
-  else if(a==="medsave"){const dv=$("#md-d")?.value,m={};MEDS.forEach(x=>{const v=num($("#md-"+x.k)?.value);if(v!=null&&v>0)m[x.k]=v});
+  else if(a==="medsave"){const dv=$("#md-d")?.value,m={};[...MEDS,...FOLDS].forEach(x=>{const v=num($("#md-"+x.k)?.value);if(v!=null&&v>0)m[x.k]=v});
+    const ag=parseInt($("#md-age")?.value);if(ag>=15&&ag<=90){S.age=ag;if(FOLDS.some(z=>m[z.k]!=null))m.age=ag}
     if(!Object.keys(m).length){toast("Preencha pelo menos uma medida.");return}
     const dt=dv?new Date(dv+"T08:00:00").getTime():Date.now();m.d=dt;S.med=(S.med||[]).filter(x=>day(x.d)!==day(dt));S.med.push(m);S.med.sort((a,b)=>b.d-a.d);
     MEDF=false;save();render();scrollTo(0,0);toast("Medição salva")}
