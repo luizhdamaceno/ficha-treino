@@ -302,6 +302,10 @@ button.sv{background:none;border:0;border-left:1px solid var(--line);font:inheri
 .sfn{justify-content:center;margin:10px 0 0}.sfn .ch{font-size:12px;padding:3px 10px;cursor:pointer}
 .bmg.foff.foff.foff{fill:#4a5262;stroke:var(--card)}
 @media(prefers-color-scheme:dark){.bmg.foff.foff.foff{fill:#1f2835}}
+/* iPhone: sem zoom de toque duplo (Concluir série → Confirmar) e sem zoom ao focar a anotação */
+html{touch-action:manipulation}
+button,a,select,input,label{touch-action:manipulation}
+textarea#nt{font-size:16px}
 </style>
 </head>
 <body>
