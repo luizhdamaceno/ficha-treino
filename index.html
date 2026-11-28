@@ -68,6 +68,61 @@ h2{font-size:22px;margin:2px 0 0;letter-spacing:-.02em;color:var(--ink)}
 .in{display:grid;gap:8px;margin-bottom:12px}
 .in label{display:block;font-size:13px;font-weight:700;color:var(--muted);margin-bottom:3px}
 .in select#op{font-size:16px;text-align:left;padding:0 12px}
+.eqs{display:flex;gap:6px;margin-top:8px}
+.in>div{min-width:0}
+.opb{box-sizing:border-box;max-width:100%;display:flex;align-items:center;gap:8px;width:100%;min-height:50px;padding:0 10px 0 14px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);font:700 16px/1.2 system-ui,sans-serif;text-align:left;cursor:pointer}
+.opb .opn{flex:1;min-width:0;padding:8px 0;overflow:hidden;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2}
+.opb svg{flex:none;color:var(--muted)}
+.opb.emp .opn{color:var(--muted);font-weight:600}
+.opb:active{background:var(--soft)}
+html.lock,html.lock body{overflow:hidden}
+#ops .op.off{opacity:.5;cursor:not-allowed}
+#ops .op.off b{font-weight:600}
+#ops .lk2{flex:none;color:var(--muted);display:grid;place-items:center;width:26px}
+#ops .lnote{margin:10px 12px 0;padding:10px 12px;border-radius:12px;background:var(--soft);color:var(--muted);font-size:13px;font-weight:600}
+.limw{margin:8px 0 0;font-size:13px;font-weight:700;color:var(--bad,#b3261e)}
+.pf h3{margin:0;font-size:18px}
+.pfd{margin:4px 0 12px;color:var(--muted);font-size:14px}
+.lims{display:grid;gap:8px}
+.limr{border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.limr.on{border-color:var(--gold)}
+.limb{display:flex;align-items:center;gap:12px;width:100%;min-height:60px;padding:10px 14px;border:0;background:none;color:var(--ink);font:inherit;text-align:left;cursor:pointer}
+.limb .lt{flex:1;min-width:0}
+.limb b{display:block;font-size:16px}
+.limb small{display:block;margin-top:2px;font-size:13px;font-weight:600;color:var(--muted)}
+.limb .tg{flex:none;position:relative;width:50px;height:30px;border-radius:15px;background:var(--line);transition:background .18s}
+.limb .tg::after{content:"";position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:transform .18s}
+.limr.on .tg{background:var(--gold)}
+.limr.on .tg::after{transform:translateX(20px)}
+.limx{margin:0;padding:0 14px 12px;font-size:13px;color:var(--muted);line-height:1.5}
+.pfn{margin:12px 0 0;font-size:13px;color:var(--muted)}
+#ops{position:fixed;inset:0;z-index:40}
+#ops .bd{position:absolute;inset:0;background:rgba(8,16,28,.5);opacity:0;transition:opacity .22s}
+#ops .sh{position:absolute;left:0;right:0;bottom:0;max-width:560px;margin:0 auto;max-height:min(80vh,680px);display:flex;flex-direction:column;background:var(--card);color:var(--ink);border-radius:22px 22px 0 0;box-shadow:0 -10px 40px rgba(0,0,0,.22);transform:translateY(100%);transition:transform .28s cubic-bezier(.2,.8,.2,1);padding-bottom:env(safe-area-inset-bottom)}
+#ops.on .bd{opacity:1}
+#ops.on .sh{transform:none}
+#ops .hnd{width:40px;height:5px;border-radius:3px;background:var(--line);margin:8px auto 2px;flex:none}
+#ops .shh{display:flex;align-items:center;gap:10px;padding:6px 10px 12px 20px;border-bottom:1px solid var(--line);flex:none}
+#ops .hx{flex:1;min-width:0}
+#ops h3{margin:0;font-size:19px;font-weight:800;letter-spacing:-.01em}
+#ops .shh small{display:block;margin-top:2px;color:var(--muted);font-size:13px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#ops .x{flex:none;display:grid;place-items:center;width:40px;height:40px;border:0;border-radius:50%;background:var(--soft);color:var(--ink)}
+#ops .ls{overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:4px 10px 16px}
+#ops .gh{padding:16px 12px 6px;font-size:12px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+#ops .op{display:flex;align-items:center;gap:12px;width:100%;min-height:56px;margin:2px 0;padding:10px 12px;border:0;border-radius:14px;background:none;color:var(--ink);font:inherit;text-align:left;cursor:pointer;transition:background .12s}
+#ops .op:active{background:var(--soft)}
+#ops .op:focus-visible{outline:2px solid var(--gold);outline-offset:-2px}
+#ops .op.on{background:var(--workbg)}
+#ops .ot{flex:1;min-width:0}
+#ops .op b{display:block;font-size:16px;font-weight:700;line-height:1.25}
+#ops .op small{display:block;margin-top:3px;font-size:13px;font-weight:600;color:var(--muted)}
+#ops .ck{flex:none;display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--gold);color:#142b45;visibility:hidden}
+#ops .op.on .ck{visibility:visible}
+@media(prefers-reduced-motion:reduce){#ops .sh,#ops .bd{transition:none}}
+.in .lh{display:block;width:max-content;max-width:100%;box-sizing:border-box;overflow:hidden;text-overflow:ellipsis}
+@media(max-width:360px){.in .lw{display:none}}
+.eqs button{flex:1;min-height:40px;padding:0 4px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--muted);font:700 14px/1 system-ui,sans-serif}
+.eqs button.on{background:var(--navy);border-color:var(--navy);color:#fff}
 textarea#nt{width:100%;min-height:64px;font:inherit;font-size:15px;color:inherit;border-radius:10px;border:1px solid var(--line);background:var(--card);padding:10px;resize:vertical}
 .ntl{margin:8px 0 0;font-size:14px;color:var(--muted)}
 details.nt{margin:8px 0 0}
@@ -262,6 +317,7 @@ button.sv{background:none;border:0;border-left:1px solid var(--line);font:inheri
 </div>
 <main id="main"></main>
 <div id="rest" role="timer" aria-label="Descanso"><small id="rl">Descanso</small><div class="t"><span id="rt">0:00</span></div><button data-act="undo" id="ru" hidden>Desfazer</button><button data-act="plus">+15 s</button><button data-act="skip">Pular</button></div>
+<div id="ops" hidden></div>
 <div id="toast" role="status"><span id="tm"></span><button data-act="undo" id="tu">Desfazer</button></div>
 <input type="file" id="imp" accept="application/json" hidden>
 
@@ -327,7 +383,7 @@ const F={
           "n": "Posterior de coxa – flexora",
           "o": "Posteriores – flexão de joelho",
           "tag": "Treino fixo",
-          "s": "Cadeira flexora (sentado), melhor opção; Flexora unilateral sentada; Mesa flexora (deitado), só se não houver cadeira",
+          "s": "Cadeira flexora, melhor opção; Flexora unilateral sentada; Mesa flexora, só se não houver cadeira",
           "wu": [
             [
               "8–10 leve",
@@ -344,14 +400,14 @@ const F={
         {
           "n": "Peitoral – região média",
           "tag": "Treino fixo",
-          "s": "Supino reto com barra; Supino reto com halteres; Supino na máquina (chest press); Supino reto no Smith; Crucifixo na máquina (peck deck) ou na polia (crossover)",
+          "s": "Supino reto com barra; Supino reto com halteres; Supino reto na máquina; Supino reto no Smith; Crucifixo na máquina (peck deck) ou na polia (crossover)",
           "op": [
             "Supino reto com barra",
             "Supino reto com halteres",
-            "Supino na máquina (chest press)",
+            "Supino reto na máquina",
             "Supino reto no Smith",
             "Crucifixo na máquina (peck deck)",
-            "Crucifixo na polia (crossover)"
+            "Crossover"
           ],
           "wu": [
             [
@@ -369,7 +425,7 @@ const F={
         {
           "n": "Peitoral – região superior",
           "tag": "Treino fixo",
-          "s": "Supino inclinado com halteres; Supino inclinado com barra; Supino inclinado na máquina; Supino inclinado no Smith; Crossover na polia baixa (de baixo para cima)",
+          "s": "Supino inclinado com halteres; Supino inclinado com barra; Supino inclinado na máquina; Supino inclinado no Smith; Crossover de baixo para cima",
           "wu": [],
           "w": [
             4,
@@ -381,13 +437,19 @@ const F={
         {
           "n": "Tríceps",
           "tag": "Treino fixo",
-          "s": "Tríceps na polia com corda, de costas para a polia (acima da cabeça); Tríceps francês com halter (unilateral ou com as duas mãos); Extensão acima da cabeça na polia alta",
+          "s": "Tríceps na polia com corda, de costas para a polia (acima da cabeça); Tríceps francês com halter (unilateral ou com as duas mãos); Tríceps francês na polia (barra)",
           "op": [
-            "Tríceps na polia com corda, de costas (acima da cabeça)",
+            "Tríceps francês na polia (corda)",
             "Tríceps francês com halter",
-            "Extensão acima da cabeça na polia alta"
+            "Tríceps francês unilateral na polia",
+            "Tríceps francês na polia (barra)"
           ],
-          "wu": [],
+          "wu": [
+            [
+              "12–15 leve",
+              "45–60 s"
+            ]
+          ],
           "w": [
             4,
             "10–15",
@@ -399,7 +461,7 @@ const F={
         {
           "n": "Deltoide anterior",
           "tag": "Treino fixo",
-          "s": "Desenvolvimento na máquina (shoulder press); Desenvolvimento com halteres sentado; Desenvolvimento no Smith sentado",
+          "s": "Desenvolvimento na máquina; Desenvolvimento com halteres; Desenvolvimento no Smith",
           "wu": [],
           "w": [
             3,
@@ -411,7 +473,7 @@ const F={
         {
           "n": "Deltoide lateral",
           "tag": "Treino fixo",
-          "s": "Elevação lateral na máquina; Elevação lateral com halteres; Elevação lateral na polia (unilateral)",
+          "s": "Elevação lateral na máquina; Elevação lateral com halteres; Elevação lateral unilateral na polia",
           "wu": [],
           "w": [
             3,
@@ -424,7 +486,7 @@ const F={
           "n": "Abdômen – reto abdominal",
           "o": "Abdômen",
           "tag": "Treino fixo",
-          "s": "Abdominal na polia (crunch ajoelhado com corda); Abdominal na máquina; Abdominal crunch no solo",
+          "s": "Abdominal na polia (ajoelhado); Abdominal na máquina; Abdominal supra",
           "wu": [],
           "w": [
             3,
@@ -437,7 +499,7 @@ const F={
           "n": "Panturrilha sentado",
           "o": "Panturrilhas – sóleo",
           "tag": "Treino fixo",
-          "s": "Panturrilha sentada (máquina); Panturrilha sentada com halteres ou anilha sobre os joelhos",
+          "s": "Panturrilha sentada na máquina; Panturrilha sentada unilateral (máquina); Panturrilha sentada com halteres ou anilha sobre os joelhos",
           "wu": [],
           "w": [
             2,
@@ -481,7 +543,7 @@ const F={
           "n": "Costas – remada",
           "o": "Costas – espessura (remada)",
           "tag": "Treino fixo",
-          "s": "Remada baixa na polia (triângulo); Remada articulada (máquina); Remada com apoio de peito (máquina ou banco inclinado); Remada unilateral com halter (serrote)",
+          "s": "Remada baixa (triângulo); Remada articulada (máquina); Remada com apoio de peito (máquina ou banco inclinado); Remada unilateral com halter (serrote)",
           "wu": [
             [
               "8–10 leve",
@@ -499,7 +561,7 @@ const F={
           "n": "Costas – puxada",
           "o": "Costas – largura (puxada)",
           "tag": "Treino fixo",
-          "s": "Puxada frontal na polia alta; Puxada com pegada neutra (triângulo); Barra fixa assistida (graviton); Puxada articulada (máquina)",
+          "s": "Puxada frontal (pulley); Puxada com triângulo; Graviton; Puxada articulada (máquina)",
           "wu": [],
           "w": [
             4,
@@ -511,11 +573,11 @@ const F={
         {
           "n": "Bíceps",
           "tag": "Treino fixo",
-          "s": "Rosca direta com barra W; Rosca alternada com halteres; Rosca na polia baixa; Rosca inclinada com halteres",
+          "s": "Rosca direta com barra W; Rosca alternada com halteres; Rosca direta na polia; Rosca inclinada com halteres",
           "op": [
             "Rosca direta com barra W",
             "Rosca alternada com halteres",
-            "Rosca na polia baixa",
+            "Rosca direta na polia",
             "Rosca inclinada com halteres"
           ],
           "wu": [],
@@ -530,7 +592,7 @@ const F={
         {
           "n": "Deltoide posterior",
           "tag": "Treino fixo",
-          "s": "Crucifixo inverso na máquina (peck deck invertido); Crucifixo inverso com halteres (inclinado ou apoiado no banco); Crucifixo inverso na polia (cabos cruzados)",
+          "s": "Crucifixo inverso na máquina (peck deck invertido); Crucifixo invertido com halteres; Crucifixo inverso na polia (cabos cruzados)",
           "wu": [],
           "w": [
             3,
@@ -560,7 +622,7 @@ const F={
         {
           "n": "Deltoide lateral",
           "tag": "Treino fixo",
-          "s": "Elevação lateral na máquina; Elevação lateral com halteres; Elevação lateral na polia (unilateral)",
+          "s": "Elevação lateral na máquina; Elevação lateral com halteres; Elevação lateral unilateral na polia",
           "wu": [],
           "w": [
             3,
@@ -573,7 +635,7 @@ const F={
           "n": "Panturrilha sentado",
           "o": "Panturrilhas – sóleo",
           "tag": "Treino fixo",
-          "s": "Panturrilha sentada (máquina); Panturrilha sentada com halteres ou anilha sobre os joelhos",
+          "s": "Panturrilha sentada na máquina; Panturrilha sentada unilateral (máquina); Panturrilha sentada com halteres ou anilha sobre os joelhos",
           "wu": [],
           "w": [
             2,
@@ -595,7 +657,7 @@ const F={
           "n": "Quadríceps – cadeira extensora",
           "o": "Quadríceps – extensão de joelho",
           "tag": "Treino fixo",
-          "s": "Cadeira extensora; Cadeira extensora unilateral (uma perna por vez)",
+          "s": "Cadeira extensora; Cadeira extensora unilateral",
           "wu": [],
           "w": [
             4,
@@ -608,7 +670,7 @@ const F={
           "n": "Posterior de coxa – flexora",
           "o": "Posteriores – flexão de joelho",
           "tag": "Treino fixo",
-          "s": "Cadeira flexora (sentado), melhor opção; Flexora unilateral sentada; Mesa flexora (deitado), só se não houver cadeira",
+          "s": "Cadeira flexora, melhor opção; Flexora unilateral sentada; Mesa flexora, só se não houver cadeira",
           "wu": [
             [
               "8–10 leve",
@@ -625,7 +687,7 @@ const F={
         {
           "n": "Peitoral – região superior",
           "tag": "Treino fixo",
-          "s": "Supino inclinado com halteres; Supino inclinado com barra; Supino inclinado na máquina; Supino inclinado no Smith; Crossover na polia baixa (de baixo para cima)",
+          "s": "Supino inclinado com halteres; Supino inclinado com barra; Supino inclinado na máquina; Supino inclinado no Smith; Crossover de baixo para cima",
           "wu": [
             [
               "8–10 leve",
@@ -646,14 +708,14 @@ const F={
         {
           "n": "Peitoral – região média",
           "tag": "Treino fixo",
-          "s": "Supino reto com barra; Supino reto com halteres; Supino na máquina (chest press); Supino reto no Smith; Crucifixo na máquina (peck deck) ou na polia (crossover)",
+          "s": "Supino reto com barra; Supino reto com halteres; Supino reto na máquina; Supino reto no Smith; Crucifixo na máquina (peck deck) ou na polia (crossover)",
           "op": [
             "Supino reto com barra",
             "Supino reto com halteres",
-            "Supino na máquina (chest press)",
+            "Supino reto na máquina",
             "Supino reto no Smith",
             "Crucifixo na máquina (peck deck)",
-            "Crucifixo na polia (crossover)"
+            "Crossover"
           ],
           "wu": [],
           "w": [
@@ -666,13 +728,18 @@ const F={
         {
           "n": "Tríceps",
           "tag": "Treino fixo",
-          "s": "Tríceps na polia com corda (junto ao corpo); Tríceps na polia com barra reta ou V; Extensão de tríceps na máquina",
+          "s": "Tríceps corda; Tríceps pulley (barra reta ou V); Tríceps na máquina",
           "op": [
-            "Tríceps na polia com corda (junto ao corpo)",
-            "Tríceps na polia com barra reta ou V",
-            "Extensão de tríceps na máquina"
+            "Tríceps corda",
+            "Tríceps pulley (barra reta ou V)",
+            "Tríceps na máquina"
           ],
-          "wu": [],
+          "wu": [
+            [
+              "12–15 leve",
+              "45–60 s"
+            ]
+          ],
           "w": [
             4,
             "10–15",
@@ -684,7 +751,7 @@ const F={
         {
           "n": "Deltoide anterior",
           "tag": "Treino fixo",
-          "s": "Desenvolvimento na máquina (shoulder press); Desenvolvimento com halteres sentado; Desenvolvimento no Smith sentado",
+          "s": "Desenvolvimento na máquina; Desenvolvimento com halteres; Desenvolvimento no Smith",
           "wu": [],
           "w": [
             3,
@@ -696,7 +763,7 @@ const F={
         {
           "n": "Deltoide lateral",
           "tag": "Treino fixo",
-          "s": "Elevação lateral na máquina; Elevação lateral com halteres; Elevação lateral na polia (unilateral)",
+          "s": "Elevação lateral na máquina; Elevação lateral com halteres; Elevação lateral unilateral na polia",
           "wu": [],
           "w": [
             3,
@@ -709,7 +776,7 @@ const F={
           "n": "Panturrilha em pé",
           "o": "Panturrilhas – gastrocnêmio",
           "tag": "Treino fixo",
-          "s": "Panturrilha em pé na máquina; Panturrilha no leg press; Panturrilha em pé no Smith (com degrau)",
+          "s": "Panturrilha em pé na máquina; Panturrilha no leg press; Panturrilha no leg press unilateral; Panturrilha no Smith; Panturrilha unilateral com halter",
           "wu": [],
           "w": [
             2,
@@ -731,7 +798,7 @@ const F={
           "n": "Posterior de coxa – flexora",
           "o": "Posteriores – flexão de joelho",
           "tag": "Treino fixo",
-          "s": "Cadeira flexora (sentado), melhor opção; Flexora unilateral sentada; Mesa flexora (deitado), só se não houver cadeira",
+          "s": "Cadeira flexora, melhor opção; Flexora unilateral sentada; Mesa flexora, só se não houver cadeira",
           "wu": [
             [
               "8–10 leve",
@@ -749,7 +816,7 @@ const F={
           "n": "Costas – puxada",
           "o": "Costas – largura (puxada)",
           "tag": "Treino fixo",
-          "s": "Puxada frontal na polia alta; Puxada com pegada neutra (triângulo); Barra fixa assistida (graviton); Puxada articulada (máquina)",
+          "s": "Puxada frontal (pulley); Puxada com triângulo; Graviton; Puxada articulada (máquina)",
           "wu": [
             [
               "8–10 leve",
@@ -767,7 +834,7 @@ const F={
           "n": "Costas – remada",
           "o": "Costas – espessura (remada)",
           "tag": "Treino fixo",
-          "s": "Remada baixa na polia (triângulo); Remada articulada (máquina); Remada com apoio de peito (máquina ou banco inclinado)",
+          "s": "Remada baixa (triângulo); Remada articulada (máquina); Remada com apoio de peito (máquina ou banco inclinado)",
           "wu": [],
           "w": [
             4,
@@ -779,10 +846,10 @@ const F={
         {
           "n": "Bíceps",
           "tag": "Treino fixo",
-          "s": "Rosca martelo com halteres; Rosca martelo na polia com corda",
+          "s": "Rosca martelo com halteres; Rosca martelo na polia (corda)",
           "op": [
             "Rosca martelo com halteres",
-            "Rosca martelo na polia com corda"
+            "Rosca martelo na polia (corda)"
           ],
           "wu": [],
           "w": [
@@ -796,7 +863,7 @@ const F={
         {
           "n": "Deltoide posterior",
           "tag": "Treino fixo",
-          "s": "Crucifixo inverso na máquina (peck deck invertido); Crucifixo inverso com halteres (inclinado ou apoiado no banco); Crucifixo inverso na polia (cabos cruzados)",
+          "s": "Crucifixo inverso na máquina (peck deck invertido); Crucifixo invertido com halteres; Crucifixo inverso na polia (cabos cruzados)",
           "wu": [],
           "w": [
             3,
@@ -826,7 +893,7 @@ const F={
         {
           "n": "Deltoide lateral",
           "tag": "Treino fixo",
-          "s": "Elevação lateral na máquina; Elevação lateral com halteres; Elevação lateral na polia (unilateral)",
+          "s": "Elevação lateral na máquina; Elevação lateral com halteres; Elevação lateral unilateral na polia",
           "wu": [],
           "w": [
             3,
@@ -839,7 +906,7 @@ const F={
           "n": "Abdômen – reto abdominal",
           "o": "Abdômen",
           "tag": "Treino fixo",
-          "s": "Abdominal na polia (crunch ajoelhado com corda); Abdominal na máquina; Abdominal crunch no solo",
+          "s": "Abdominal na polia (ajoelhado); Abdominal na máquina; Abdominal supra",
           "wu": [],
           "w": [
             3,
@@ -852,7 +919,7 @@ const F={
           "n": "Panturrilha em pé",
           "o": "Panturrilhas – gastrocnêmio",
           "tag": "Treino fixo",
-          "s": "Panturrilha em pé na máquina; Panturrilha no leg press; Panturrilha em pé no Smith (com degrau)",
+          "s": "Panturrilha em pé na máquina; Panturrilha no leg press; Panturrilha no leg press unilateral; Panturrilha no Smith; Panturrilha unilateral com halter",
           "wu": [],
           "w": [
             2,
@@ -874,7 +941,7 @@ const F={
           "n": "Costas – puxada",
           "o": "Costas – largura (puxada)",
           "tag": "Opcional",
-          "s": "Puxada frontal na polia alta; Puxada com pegada neutra (triângulo); Barra fixa assistida (graviton); Puxada articulada (máquina)",
+          "s": "Puxada frontal (pulley); Puxada com triângulo; Graviton; Puxada articulada (máquina)",
           "wu": [
             [
               "8–10 leve",
@@ -892,7 +959,7 @@ const F={
           "n": "Costas – remada",
           "o": "Costas – espessura (remada)",
           "tag": "Opcional",
-          "s": "Remada baixa na polia (triângulo); Remada articulada (máquina); Remada com apoio de peito (máquina ou banco inclinado)",
+          "s": "Remada baixa (triângulo); Remada articulada (máquina); Remada com apoio de peito (máquina ou banco inclinado)",
           "wu": [],
           "w": [
             4,
@@ -906,14 +973,20 @@ const F={
           "tag": "Opcional",
           "s": "3 séries acima da cabeça: tríceps na polia com corda, de costas para a polia, tríceps francês com halter (unilateral ou com as duas mãos) ou extensão acima da cabeça na polia alta; 1 série junto ao corpo: tríceps na polia com corda, com barra reta ou V, ou extensão de tríceps na máquina",
           "op": [
-            "Tríceps na polia com corda, de costas (acima da cabeça)",
+            "Tríceps francês na polia (corda)",
             "Tríceps francês com halter",
-            "Extensão acima da cabeça na polia alta",
-            "Tríceps na polia com corda (junto ao corpo)",
-            "Tríceps na polia com barra reta ou V",
-            "Extensão de tríceps na máquina"
+            "Tríceps francês unilateral na polia",
+            "Tríceps francês na polia (barra)",
+            "Tríceps corda",
+            "Tríceps pulley (barra reta ou V)",
+            "Tríceps na máquina"
           ],
-          "wu": [],
+          "wu": [
+            [
+              "12–15 leve",
+              "45–60 s"
+            ]
+          ],
           "w": [
             4,
             "10–15",
@@ -930,9 +1003,9 @@ const F={
             "Rosca direta com barra W",
             "Rosca alternada com halteres",
             "Rosca inclinada com halteres",
-            "Rosca na polia baixa",
+            "Rosca direta na polia",
             "Rosca martelo com halteres",
-            "Rosca martelo na polia com corda"
+            "Rosca martelo na polia (corda)"
           ],
           "wu": [],
           "w": [
@@ -946,7 +1019,7 @@ const F={
         {
           "n": "Deltoide lateral",
           "tag": "Opcional",
-          "s": "Elevação lateral na máquina; Elevação lateral com halteres; Elevação lateral na polia (unilateral)",
+          "s": "Elevação lateral na máquina; Elevação lateral com halteres; Elevação lateral unilateral na polia",
           "wu": [],
           "w": [
             3,
@@ -977,7 +1050,7 @@ const F={
           "n": "Panturrilha em pé",
           "o": "Panturrilhas – gastrocnêmio",
           "tag": "Opcional",
-          "s": "Panturrilha em pé na máquina; Panturrilha no leg press; Panturrilha em pé no Smith (com degrau)",
+          "s": "Panturrilha em pé na máquina; Panturrilha no leg press; Panturrilha no leg press unilateral; Panturrilha no Smith; Panturrilha unilateral com halter",
           "wu": [],
           "w": [
             4,
@@ -990,7 +1063,7 @@ const F={
           "n": "Panturrilha sentado",
           "o": "Panturrilhas – sóleo",
           "tag": "Opcional",
-          "s": "Panturrilha sentada (máquina); Panturrilha sentada com halteres ou anilha sobre os joelhos",
+          "s": "Panturrilha sentada na máquina; Panturrilha sentada unilateral (máquina); Panturrilha sentada com halteres ou anilha sobre os joelhos",
           "wu": [],
           "w": [
             4,
@@ -1055,7 +1128,7 @@ const F={
           "n": "Posterior de coxa – flexora",
           "o": "Posteriores – flexão de joelho",
           "tag": "Treino fixo",
-          "s": "Cadeira flexora (sentado), melhor opção; Flexora unilateral sentada; Mesa flexora (deitado), só se não houver cadeira",
+          "s": "Cadeira flexora, melhor opção; Flexora unilateral sentada; Mesa flexora, só se não houver cadeira",
           "wu": [],
           "w": [
             2,
@@ -1067,14 +1140,14 @@ const F={
         {
           "n": "Peitoral – região média",
           "tag": "Treino fixo",
-          "s": "Supino reto com barra; Supino reto com halteres; Supino na máquina (chest press); Supino reto no Smith; Crucifixo na máquina (peck deck) ou na polia (crossover)",
+          "s": "Supino reto com barra; Supino reto com halteres; Supino reto na máquina; Supino reto no Smith; Crucifixo na máquina (peck deck) ou na polia (crossover)",
           "op": [
             "Supino reto com barra",
             "Supino reto com halteres",
-            "Supino na máquina (chest press)",
+            "Supino reto na máquina",
             "Supino reto no Smith",
             "Crucifixo na máquina (peck deck)",
-            "Crucifixo na polia (crossover)"
+            "Crossover"
           ],
           "wu": [
             [
@@ -1092,7 +1165,7 @@ const F={
         {
           "n": "Peitoral – região superior",
           "tag": "Treino fixo",
-          "s": "Supino inclinado com halteres; Supino inclinado com barra; Supino inclinado na máquina; Supino inclinado no Smith; Crossover na polia baixa (de baixo para cima)",
+          "s": "Supino inclinado com halteres; Supino inclinado com barra; Supino inclinado na máquina; Supino inclinado no Smith; Crossover de baixo para cima",
           "wu": [],
           "w": [
             3,
@@ -1104,13 +1177,19 @@ const F={
         {
           "n": "Tríceps",
           "tag": "Treino fixo",
-          "s": "Tríceps na polia com corda, de costas para a polia (acima da cabeça); Tríceps francês com halter (unilateral ou com as duas mãos); Extensão acima da cabeça na polia alta",
+          "s": "Tríceps na polia com corda, de costas para a polia (acima da cabeça); Tríceps francês com halter (unilateral ou com as duas mãos); Tríceps francês na polia (barra)",
           "op": [
-            "Tríceps na polia com corda, de costas (acima da cabeça)",
+            "Tríceps francês na polia (corda)",
             "Tríceps francês com halter",
-            "Extensão acima da cabeça na polia alta"
+            "Tríceps francês unilateral na polia",
+            "Tríceps francês na polia (barra)"
           ],
-          "wu": [],
+          "wu": [
+            [
+              "12–15 leve",
+              "45–60 s"
+            ]
+          ],
           "w": [
             3,
             "10–15",
@@ -1122,7 +1201,7 @@ const F={
         {
           "n": "Deltoide anterior",
           "tag": "Treino fixo",
-          "s": "Desenvolvimento na máquina (shoulder press); Desenvolvimento com halteres sentado; Desenvolvimento no Smith sentado",
+          "s": "Desenvolvimento na máquina; Desenvolvimento com halteres; Desenvolvimento no Smith",
           "wu": [],
           "w": [
             2,
@@ -1134,7 +1213,7 @@ const F={
         {
           "n": "Deltoide lateral",
           "tag": "Treino fixo",
-          "s": "Elevação lateral na máquina; Elevação lateral com halteres; Elevação lateral na polia (unilateral)",
+          "s": "Elevação lateral na máquina; Elevação lateral com halteres; Elevação lateral unilateral na polia",
           "wu": [],
           "w": [
             2,
@@ -1147,7 +1226,7 @@ const F={
           "n": "Abdômen – reto abdominal",
           "o": "Abdômen",
           "tag": "Treino fixo",
-          "s": "Abdominal na polia (crunch ajoelhado com corda); Abdominal na máquina; Abdominal crunch no solo",
+          "s": "Abdominal na polia (ajoelhado); Abdominal na máquina; Abdominal supra",
           "wu": [],
           "w": [
             2,
@@ -1191,7 +1270,7 @@ const F={
           "n": "Costas – remada",
           "o": "Costas – espessura (remada)",
           "tag": "Treino fixo",
-          "s": "Remada baixa na polia (triângulo); Remada articulada (máquina); Remada com apoio de peito (máquina ou banco inclinado); Remada unilateral com halter (serrote)",
+          "s": "Remada baixa (triângulo); Remada articulada (máquina); Remada com apoio de peito (máquina ou banco inclinado); Remada unilateral com halter (serrote)",
           "wu": [
             [
               "8–10 leve",
@@ -1209,7 +1288,7 @@ const F={
           "n": "Costas – puxada",
           "o": "Costas – largura (puxada)",
           "tag": "Treino fixo",
-          "s": "Puxada frontal na polia alta; Puxada com pegada neutra (triângulo); Barra fixa assistida (graviton); Puxada articulada (máquina)",
+          "s": "Puxada frontal (pulley); Puxada com triângulo; Graviton; Puxada articulada (máquina)",
           "wu": [],
           "w": [
             3,
@@ -1221,11 +1300,11 @@ const F={
         {
           "n": "Bíceps",
           "tag": "Treino fixo",
-          "s": "Rosca direta com barra W; Rosca alternada com halteres; Rosca na polia baixa; Rosca inclinada com halteres",
+          "s": "Rosca direta com barra W; Rosca alternada com halteres; Rosca direta na polia; Rosca inclinada com halteres",
           "op": [
             "Rosca direta com barra W",
             "Rosca alternada com halteres",
-            "Rosca na polia baixa",
+            "Rosca direta na polia",
             "Rosca inclinada com halteres"
           ],
           "wu": [],
@@ -1240,7 +1319,7 @@ const F={
         {
           "n": "Deltoide posterior",
           "tag": "Treino fixo",
-          "s": "Crucifixo inverso na máquina (peck deck invertido); Crucifixo inverso com halteres (inclinado ou apoiado no banco); Crucifixo inverso na polia (cabos cruzados)",
+          "s": "Crucifixo inverso na máquina (peck deck invertido); Crucifixo invertido com halteres; Crucifixo inverso na polia (cabos cruzados)",
           "wu": [],
           "w": [
             2,
@@ -1270,7 +1349,7 @@ const F={
         {
           "n": "Deltoide lateral",
           "tag": "Treino fixo",
-          "s": "Elevação lateral na máquina; Elevação lateral com halteres; Elevação lateral na polia (unilateral)",
+          "s": "Elevação lateral na máquina; Elevação lateral com halteres; Elevação lateral unilateral na polia",
           "wu": [],
           "w": [
             3,
@@ -1283,7 +1362,7 @@ const F={
           "n": "Panturrilha sentado",
           "o": "Panturrilhas – sóleo",
           "tag": "Treino fixo",
-          "s": "Panturrilha sentada (máquina); Panturrilha sentada com halteres ou anilha sobre os joelhos",
+          "s": "Panturrilha sentada na máquina; Panturrilha sentada unilateral (máquina); Panturrilha sentada com halteres ou anilha sobre os joelhos",
           "wu": [],
           "w": [
             2,
@@ -1305,7 +1384,7 @@ const F={
           "n": "Quadríceps – cadeira extensora",
           "o": "Quadríceps – extensão de joelho",
           "tag": "Treino fixo",
-          "s": "Cadeira extensora; Cadeira extensora unilateral (uma perna por vez)",
+          "s": "Cadeira extensora; Cadeira extensora unilateral",
           "wu": [],
           "w": [
             3,
@@ -1318,7 +1397,7 @@ const F={
           "n": "Posterior de coxa – flexora",
           "o": "Posteriores – flexão de joelho",
           "tag": "Treino fixo",
-          "s": "Cadeira flexora (sentado), melhor opção; Flexora unilateral sentada; Mesa flexora (deitado), só se não houver cadeira",
+          "s": "Cadeira flexora, melhor opção; Flexora unilateral sentada; Mesa flexora, só se não houver cadeira",
           "wu": [
             [
               "8–10 leve",
@@ -1335,7 +1414,7 @@ const F={
         {
           "n": "Peitoral – região superior",
           "tag": "Treino fixo",
-          "s": "Supino inclinado com halteres; Supino inclinado com barra; Supino inclinado na máquina; Supino inclinado no Smith; Crossover na polia baixa (de baixo para cima)",
+          "s": "Supino inclinado com halteres; Supino inclinado com barra; Supino inclinado na máquina; Supino inclinado no Smith; Crossover de baixo para cima",
           "wu": [
             [
               "8–10 leve",
@@ -1356,14 +1435,14 @@ const F={
         {
           "n": "Peitoral – região média",
           "tag": "Treino fixo",
-          "s": "Supino reto com barra; Supino reto com halteres; Supino na máquina (chest press); Supino reto no Smith; Crucifixo na máquina (peck deck) ou na polia (crossover)",
+          "s": "Supino reto com barra; Supino reto com halteres; Supino reto na máquina; Supino reto no Smith; Crucifixo na máquina (peck deck) ou na polia (crossover)",
           "op": [
             "Supino reto com barra",
             "Supino reto com halteres",
-            "Supino na máquina (chest press)",
+            "Supino reto na máquina",
             "Supino reto no Smith",
             "Crucifixo na máquina (peck deck)",
-            "Crucifixo na polia (crossover)"
+            "Crossover"
           ],
           "wu": [],
           "w": [
@@ -1376,13 +1455,18 @@ const F={
         {
           "n": "Tríceps",
           "tag": "Treino fixo",
-          "s": "Tríceps na polia com corda (junto ao corpo); Tríceps na polia com barra reta ou V; Extensão de tríceps na máquina",
+          "s": "Tríceps corda; Tríceps pulley (barra reta ou V); Tríceps na máquina",
           "op": [
-            "Tríceps na polia com corda (junto ao corpo)",
-            "Tríceps na polia com barra reta ou V",
-            "Extensão de tríceps na máquina"
+            "Tríceps corda",
+            "Tríceps pulley (barra reta ou V)",
+            "Tríceps na máquina"
           ],
-          "wu": [],
+          "wu": [
+            [
+              "12–15 leve",
+              "45–60 s"
+            ]
+          ],
           "w": [
             3,
             "10–15",
@@ -1394,7 +1478,7 @@ const F={
         {
           "n": "Deltoide anterior",
           "tag": "Treino fixo",
-          "s": "Desenvolvimento na máquina (shoulder press); Desenvolvimento com halteres sentado; Desenvolvimento no Smith sentado",
+          "s": "Desenvolvimento na máquina; Desenvolvimento com halteres; Desenvolvimento no Smith",
           "wu": [],
           "w": [
             2,
@@ -1406,7 +1490,7 @@ const F={
         {
           "n": "Deltoide lateral",
           "tag": "Treino fixo",
-          "s": "Elevação lateral na máquina; Elevação lateral com halteres; Elevação lateral na polia (unilateral)",
+          "s": "Elevação lateral na máquina; Elevação lateral com halteres; Elevação lateral unilateral na polia",
           "wu": [],
           "w": [
             2,
@@ -1419,7 +1503,7 @@ const F={
           "n": "Panturrilha em pé",
           "o": "Panturrilhas – gastrocnêmio",
           "tag": "Treino fixo",
-          "s": "Panturrilha em pé na máquina; Panturrilha no leg press; Panturrilha em pé no Smith (com degrau)",
+          "s": "Panturrilha em pé na máquina; Panturrilha no leg press; Panturrilha no leg press unilateral; Panturrilha no Smith; Panturrilha unilateral com halter",
           "wu": [],
           "w": [
             2,
@@ -1441,7 +1525,7 @@ const F={
           "n": "Posterior de coxa – flexora",
           "o": "Posteriores – flexão de joelho",
           "tag": "Treino fixo",
-          "s": "Cadeira flexora (sentado), melhor opção; Flexora unilateral sentada; Mesa flexora (deitado), só se não houver cadeira",
+          "s": "Cadeira flexora, melhor opção; Flexora unilateral sentada; Mesa flexora, só se não houver cadeira",
           "wu": [
             [
               "8–10 leve",
@@ -1459,7 +1543,7 @@ const F={
           "n": "Costas – puxada",
           "o": "Costas – largura (puxada)",
           "tag": "Treino fixo",
-          "s": "Puxada frontal na polia alta; Puxada com pegada neutra (triângulo); Barra fixa assistida (graviton); Puxada articulada (máquina)",
+          "s": "Puxada frontal (pulley); Puxada com triângulo; Graviton; Puxada articulada (máquina)",
           "wu": [
             [
               "8–10 leve",
@@ -1477,7 +1561,7 @@ const F={
           "n": "Costas – remada",
           "o": "Costas – espessura (remada)",
           "tag": "Treino fixo",
-          "s": "Remada baixa na polia (triângulo); Remada articulada (máquina); Remada com apoio de peito (máquina ou banco inclinado)",
+          "s": "Remada baixa (triângulo); Remada articulada (máquina); Remada com apoio de peito (máquina ou banco inclinado)",
           "wu": [],
           "w": [
             3,
@@ -1489,10 +1573,10 @@ const F={
         {
           "n": "Bíceps",
           "tag": "Treino fixo",
-          "s": "Rosca martelo com halteres; Rosca martelo na polia com corda",
+          "s": "Rosca martelo com halteres; Rosca martelo na polia (corda)",
           "op": [
             "Rosca martelo com halteres",
-            "Rosca martelo na polia com corda"
+            "Rosca martelo na polia (corda)"
           ],
           "wu": [],
           "w": [
@@ -1506,7 +1590,7 @@ const F={
         {
           "n": "Deltoide posterior",
           "tag": "Treino fixo",
-          "s": "Crucifixo inverso na máquina (peck deck invertido); Crucifixo inverso com halteres (inclinado ou apoiado no banco); Crucifixo inverso na polia (cabos cruzados)",
+          "s": "Crucifixo inverso na máquina (peck deck invertido); Crucifixo invertido com halteres; Crucifixo inverso na polia (cabos cruzados)",
           "wu": [],
           "w": [
             2,
@@ -1536,7 +1620,7 @@ const F={
         {
           "n": "Deltoide lateral",
           "tag": "Treino fixo",
-          "s": "Elevação lateral na máquina; Elevação lateral com halteres; Elevação lateral na polia (unilateral)",
+          "s": "Elevação lateral na máquina; Elevação lateral com halteres; Elevação lateral unilateral na polia",
           "wu": [],
           "w": [
             2,
@@ -1549,7 +1633,7 @@ const F={
           "n": "Abdômen – reto abdominal",
           "o": "Abdômen",
           "tag": "Treino fixo",
-          "s": "Abdominal na polia (crunch ajoelhado com corda); Abdominal na máquina; Abdominal crunch no solo",
+          "s": "Abdominal na polia (ajoelhado); Abdominal na máquina; Abdominal supra",
           "wu": [],
           "w": [
             2,
@@ -1562,7 +1646,7 @@ const F={
           "n": "Panturrilha em pé",
           "o": "Panturrilhas – gastrocnêmio",
           "tag": "Treino fixo",
-          "s": "Panturrilha em pé na máquina; Panturrilha no leg press; Panturrilha em pé no Smith (com degrau)",
+          "s": "Panturrilha em pé na máquina; Panturrilha no leg press; Panturrilha no leg press unilateral; Panturrilha no Smith; Panturrilha unilateral com halter",
           "wu": [],
           "w": [
             2,
@@ -1584,7 +1668,7 @@ const F={
           "n": "Costas – puxada",
           "o": "Costas – largura (puxada)",
           "tag": "Opcional",
-          "s": "Puxada frontal na polia alta; Puxada com pegada neutra (triângulo); Barra fixa assistida (graviton); Puxada articulada (máquina)",
+          "s": "Puxada frontal (pulley); Puxada com triângulo; Graviton; Puxada articulada (máquina)",
           "wu": [
             [
               "8–10 leve",
@@ -1602,7 +1686,7 @@ const F={
           "n": "Costas – remada",
           "o": "Costas – espessura (remada)",
           "tag": "Opcional",
-          "s": "Remada baixa na polia (triângulo); Remada articulada (máquina); Remada com apoio de peito (máquina ou banco inclinado)",
+          "s": "Remada baixa (triângulo); Remada articulada (máquina); Remada com apoio de peito (máquina ou banco inclinado)",
           "wu": [],
           "w": [
             3,
@@ -1616,14 +1700,20 @@ const F={
           "tag": "Opcional",
           "s": "3 séries acima da cabeça: tríceps na polia com corda, de costas para a polia, tríceps francês com halter (unilateral ou com as duas mãos) ou extensão acima da cabeça na polia alta; 1 série junto ao corpo: tríceps na polia com corda, com barra reta ou V, ou extensão de tríceps na máquina",
           "op": [
-            "Tríceps na polia com corda, de costas (acima da cabeça)",
+            "Tríceps francês na polia (corda)",
             "Tríceps francês com halter",
-            "Extensão acima da cabeça na polia alta",
-            "Tríceps na polia com corda (junto ao corpo)",
-            "Tríceps na polia com barra reta ou V",
-            "Extensão de tríceps na máquina"
+            "Tríceps francês unilateral na polia",
+            "Tríceps francês na polia (barra)",
+            "Tríceps corda",
+            "Tríceps pulley (barra reta ou V)",
+            "Tríceps na máquina"
           ],
-          "wu": [],
+          "wu": [
+            [
+              "12–15 leve",
+              "45–60 s"
+            ]
+          ],
           "w": [
             4,
             "10–15",
@@ -1640,9 +1730,9 @@ const F={
             "Rosca direta com barra W",
             "Rosca alternada com halteres",
             "Rosca inclinada com halteres",
-            "Rosca na polia baixa",
+            "Rosca direta na polia",
             "Rosca martelo com halteres",
-            "Rosca martelo na polia com corda"
+            "Rosca martelo na polia (corda)"
           ],
           "wu": [],
           "w": [
@@ -1656,7 +1746,7 @@ const F={
         {
           "n": "Deltoide lateral",
           "tag": "Opcional",
-          "s": "Elevação lateral na máquina; Elevação lateral com halteres; Elevação lateral na polia (unilateral)",
+          "s": "Elevação lateral na máquina; Elevação lateral com halteres; Elevação lateral unilateral na polia",
           "wu": [],
           "w": [
             2,
@@ -1687,7 +1777,7 @@ const F={
           "n": "Panturrilha em pé",
           "o": "Panturrilhas – gastrocnêmio",
           "tag": "Opcional",
-          "s": "Panturrilha em pé na máquina; Panturrilha no leg press; Panturrilha em pé no Smith (com degrau)",
+          "s": "Panturrilha em pé na máquina; Panturrilha no leg press; Panturrilha no leg press unilateral; Panturrilha no Smith; Panturrilha unilateral com halter",
           "wu": [],
           "w": [
             3,
@@ -1700,7 +1790,7 @@ const F={
           "n": "Panturrilha sentado",
           "o": "Panturrilhas – sóleo",
           "tag": "Opcional",
-          "s": "Panturrilha sentada (máquina); Panturrilha sentada com halteres ou anilha sobre os joelhos",
+          "s": "Panturrilha sentada na máquina; Panturrilha sentada unilateral (máquina); Panturrilha sentada com halteres ou anilha sobre os joelhos",
           "wu": [],
           "w": [
             3,
@@ -1732,22 +1822,69 @@ function applyPlan(p,ver){return p;/* edição de plano retirada até existir ca
 const PV=(ver,id)=>{const k=ver+":"+id+":"+planRev;if(!(k in PC)){const b=(ver==="full"?F.panels:F.short).find(p=>p.id===id);PC[k]=b?applyPlan(b,ver):undefined}return PC[k]};
 const P=id=>PV(verOf(id),id);
 const steps=e=>[...e.wu.map(([r,d])=>({t:"a",reps:r,rest:d})),...Array.from({length:e.w[0]},()=>({t:"w",reps:e.w[1],rest:e.w[2]}))];
-const opts=e=>[...(e.op||e.s.split("; ").map(x=>x.replace(/, melhor opção$|, só se não houver cadeira.*$/,"").trim())),"Outro"];
+const opts0=e=>e.op||e.s.split("; ").map(x=>x.replace(/, melhor opção$|, só se não houver cadeira.*$/,"").trim());
+/* variações de academia acrescentadas (28/11/2026); o tríceps do A segue acima da cabeça e o bíceps do B/E segue só supinado */
+function xop(e,b){const n=e.n,L=[];
+  if(/^Quadríceps – Leg/.test(n))L.push("Agachamento livre com barra","Agachamento sumô com halter","Agachamento búlgaro com halteres","Leg press horizontal","Agachamento pêndulo","Hack unilateral");
+  else if(/stiff$/.test(n))L.push("Stiff no Smith","Stiff unilateral com halter","Terra romeno com barra");
+  else if(/flexora$/.test(n))L.push("Mesa flexora unilateral","Flexora em pé unilateral");
+  else if(/região média$/.test(n))L.push("Crucifixo com halteres","Supino reto na máquina unilateral","Flexão de braço");
+  else if(/região superior$/.test(n))L.push("Crucifixo inclinado com halteres","Crossover de baixo para cima unilateral");
+  else if(/^Tríceps/.test(n)){if(b.includes("Tríceps francês com halter"))L.push("Tríceps francês na máquina","Tríceps francês com barra W");
+    if(b.includes("Tríceps corda"))L.push("Tríceps unilateral na polia","Tríceps coice unilateral na polia","Mergulho na máquina (paralela assistida)")}
+  else if(/^Deltoide anterior/.test(n))L.push("Desenvolvimento com barra","Desenvolvimento Arnold com halteres","Elevação frontal com halteres","Elevação frontal na polia","Elevação frontal com anilha");
+  else if(/^Deltoide lateral/.test(n))L.push("Elevação lateral no crossover","Elevação lateral unilateral na máquina");
+  else if(/^Deltoide posterior/.test(n))L.push("Face pull na polia","Crucifixo invertido unilateral na polia");
+  else if(/remada$/.test(n))L.push("Remada curvada com barra","Remada cavalinho","Remada unilateral na polia","Remada articulada unilateral","Remada no Smith");
+  else if(/puxada$/.test(n))L.push("Barra fixa","Puxada unilateral na polia","Pulldown na polia","Puxada supinada");
+  else if(/^Bíceps/.test(n)){L.push("Rosca Scott na máquina","Rosca Scott com barra W","Rosca Scott com halter","Rosca direta com barra reta","Rosca concentrada com halter","Rosca na máquina");
+    if(b.includes("Rosca martelo com halteres"))L.push("Rosca martelo cruzada com halter")}
+  else if(/^Trapézio/.test(n))L.push("Encolhimento na polia");
+  else if(/^Abdômen/.test(n))L.push("Abdominal infra (elevação de pernas)","Abdominal no banco declinado","Roda abdominal");
+  else if(/^Panturrilha em pé/.test(n))L.push("Panturrilha no hack","Panturrilha burrinho","Panturrilha em pé unilateral na máquina");
+  else if(/^Panturrilha sentado/.test(n))L.push("Panturrilha sentada no Smith");
+  return L}
+const OPC=new WeakMap();
+const opts=e=>{if(!OPC.has(e)){const b=opts0(e);OPC.set(e,[...new Set([...b,...xop(e,b)]),"Outro"])}return OPC.get(e)};
 const sig=p=>p.ex.map(e=>e.n+steps(e).length).join("|");
+/* tipo de carga: máquinas podem ser de pino (total), de anilha num ponto só (total) ou de anilha em cada lado (kg/lado).
+   O tipo fica gravado no fim do nome da variação ("… · anilha/lado"), então a progressão de cada tipo fica separada. */
+const EQS=["pino","anilha","anilha/lado"],EQL={"pino":"Pino","anilha":"Anilha","anilha/lado":"Anilha/lado"};
+const vSplit=v=>{const m=String(v||"").match(/^(.*) · (pino|anilha|anilha\/lado)$/);return m?{b:m[1],q:m[2]}:{b:String(v||""),q:""}};
+const vJoin=(b,q)=>b?b+(q?" · "+q:""):"";
+const isMach=b=>/máquina|^Cadeira|Mesa flexora|Flexora unilateral|Flexora em pé|Leg press|leg press|hack|articulada|peck deck|pêndulo|cavalinho/i.test(b)&&!/halteres ou anilha/.test(b);
+const lastEq=b=>{for(const h of S.hist)for(const y of h.sets||[]){const x=vSplit(y.v);if(x.b===b&&x.q)return x.q}return""};
+const defEq=b=>lastEq(b)||(/Leg press|leg press|hack/i.test(b)?"anilha/lado":"pino");
+/* carga por lado: halter (um halter), unilateral (um braço/perna), barra e Smith (anilhas de um lado, sem a barra) e máquina com anilha em cada lado */
+const perSide=v=>{const{b,q}=vSplit(v);if(q)return q==="anilha/lado"||/unilateral/i.test(b);
+  return /unilateral|halter|Smith|crossover|cabos cruzados|com barra/i.test(b)&&!/duas mãos|anilha sobre|Tríceps francês com halter|sumô/.test(b)};
+const kgU=v=>perSide(v)?"kg/lado":"kg";
+/* limitações do perfil: exercícios que forçam a região ficam cinza na escolha */
+const LIMS=[{k:"cot",l:"Cotovelo",a:"o cotovelo"},{k:"omb",l:"Ombro",a:"o ombro"},{k:"pun",l:"Punho",a:"o punho"},{k:"lom",l:"Lombar",a:"a lombar"},{k:"joe",l:"Joelho",a:"o joelho"}];
+const LIMX={};[["cot",["Tríceps francês com barra W","Tríceps francês com halter","Mergulho na máquina (paralela assistida)","Rosca direta com barra reta","Rosca Scott com barra W"]],
+  ["omb",["Desenvolvimento com barra","Desenvolvimento no Smith","Desenvolvimento Arnold com halteres","Mergulho na máquina (paralela assistida)","Supino reto com barra","Supino inclinado com barra","Crucifixo com halteres","Crucifixo inclinado com halteres"]],
+  ["pun",["Rosca direta com barra reta","Flexão de braço"]],
+  ["lom",["Stiff com barra","Terra romeno com barra","Agachamento livre com barra","Remada curvada com barra","Roda abdominal","Abdominal infra (elevação de pernas)"]],
+  ["joe",["Agachamento livre com barra","Agachamento búlgaro com halteres","Agachamento pêndulo","Agachamento hack (máquina)","Hack unilateral","Cadeira extensora","Cadeira extensora unilateral"]]].forEach(([k,a])=>a.forEach(o=>(LIMX[o]=LIMX[o]||[]).push(k)));
+const limOf=o=>{const on=S.lim||[];return(LIMX[vSplit(o).b]||[]).filter(k=>on.includes(k))};
+const limTxt=ks=>{const a=ks.map(k=>LIMS.find(x=>x.k===k).a);return"Força "+(a.length>1?a.slice(0,-1).join(", ")+" e "+a[a.length-1]:a[0])};
+const allOps=()=>[...new Set(F.panels.flatMap(p=>p.ex.flatMap(e=>opts(e))))].filter(o=>o!=="Outro");
+/* registro sem tipo (feito antes desta versão) vale para qualquer tipo da mesma máquina */
+const vMatch=(x,v)=>!v||!x||x===v||(()=>{const a=vSplit(x),b=vSplit(v);return a.b===b.b&&(!a.q||!b.q)})();
 
 /* histórico gravado em formato compacto: nomes e variações viram índices, cada série vira uma lista */
 const HMAX=3000,HWARN=1800000;let histRev=0;let lastLen=0,saveFail=false;
 function packH(hist){const N=[],V=[],ni={},vi={},ix=(m,a,x)=>x in m?m[x]:(a.push(x),m[x]=a.length-1);
   const H=hist.map(h=>{const o={d:h.d,p:h.p,z:(h.sets||[]).map(y=>{const r=[ix(ni,N,y.n),y.k,y.v?ix(vi,V,y.v):-1,y.kg??null,y.reps??null,y.rir??null,y.a?1:0];
       while(r.length>2&&(r[r.length-1]===null||r[r.length-1]===0&&r.length===7))r.pop();return r})};
-    if(h.dur)o.dur=h.dur;if(h.nt)o.nt=h.nt;return o});return{N,V,H}}
+    if(h.dur)o.dur=h.dur;if(h.nt)o.nt=h.nt;if(h.fx)o.fx=1;return o});return{N,V,H}}
 function unpackH(z){if(!z||!Array.isArray(z.H))return[];const N=z.N||[],V=z.V||[];
   return z.H.map(h=>{const o={d:h.d,p:h.p,sets:(h.z||[]).map(r=>{const y={n:N[r[0]],k:r[1]};if(r[2]!=null&&r[2]>=0)y.v=V[r[2]];
-      if(r[6])y.a=1;y.kg=r[3]??null;y.reps=r[4]??null;if(!y.a)y.rir=r[5]??null;return y})};if(h.dur)o.dur=h.dur;if(h.nt)o.nt=h.nt;return o})}
+      if(r[6])y.a=1;y.kg=r[3]??null;y.reps=r[4]??null;if(!y.a)y.rir=r[5]??null;return y})};if(h.dur)o.dur=h.dur;if(h.nt)o.nt=h.nt;if(h.fx)o.fx=1;return o})}
 function load(){let o;try{o=JSON.parse(localStorage.getItem(K))}catch(e){}
   if(o&&o.hz&&!Array.isArray(o.hist))o.hist=unpackH(o.hz);
   if(!o||typeof o!=="object"||Array.isArray(o))o={};
-  return{v:1,age:typeof o.age==="number"?o.age:null,med:Array.isArray(o.med)?o.med.filter(m=>m&&typeof m.d==="number"):[],exp:typeof o.exp==="number"?o.exp:null,mode:o.mode&&typeof o.mode==="object"&&!Array.isArray(o.mode)?o.mode:{},plan:o.plan&&typeof o.plan==="object"&&!Array.isArray(o.plan)?o.plan:{},tab:o.tab||null,cur:o.cur&&typeof o.cur==="object"&&!Array.isArray(o.cur)?o.cur:{},hist:Array.isArray(o.hist)?o.hist:[]}}
+  return{v:1,age:typeof o.age==="number"?o.age:null,med:Array.isArray(o.med)?o.med.filter(m=>m&&typeof m.d==="number"):[],exp:typeof o.exp==="number"?o.exp:null,mode:o.mode&&typeof o.mode==="object"&&!Array.isArray(o.mode)?o.mode:{},plan:o.plan&&typeof o.plan==="object"&&!Array.isArray(o.plan)?o.plan:{},tab:o.tab||null,lim:Array.isArray(o.lim)?o.lim.filter(k=>typeof k==="string"):[],cur:o.cur&&typeof o.cur==="object"&&!Array.isArray(o.cur)?o.cur:{},hist:Array.isArray(o.hist)?o.hist:[]}}
 let hzC=null,hzK="";
 function save(){const{hist,...rest}=S,key=hist.length+"|"+(hist[0]?.d||0)+"|"+histRev;
   if(key!==hzK||!hzC){hzC=JSON.stringify(packH(hist));hzK=key}
@@ -1757,9 +1894,26 @@ let S=load();PC={};
 function migrate(){histRev++;/* nomes antigos (campo "o") -> nomes atuais */
   /* treino B de 25/11/2026: o leg press feito foi o unilateral */
   S.hist.forEach(h=>{if(h.d===1795651366693&&Array.isArray(h.sets))h.sets.forEach(y=>{if(y.n==="Quadríceps – Legpress (ou agachamento)"&&y.v==="Leg press 45°")y.v="Leg press 45° unilateral"})});
+  /* questionário de 28/11/2026: tipo de carga dos registros antigos; leg press foi registrado como total e passa a ser por lado */
+  const FX={1795651366693:{"Leg press 45° unilateral":["Leg press 45° unilateral · anilha/lado",.5],"Panturrilha sentada (máquina)":["Panturrilha sentada (máquina) · anilha",1]},
+    1795824490692:{"Cadeira flexora (sentado)":["Cadeira flexora (sentado) · pino",1],"Crucifixo na máquina (peck deck)":["Crucifixo na máquina (peck deck) · pino",1],
+      "Desenvolvimento na máquina (shoulder press)":["Desenvolvimento na máquina (shoulder press) · anilha/lado",1],"Abdominal na máquina":["Abdominal na máquina · pino",1],
+      "Extensão acima da cabeça na polia alta":["Tríceps francês unilateral na polia",1]}};
+  S.hist.forEach(h=>{const f=FX[h.d];if(!f||h.fx||!Array.isArray(h.sets))return;h.sets.forEach(y=>{const r=f[y.v];if(!r)return;y.v=r[0];if(y.kg!=null&&r[1]!==1)y.kg=y.kg*r[1]});h.fx=1});
+  /* nomes de academia (28/11/2026): só a parte do nome muda; o tipo de carga ("· pino" etc.) fica */
+  const RN={"Cadeira flexora (sentado)": "Cadeira flexora", "Mesa flexora (deitado)": "Mesa flexora", "Supino na máquina (chest press)": "Supino reto na máquina", "Crucifixo na polia (crossover)": "Crossover", "Crossover na polia baixa (de baixo para cima)": "Crossover de baixo para cima", "Tríceps na polia com corda, de costas (acima da cabeça)": "Tríceps francês na polia (corda)", "Extensão acima da cabeça na polia alta": "Tríceps francês na polia (barra)", "Tríceps na polia com corda (junto ao corpo)": "Tríceps corda", "Tríceps na polia com barra reta ou V": "Tríceps pulley (barra reta ou V)", "Extensão de tríceps na máquina": "Tríceps na máquina", "Desenvolvimento na máquina (shoulder press)": "Desenvolvimento na máquina", "Desenvolvimento com halteres sentado": "Desenvolvimento com halteres", "Desenvolvimento no Smith sentado": "Desenvolvimento no Smith", "Elevação lateral na polia (unilateral)": "Elevação lateral unilateral na polia", "Abdominal na polia (crunch ajoelhado com corda)": "Abdominal na polia (ajoelhado)", "Abdominal crunch no solo": "Abdominal supra", "Panturrilha sentada (máquina)": "Panturrilha sentada na máquina", "Panturrilha em pé no Smith (com degrau)": "Panturrilha no Smith", "Panturrilha em pé unilateral (com halter)": "Panturrilha unilateral com halter", "Cadeira extensora unilateral (uma perna por vez)": "Cadeira extensora unilateral", "Remada baixa na polia (triângulo)": "Remada baixa (triângulo)", "Puxada frontal na polia alta": "Puxada frontal (pulley)", "Puxada com pegada neutra (triângulo)": "Puxada com triângulo", "Barra fixa assistida (graviton)": "Graviton", "Rosca na polia baixa": "Rosca direta na polia", "Rosca martelo na polia com corda": "Rosca martelo na polia (corda)", "Crucifixo inverso com halteres (inclinado ou apoiado no banco)": "Crucifixo invertido com halteres"},rn=v=>{if(typeof v!=="string")return v;const x=vSplit(v);return RN[x.b]?vJoin(RN[x.b],x.q):v};
+  S.hist.forEach(h=>(h.sets||[]).forEach(y=>{if(y.v)y.v=rn(y.v)}));
+  Object.values(S.cur||{}).forEach(c=>{if(c&&c.log)Object.values(c.log).forEach(l=>{if(l&&l.v){l.v=rn(l.v);const x=vSplit(l.v);if(!x.q&&isMach(x.b))l.v=vJoin(x.b,defEq(x.b))}})});
   F.panels.forEach(p=>{const s=S.cur[p.id];if(s&&s.t0&&S.mode[p.id]==null&&s.sig===sig(p))S.mode[p.id]="full"});
   F.panels.forEach(p=>{const s=S.cur[p.id];
     if(s&&s.sig===p.ex.map(e=>(e.o||e.n)+steps(e).length).join("|"))s.sig=sig(p)});
+  /* aquecimento novo no tríceps: sessão aberta não perde o progresso (desloca as séries feitas em 1) */
+  F.panels.forEach(p0=>{const p=P(p0.id),s=S.cur[p.id];if(!s)return;
+    const ti=p.ex.map((e,i)=>/^Tríceps/.test(e.n)&&e.wu.length?i:-1).filter(i=>i>=0);if(!ti.length)return;
+    const old=p.ex.map((e,i)=>e.n+(steps(e).length-(ti.includes(i)?e.wu.length:0))).join("|");if(s.sig!==old)return;
+    ti.forEach(i=>{const k=s.done[i]||0,add=p.ex[i].wu.length;if(k>0)s.done[i]=k+add;const L={};
+      Object.entries(s.log||{}).forEach(([key,v])=>{const[a,b]=key.split(":");L[+a===i?a+":"+(+b+add):key]=v});s.log=L});
+    s.sig=sig(p)});
   const ren=n=>{for(const p of F.panels){const e=p.ex.find(x=>x.o===n);if(e)return e.n}return n};
   S.hist.forEach(h=>{if(!Array.isArray(h.sets))return;
     h.sets.forEach(y=>{y.n=ren(y.n)});
@@ -1777,13 +1931,13 @@ function archive(p,s){const sets=[];
   const dur=s.t0&&s.t1?Math.max(1,Math.round((s.t1-s.t0)/60000)):null;
   if(sets.length||Object.keys(nt).length){const x={d:s.t0||Date.now(),p:p.name,sets};if(dur)x.dur=dur;if(Object.keys(nt).length)x.nt=nt;S.hist.unshift(x)}
   S.hist=S.hist.slice(0,HMAX);histRev++;delete S.cur[p.id]}
-function lastSet(n,k,v,aq){for(const h of S.hist){const x=(h.sets||[]).find(x=>x.n===n&&x.k===k&&!!x.a===!!aq&&(x.kg!=null||x.reps!=null)&&(!v||!x.v||x.v===v));if(x)return x}return null}
+function lastSet(n,k,v,aq){for(const h of S.hist){const x=(h.sets||[]).find(x=>x.n===n&&x.k===k&&!!x.a===!!aq&&(x.kg!=null||x.reps!=null)&&vMatch(x.v,v));if(x)return x}return null}
 function histV(n,k){for(const h of S.hist){const x=(h.sets||[]).find(y=>y.n===n&&y.k===k&&!y.a&&y.v);if(x)return x.v}return""}
 /* dupla progressão: se no último treino todas as séries pesadas bateram o topo da faixa, sugere subir */
 const topR=e=>{const m=String(e.w[1]).match(/\d+/g);return m?+m[m.length-1]:null};
 const incKg=kg=>kg<=12?1:kg<=40?2:2.5;
 function sugKg(e,vv){const top=topR(e);if(!top)return null;
-  for(const h of S.hist){const ws=(h.sets||[]).filter(y=>y.n===e.n&&!y.a&&y.kg!=null&&y.reps!=null&&(!vv||!y.v||y.v===vv));if(!ws.length)continue;
+  for(const h of S.hist){const ws=(h.sets||[]).filter(y=>y.n===e.n&&!y.a&&y.kg!=null&&y.reps!=null&&vMatch(y.v,vv));if(!ws.length)continue;
     const mk=Math.max(...ws.map(y=>y.kg)),hv=ws.filter(y=>y.kg===mk);if(mk>0&&hv.every(y=>y.reps>=top))return{from:mk,to:Math.round((mk+incKg(mk))*2)/2,top};return null}
   return null}
 function nextLbl(p,s){const j=curEx(p,s);if(j==null||j<0)return"";const e=p.ex[j],st=steps(e),k=s.done[j]||0;if(k>=st.length)return"";
@@ -1821,13 +1975,13 @@ function phase(){let done=new Set(),n=0,last={};[...S.hist].sort((a,b)=>a.d-b.d)
     done.add(id);last[id]=h;if(FIX.every(x=>done.has(x))){done=new Set();last={};n++}});return{done,n,last}}
 function render(){
   EV=evoData(S.hist,8);FG=fatigue();
-  if(!F.week.includes(S.tab)&&S.tab!=="h"&&S.tab!=="e"&&S.tab!=="m")S.tab=F.week.find(t=>!isRest(t)&&S.cur[t]?.t0)||F.week[0];
-  const tabs=[...F.week.map(t=>({t,l:isRest(t)?"Descanso":P(t).tab})),{t:"e",l:"Evolução"},{t:"m",l:"Medidas"},{t:"h",l:"Histórico"}];
+  if(!F.week.includes(S.tab)&&S.tab!=="h"&&S.tab!=="e"&&S.tab!=="m"&&S.tab!=="p")S.tab=F.week.find(t=>!isRest(t)&&S.cur[t]?.t0)||F.week[0];
+  const tabs=[...F.week.map(t=>({t,l:isRest(t)?"Descanso":P(t).tab})),{t:"e",l:"Evolução"},{t:"m",l:"Medidas"},{t:"h",l:"Histórico"},{t:"p",l:"Perfil"}];
   const PH=phase();
   $("#tabs").innerHTML=tabs.map(x=>{const dn=PH.done.has(x.t);return`<button class="tab${dn?" dn":""}" role="tab" aria-selected="${x.t===S.tab}" data-act="tab" data-v="${x.t}"${dn?` aria-label="${esc(x.l)}, concluído nesta fase"`:""}>${dn?"✓ ":""}${esc(x.l)}</button>`}).join("");
-  const p=!isRest(S.tab)&&S.tab!=="h"&&S.tab!=="e"&&S.tab!=="m"?P(S.tab):null;
+  const p=!isRest(S.tab)&&S.tab!=="h"&&S.tab!=="e"&&S.tab!=="m"&&S.tab!=="p"?P(S.tab):null;
   if(p){$("#prog").innerHTML=progHTML(p);$("#prog").hidden=false}else $("#prog").hidden=true;
-  $("#main").innerHTML=p?panelHTML(p):S.tab==="h"?histHTML():S.tab==="e"?evoHTML():S.tab==="m"?medHTML():restHTML();
+  $("#main").innerHTML=p?panelHTML(p):S.tab==="p"?perfHTML():S.tab==="h"?histHTML():S.tab==="e"?evoHTML():S.tab==="m"?medHTML():restHTML();
   $("#tabs [aria-selected=true]")?.scrollIntoView({inline:"center",block:"nearest"});
 }
 const mins=(a,b)=>Math.max(1,Math.round((b-a)/60000));
@@ -1854,7 +2008,9 @@ function etaMin(p,s){let rem=0,dn=0;p.ex.forEach((e,j)=>{const st=steps(e),k=s.d
   if(s.t0&&s.etaN!==nd){s.etaB=v;s.etaN=nd}
   return v}
 function etaHTML(p,s){const m=etaMin(p,s),sh=verOf(p.id)==="short";
-  return` · <span class="eta ${sh?(m>60?"bad":"ok"):""}" title="${s.t0?"Previsão de término":"Duração prevista"}">⏱ ~${m} min</span>`}
+  /* depois de iniciar: mostra o tempo que falta (a cor da versão 60 min continua olhando o total previsto) */
+  const r=s.t0?Math.max(1,Math.round(m-(Date.now()-s.t0)/60000)):m;
+  return` · <span class="eta ${sh?(m>60?"bad":"ok"):""}" title="${s.t0?"Tempo restante previsto · total ~"+m+" min":"Duração prevista"}">⏱ ~${r} min${s.t0?" restantes":""}</span>`}
 function progHTML(p){const dv=doneView(p);
   if(dv){const tot=dv.cnt.reduce((a,b)=>a+b,0);
     return`<div class="ring" style="--p:100%" role="img" aria-label="Concluído"><b>✓</b></div><div class="pt"><strong>${pl(tot,"série feita","séries feitas")}</strong><span>Concluído em ${fdate(dv.h.d)}${dv.h.dur?" · "+dv.h.dur+" min":""}</span></div>`}const{s,d,t}=stat(p),pct=t?Math.round(d/t*100):0,c=curEx(p,s);
@@ -1884,15 +2040,15 @@ function openHTML(e,i,s){const st=steps(e),k=s.done[i]||0,fin=k>=st.length,x=st[
   h+=evoChips(e.n)+fatCard(e.n);
   const ln=lastNote(e.n);if(ln)h+=`<p class="ntl">📝 Última nota: ${esc(ln)}</p>`;
   if(!fin){const w=x.t==="w",n=w?k-nw+1:k+1,tot=w?e.w[0]:nw,prev=s.log[i+":"+(k-1)],
-      vv=defV(e,i,k,s),v={...(s.log[i+":"+k]||{})},ls=lastSet(e.n,n,vv,!w);let auto=null;
+      vv0=defV(e,i,k,s),vs=vSplit(vv0),vq=isMach(vs.b)?(vs.q||defEq(vs.b)):"",vv=vJoin(vs.b,vq),v={...(s.log[i+":"+k]||{})},ls=lastSet(e.n,n,vv,!w);let auto=null;
     const sg=w?sugKg(e,vv):null;
     if(w&&v.kg==null){if(prev&&k>nw&&prev.kg!=null&&(prev.v||"")===vv)auto=prev.kg;else if(sg)auto=sg.to;else if(ls)auto=ls.kg;v.kg=auto}
     h+=`<div class="step ${w?"w":""}"><h4 aria-live="polite">${w?"Série de trabalho":"Aquecimento"} ${n} de ${tot}</h4>
     <p>Meta: ${fmtMeta(x.reps)}</p>${sg?`<p class="sgl">↑ Hora de subir: você fez ${sg.top} reps com ${sg.from} kg. Tente ≈ ${sg.to} kg.</p>`:""}
-    <div class="in"><div><label for="op">Exercício feito</label><select id="op" data-ex="${i}" data-k="${k}"><option value="">Escolha a opção…</option>${opts(e).map(o=>`<option ${o===vv?"selected":""}>${esc(o)}</option>`).join("")}</select></div></div>
-    <div class="in" style="grid-template-columns:repeat(${w?3:2},1fr)">
-      <div><label for="kg">Carga (kg)<small class="lh ${ls&&ls.kg!=null?"on":""}">Última ${ls&&ls.kg!=null?ls.kg+" kg":"—"}</small></label><input id="kg" type="number" inputmode="decimal" step="0.5" min="0" value="${v.kg??""}" data-auto="${auto??""}"></div>
-      <div><label for="rp">Reps feitas<small class="lh ${ls&&ls.reps!=null?"on":""}">Última ${ls&&ls.reps!=null?ls.reps+" reps":"—"}</small></label><input id="rp" type="number" inputmode="numeric" min="0" value="${v.reps??""}"></div>
+    <div class="in"><div><label id="opL">Exercício feito</label><input type="hidden" id="op" data-ex="${i}" data-k="${k}" value="${esc(vs.b)}"><button type="button" class="opb ${vs.b?"":"emp"}" data-act="opopen" data-ex="${i}" data-k="${k}" aria-haspopup="dialog" aria-labelledby="opL opN"><span class="opn" id="opN">${vs.b?esc(vs.b):"Escolha o exercício…"}</span><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M7 10l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>${vs.b&&limOf(vs.b).length?`<p class="limw" role="note">⚠ ${esc(limTxt(limOf(vs.b)))}. Toque acima para trocar.</p>`:""}${vq?`<div class="eqs" role="group" aria-label="Tipo de carga">${EQS.map(q=>`<button type="button" class="${q===vq?"on":""}" aria-pressed="${q===vq}" data-act="eq" data-ex="${i}" data-k="${k}" data-q="${q}">${EQL[q]}</button>`).join("")}</div>`:""}</div></div>
+    <div class="in" style="grid-template-columns:repeat(${w?3:2},minmax(0,1fr))">
+      <div><label for="kg">${perSide(vv)?"Kg/lado":"Carga (kg)"}<small class="lh ${ls&&ls.kg!=null?"on":""}"><span class="lw">Última </span>${ls&&ls.kg!=null?ls.kg+" kg":"—"}</small></label><input id="kg" type="number" inputmode="decimal" step="0.5" min="0" value="${v.kg??""}" data-auto="${auto??""}"></div>
+      <div><label for="rp">Reps feitas<small class="lh ${ls&&ls.reps!=null?"on":""}"><span class="lw">Última </span>${ls&&ls.reps!=null?ls.reps+" reps":"—"}</small></label><input id="rp" type="number" inputmode="numeric" min="0" value="${v.reps??""}"></div>
       ${w?`<div><label for="rir">RIR<small class="lh" style="visibility:hidden">—</small></label><select id="rir"><option value="">—</option>${[0,1,2,3].map(r=>`<option ${v.rir===r?"selected":""}>${r}</option>`).join("")}</select></div>`:""}
     </div><button class="go" data-act="next" data-ex="${i}">Concluir série</button></div>`}
   else h+=`<div class="fin">✓ Exercício concluído</div>`;
@@ -2144,6 +2300,16 @@ function medHTML(){const M=(S.med||[]).slice().sort((a,b)=>a.d-b.d),last=M[M.len
       <table class="evt mt2"><thead><tr><th>Data</th><th class="r">Medida</th><th class="r">Variação</th></tr></thead><tbody>${pts.slice().reverse().map((p,i,arr)=>{const q=arr[i+1],v=q?p.v-q.v:null;return`<tr><td>${fdate(p.d)}</td><td class="r">${nf(p.v)} ${m.u}</td><td class="r ${"c-"+cls(v)}">${v==null?"—":(v>0?"+":v<0?"−":"")+nf(Math.abs(v))}</td></tr>`}).join("")}</tbody></table></div></details>`});
   h+=`<details class="h"><summary>Medições registradas</summary>${M.slice().reverse().map(x=>`<p><b>${fdate(x.d)}</b><br>${MEDS.filter(m=>x[m.k]!=null).map(m=>m.l+" "+nf(x[m.k])+" "+m.u).join(" · ")}${FOLDS.some(z=>x[z.k]!=null)?"<br><small>Dobras (mm): "+FOLDS.filter(z=>x[z.k]!=null).map(z=>z.l+" "+nf(x[z.k])).join(" · ")+(x.age?" · idade "+x.age:"")+"</small>":""}</p><div class="act"><button class="lk del" data-act="meddel" data-d="${x.d}">Apagar esta medição</button></div>`).join("")}</details>`;
   return h}
+function bkName(){const ds=S.hist.map(h=>h.d).filter(d=>typeof d==="number"),f=d=>{const x=new Date(d);return x.getFullYear()+"-"+String(x.getMonth()+1).padStart(2,"0")+"-"+String(x.getDate()).padStart(2,"0")};
+  /* ano-mês-dia: os arquivos ficam em ordem cronológica ao ordenar por nome */
+  const a=ds.length?Math.min(...ds):Date.now(),b=ds.length?Math.max(...ds):Date.now();return"backup-historico-"+f(a)+"-a-"+f(b)+".json"}
+function perfHTML(){const on=new Set(S.lim||[]),A=allOps();
+  let h=`<div class="hd"><div><div class="eb">Seu perfil</div><h2>Perfil</h2></div></div>`;
+  h+=`<div class="card pf"><h3>Limitações</h3><p class="pfd">Marque as regiões que precisam de cuidado. Os exercícios que forçam cada uma ficam cinza na escolha do exercício e não podem ser selecionados.</p><div class="lims">`;
+  LIMS.forEach(x=>{const a=on.has(x.k),n=A.filter(o=>(LIMX[o]||[]).includes(x.k)).sort((p,q)=>p.localeCompare(q,"pt-BR"));
+    h+=`<div class="limr ${a?"on":""}"><button type="button" class="limb" role="switch" aria-checked="${a}" data-act="lim" data-v="${x.k}"><span class="lt"><b>${x.l}</b><small>${a?pl(n.length,"exercício fica cinza","exercícios ficam cinza"):pl(n.length,"exercício força esta região","exercícios forçam esta região")}</small></span><i class="tg" aria-hidden="true"></i></button>
+      ${a?`<p class="limx">${n.map(esc).join(" · ")}</p>`:""}</div>`});
+  return h+`</div><p class="pfn">Em breve: mais dados do seu perfil nesta aba.</p></div>`}
 function histHTML(){
   let h=`<div class="hd"><div><div class="eb">Seus treinos salvos</div><h2>Histórico</h2></div><span class="sm">${pl(S.hist.length,"treino","treinos")}</span></div>`;
   h+=bkHTML();
@@ -2151,7 +2317,7 @@ function histHTML(){
   S.hist.slice(0,60).forEach((x,hi)=>{const g={};let vol=0;(x.sets||[]).forEach(y=>{(g[y.n]=g[y.n]||[]).push(y);if(!y.a&&y.kg!=null&&y.reps!=null)vol+=y.kg*y.reps});
     const nt=x.nt||{};Object.keys(nt).forEach(n=>{g[n]=g[n]||[]});
     if(x.d===EDH){h+=histEdHTML(x);return}
-    h+=`<details class="h"><summary>${new Date(x.d).toLocaleDateString("pt-BR",{weekday:"short",day:"2-digit",month:"2-digit"})} · ${esc(x.p)}${x.dur?" · "+x.dur+" min":""}</summary><p><b>${pl(x.sets.filter(y=>!y.a).length,"série","séries")}</b> · volume ${Math.round(vol).toLocaleString("pt-BR")} kg</p>${Object.entries(g).map(([n,a])=>{let lv;const t=a.map(y=>{const pre=y.v&&y.v!==lv?`<i>${esc(y.v)}:</i> `:"";lv=y.v;return pre+`${y.a?"aq ":""}${y.kg??"—"} kg × ${y.reps??"—"}${y.rir!=null?` (RIR ${y.rir})`:""}`}).join(" · ");
+    h+=`<details class="h"><summary>${new Date(x.d).toLocaleDateString("pt-BR",{weekday:"short",day:"2-digit",month:"2-digit"})} · ${esc(x.p)}${x.dur?" · "+x.dur+" min":""}</summary><p><b>${pl(x.sets.filter(y=>!y.a).length,"série","séries")}</b> · volume ${Math.round(vol).toLocaleString("pt-BR")} kg</p>${Object.entries(g).map(([n,a])=>{let lv;const t=a.map(y=>{const pre=y.v&&y.v!==lv?`<i>${esc(y.v)}:</i> `:"";lv=y.v;return pre+`${y.a?"aq ":""}${y.kg??"—"} ${kgU(y.v)} × ${y.reps??"—"}${y.rir!=null?` (RIR ${y.rir})`:""}`}).join(" · ");
       return`<p><b>${esc(n)}</b>${t?"<br>"+t:""}${nt[n]?`<br>📝 ${esc(nt[n])}`:""}</p>`}).join("")}<div class="act"><button class="lk" data-act="hedit" data-d="${x.d}">✎ Corrigir séries</button><button class="lk del" data-act="delh" data-i="${hi}" data-d="${x.d}">Apagar este treino</button></div></details>`});
   return h+`<div class="act"><button class="lk" data-act="export">Exportar backup</button><button class="lk" data-act="import">Importar backup</button><button class="lk" data-act="clear">Apagar histórico</button></div>`}
 
@@ -2209,13 +2375,21 @@ document.addEventListener("click",ev=>{const b=ev.target.closest("[data-act]");i
   else if(a==="close"){animClose(()=>{if(phase().last[p.id]&&!s.t0&&!Object.keys(s.done).length)delete S.cur[p.id];else s.open=-1;save();render()},i)}
   else if(a==="back")back(p,i);
   else if(a==="undo"){if(U){const q=P(U.p);if(q)back(q,U.i)}$("#toast").className=""}
+  else if(a==="lim"){const k=b.dataset.v,L=new Set(S.lim||[]);L.has(k)?L.delete(k):L.add(k);S.lim=LIMS.map(x=>x.k).filter(x=>L.has(x));save();render()}
+  else if(a==="opopen")opOpen(+b.dataset.ex,+b.dataset.k,b);
+  else if(a==="opclose")opClose();
+  else if(a==="oppick"){const o=OPS;if(!o)return;const v=b.dataset.v,cur=$("#op")?.value||"";opClose();if(v!==cur)setOp(o.ex,o.k,v)}
+  else if(a==="eq"){const kgI=$("#kg"),rir=$("#rir"),key=b.dataset.ex+":"+b.dataset.k,ob=$("#op")?.value||"";if(!ob)return;
+    const kg=kgI&&kgI.value!==kgI.dataset.auto?num(kgI.value):null;
+    s.log[key]={kg,reps:num($("#rp")?.value),rir:rir?num(rir.value):null,v:vJoin(ob,b.dataset.q)};save();render()}
   else if(a==="next"){audio();
     const full=$("#kg")?.value!==""&&$("#rp")?.value!==""&&(!$("#rir")||$("#rir").value!=="");
     if(!full&&b.dataset.armed!=="1"){b.dataset.armed="1";b.classList.add("armed");b.textContent="Confirmar";vibe(20);
       clearTimeout(b._t);b._t=setTimeout(()=>{b.dataset.armed="";b.classList.remove("armed");b.textContent="Concluir série"},4000);return}
     clearTimeout(b._t);doneFx();const e=p.ex[i],st=steps(e),k=s.done[i]||0;if(k>=st.length)return;
     const w=st[k].t==="w";s.t0=s.t0||Date.now()-60000;s.t1=Date.now();
-    s.log[i+":"+k]={kg:num($("#kg").value),reps:num($("#rp").value),rir:w?num($("#rir").value):null,v:$("#op")?.value??null};
+    const ob=$("#op")?.value??null,oq=$(".eqs .on")?.dataset.q||"";
+    s.log[i+":"+k]={kg:num($("#kg").value),reps:num($("#rp").value),rir:w?num($("#rir").value):null,v:ob==null?null:ob&&isMach(ob)?vJoin(ob,oq||defEq(ob)):ob};
     s.done[i]=k+1;s.open=k+1<st.length?i:null;
     const all=p.ex.every((x,j)=>(s.done[j]||0)>=steps(x).length),nx=curEx(p,s);
     save();wake();vibe(40);
@@ -2227,8 +2401,8 @@ document.addEventListener("click",ev=>{const b=ev.target.closest("[data-act]");i
   else if(a==="finish"){const{d,t}=stat(p);if(d<t&&!confirm("Salvar o treino como está e encerrar?"))return;
     const ph0=phase().n;archive(p,s);stopRest();save();render();scrollTo(0,0);toast(phase().n>ph0?"Fase completa! Os treinos recomeçam do zero.":"Treino salvo no histórico")}
   else if(a==="reset"){if(confirm("Reiniciar este treino? O progresso de hoje será apagado.")){delete S.cur[p.id];stopRest();save();render()}}
-  else if(a==="export"){const u=URL.createObjectURL(new Blob([JSON.stringify({hist:S.hist,mode:S.mode||{},med:S.med||[]},null,1)],{type:"application/json"})),l=document.createElement("a");
-    l.href=u;l.download="ficha-treino-backup.json";document.body.appendChild(l);l.click();l.remove();setTimeout(()=>URL.revokeObjectURL(u),2000);
+  else if(a==="export"){const u=URL.createObjectURL(new Blob([JSON.stringify({hist:S.hist,mode:S.mode||{},med:S.med||[],lim:S.lim||[]},null,1)],{type:"application/json"})),l=document.createElement("a");
+    l.href=u;l.download=bkName();document.body.appendChild(l);l.click();l.remove();setTimeout(()=>URL.revokeObjectURL(u),2000);
     S.exp=Date.now();save();if(S.tab==="h")render();toast("Backup exportado")}
   else if(a==="import")$("#imp").click();
   else if(a==="mednew"){MEDF=true;render();setTimeout(()=>$("#md-peso")?.focus(),50)}
@@ -2254,12 +2428,40 @@ $("#imp").addEventListener("change",async e=>{const f=e.target.files[0];e.target
     const seen=new Set(S.hist.map(h=>h.d+h.p));o.hist.forEach(h=>{if(h&&Array.isArray(h.sets)&&!seen.has(h.d+h.p))S.hist.push(h)});
     if(o.mode&&typeof o.mode==="object"&&!Array.isArray(o.mode))S.mode={...o.mode,...(S.mode||{})};
     if(Array.isArray(o.med)){const have=new Set((S.med||[]).map(m=>day(m.d)));S.med=[...(S.med||[]),...o.med.filter(m=>m&&typeof m.d==="number"&&!have.has(day(m.d)))].sort((a,b)=>b.d-a.d)}
+    if(Array.isArray(o.lim))S.lim=[...new Set([...(S.lim||[]),...o.lim.filter(k=>typeof k==="string")])];
     migrate();S.hist.sort((a,b)=>b.d-a.d);save();render();toast("Backup importado")}
   catch(x){toast("Arquivo inválido. Use um backup exportado por esta ficha.")}});
 /* troca do exercício feito: guarda o que foi digitado e recalcula a carga sugerida */
-document.addEventListener("change",ev=>{const t=ev.target;if(t.id!=="op")return;const p=P(S.tab);if(!p)return;const s=sess(p),kgI=$("#kg"),rir=$("#rir");
+function setOp(ex,k,val){const p=P(S.tab);if(!p)return;const s=sess(p),kgI=$("#kg"),rir=$("#rir");
   const kg=kgI&&kgI.value!==kgI.dataset.auto?num(kgI.value):null;
-  s.log[t.dataset.ex+":"+t.dataset.k]={kg,reps:num($("#rp")?.value),rir:rir?num(rir.value):null,v:t.value};save();render()});
+  s.log[ex+":"+k]={kg,reps:num($("#rp")?.value),rir:rir?num(rir.value):null,v:val&&isMach(val)?vJoin(val,defEq(val)):val};save();render()}
+document.addEventListener("change",ev=>{const t=ev.target;if(t.id!=="op")return;setOp(t.dataset.ex,t.dataset.k,t.value)});
+/* ---------- seletor de exercício: 3 mais usados + demais em ordem alfabética ---------- */
+let OPS=null;
+function opStats(n){const m={};S.hist.forEach(h=>(h.sets||[]).forEach(y=>{if(y.n!==n||y.a||!y.v)return;const b=vSplit(y.v).b,x=m[b]=m[b]||{c:0,d:0,kg:null,v:""};x.c++;
+    if(h.d>x.d||h.d===x.d&&y.kg!=null&&(x.kg==null||y.kg>x.kg)){x.d=h.d;x.kg=y.kg;x.v=y.v}}));return m}
+function opOpen(ex,k,trig){const p=P(S.tab);if(!p||!p.ex[ex])return;const e=p.ex[ex],cur=$("#op")?.value||"",st=opStats(e.n),oth=opts(e).filter(o=>o!=="Outro");
+  const ok=oth.filter(o=>!limOf(o).length),blk=oth.filter(o=>limOf(o).length).sort((a,b)=>a.localeCompare(b,"pt-BR"));
+  const top=ok.filter(o=>st[o]).sort((a,b)=>st[b].c-st[a].c||st[b].d-st[a].d).slice(0,3),rest=ok.filter(o=>!top.includes(o)).sort((a,b)=>a.localeCompare(b,"pt-BR"));
+  const dm=t=>{const x=new Date(t);return String(x.getDate()).padStart(2,"0")+"/"+String(x.getMonth()+1).padStart(2,"0")};
+  const row=o=>{const x=st[o],on=o===cur;return`<button type="button" class="op ${on?"on":""}" role="option" aria-selected="${on}" data-act="oppick" data-v="${esc(o)}"><span class="ot"><b>${esc(o)}</b>${x?`<small>${pl(x.c,"série","séries")}${x.kg!=null?" · última "+nf(x.kg)+" "+kgU(x.v):""} · ${dm(x.d)}</small>`:""}</span><i class="ck" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></i></button>`};
+  const g=(t,a)=>a.length?`<div class="gh" role="presentation">${t}</div>${a.map(row).join("")}`:"";
+  const off=o=>`<button type="button" class="op off" role="option" aria-disabled="true" disabled><span class="ot"><b>${esc(o)}</b><small>${esc(limTxt(limOf(o)))}</small></span><i class="lk2" aria-hidden="true"><svg viewBox="0 0 24 24" width="15" height="15"><rect x="5" y="11" width="14" height="10" rx="2.5" fill="currentColor"/><path d="M8 11V8a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" stroke-width="2.4"/></svg></i></button>`;
+  const allOff=!ok.length&&blk.length;
+  const el=$("#ops");OPS={ex,k,trig};
+  el.innerHTML=`<div class="bd" data-act="opclose"></div><div class="sh" role="dialog" aria-modal="true" aria-labelledby="opsT"><div class="hnd" aria-hidden="true"></div>
+    <div class="shh"><div class="hx"><h3 id="opsT">Exercício feito</h3><small>${esc(e.n)}</small></div><button type="button" class="x" data-act="opclose" aria-label="Fechar"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg></button></div>
+    <div class="ls" role="listbox" aria-labelledby="opsT">${g("Mais usados",top)}${g(top.length?"Todos":"Opções",rest)}${allOff?`<p class="lnote">Todas as opções desta lista forçam uma região marcada nas suas limitações. Use “Outro” e anote o que fez.</p>`:""}${g("Outra opção",["Outro"])}${blk.length?`<div class="gh" role="presentation">Indisponíveis · suas limitações</div>${blk.map(off).join("")}`:""}</div></div>`;
+  el.hidden=false;document.documentElement.classList.add("lock");
+  requestAnimationFrame(()=>{el.classList.add("on");(el.querySelector(".op.on")||el.querySelector(".op"))?.focus({preventScroll:true});const on=el.querySelector(".op.on");if(on)on.scrollIntoView({block:"center"})});
+  const sh=el.querySelector(".sh"),hd=el.querySelector(".shh"),hn=el.querySelector(".hnd");let y0=null,dy=0;
+  const st0=ev=>{y0=ev.touches[0].clientY;dy=0;sh.style.transition="none"},mv=ev=>{if(y0==null)return;dy=Math.max(0,ev.touches[0].clientY-y0);sh.style.transform=`translateY(${dy}px)`},
+    en=()=>{if(y0==null)return;y0=null;sh.style.transition="";sh.style.transform="";if(dy>90)opClose()};
+  [hd,hn].forEach(x=>{x.addEventListener("touchstart",st0,{passive:true});x.addEventListener("touchmove",mv,{passive:true});x.addEventListener("touchend",en)})}
+function opClose(){const el=$("#ops");if(!el||el.hidden)return;const t=OPS&&OPS.trig;OPS=null;el.classList.remove("on");document.documentElement.classList.remove("lock");
+  setTimeout(()=>{if(!OPS){el.hidden=true;el.innerHTML=""}},reduce?0:260);const b=$(".opb");if(b)b.focus({preventScroll:true})}
+document.addEventListener("keydown",ev=>{if(ev.key==="Escape"&&OPS){ev.preventDefault();opClose()}
+  else if(OPS&&(ev.key==="ArrowDown"||ev.key==="ArrowUp")){const l=[...document.querySelectorAll("#ops .op")],i=l.indexOf(document.activeElement);if(i<0)return;ev.preventDefault();l[Math.max(0,Math.min(l.length-1,i+(ev.key==="ArrowDown"?1:-1)))].focus()}});
 document.addEventListener("input",ev=>{const t=ev.target;if(t.id!=="nt")return;const p=P(S.tab);if(!p)return;const s=sess(p);
   (s.nt=s.nt||{})[t.dataset.ex]=t.value;save();const sm=t.closest("details")?.querySelector("summary");if(sm)sm.textContent="Anotação de hoje"+(t.value.trim()?" ✓":"")});
 document.addEventListener("focusin",e=>{if(e.target.matches("input[type=number]"))e.target.select()});
